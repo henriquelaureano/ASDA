@@ -14,6 +14,6 @@
   
 ***
 
-Homework I (HW1)
+Homework I ([HW1](https://mynameislaure.github.io/amcs210/hw1.pdf))
 
 ***
