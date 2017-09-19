@@ -165,18 +165,19 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
         identical coins each of which has the probability of \(\pi\) = 0.3 that it
         lands in heads.}
 
-\begin{itemize}
- \item Enumerate the elements of the sample space of \(X\).
-\end{itemize}
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Enumerate the elements of the sample space of \(X\).} \\
 
 \underline{Solution:}
 
 \[ \Omega = \{0, 1, 2, 3, 4, 5\}. \]
 
-\begin{itemize}
- \item Obtain the table of probability mass function, i.e., compute the
-       probabilities \(\mathbb{P}(X = x)\) for each \(x\) in the sample space.
-\end{itemize}
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
+
+\textbf{Obtain the table of probability mass function, i.e., compute the
+        probabilities \(\mathbb{P}(X = x)\) for each \(x\) in the sample space.} 
+\\
 
 \underline{Solution:}
 
@@ -203,9 +204,9 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 \end{table}
 \end{minipage}
 
-\begin{itemize}
- \item Compute \(\mathbb{P}(X \geq 4)\).
-\end{itemize}
+\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
+
+\textbf{Compute \(\mathbb{P}(X \geq 4)\).} \\
 
 \underline{Solution:}
 
@@ -214,9 +215,9 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \[ \boxed{\mathbb{P}(X \geq 4) = \Sexpr{dbinom(4, 5, .3) + dbinom(5, 5, .3)}.} \]
 
-\begin{itemize}
- \item Compute \(\mathbb{P}(X < 3)\).
-\end{itemize}
+\subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
+
+\textbf{Compute \(\mathbb{P}(X < 3)\).} \\
 
 \underline{Solution:}
 
@@ -233,96 +234,41 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \horrule{1pt} \\
 
-\textbf{Download the “calcium” data set from the course website. Provide the
-        summary statistics (mean, standard deviation, and 5-number data summaries)
-        and the histograms of variables “Begin” and “End”. Which variable is
-        higher on average, and which one is more dispersed? Calculate the variance
-        of “End” for the placebo group manually; i.e., by first calculating the
-        deviations from the mean. Provide the boxplots of variables “Begin” and
-        “End” for different “Treatment” groups (i.e., calcium and placebo). In one
-        paragraph, discuss your findings based on these graphs.} \\
+\textbf{Exercises on calculating probabilities for the normal distribution. Some
+        of these require the use of the standard normal probability table which
+        has been uploaded in the subfolder ”Admin” in the class dropbox.}
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Suppose that the systolic blood pressure (SBP) among white teens follows a
+        normal distribution with mean \(\mu\) = 120 units (mm Hg) and standard
+        deviation \(\sigma\) = 4 units. (i.) What are the first and third quartile
+        SBP values in this population? (ii.) What is the 90-th percentile SBP
+        value? (iii.) Use the standard normal table to calculate the proportion of
+        teens with SBP between 112 and 126 units. (iv.) A teen was randomly
+        selected from the population. What is the probability that this teen has
+        SBP that is greater than 130 units? (v.) An investigator randomly selected
+        5 teens. What is the probability that none of them has SBP tha exceeds 130
+        units? (vi.) Again on the 5 teens: what is the probability that exactly 1
+        has SBP that exceeds 130 units.} \\
 
 \underline{Solution:}
 
-<<warning=FALSE>>=
-# <code r> ===================================================================== #
-(calcium <- read.table("~/Dropbox/CLASS-DROPBOX/BOOK-DATA/calcium.txt"
-                       , header = TRUE, sep = ","))
-# </code r> ==================================================================== #
-@
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
-Minimum, 1st quartile, median, mean, 3rd quartile and maximum:
+\textbf{A graduate program will admit only students who score on the top 90-th
+        percentile in an international examination. There is some complication in
+        the admissions process because the grading scheme for the examination
+        changed in 2016. Prior to 2016, the scores ranged from 0 to 800. From 2016
+        onwards the scores were recalibrated so that they range from 0 to 150.
+        Suppose that the pre-2016 scores followed a normal distribution with mean
+        600 and variance of 50. From 2016 onwards the distribution remained normal
+        but the mean is 120 and the variance is 15. One applicant who took the
+        test in 2015 scored 700 (out of 800) and another who took the test in 2017
+        scored 130 (out of 200). Check if either of these applicants should be
+        automatically denied admission based on the examination scores.} \\
 
-<<>>=
-# <code r> ===================================================================== #
-summary(calcium[ , -1])
-# </code r> ==================================================================== #
-@
-
-Standard deviation:
-
-<<>>=
-# <code r> ===================================================================== #
-sd(calcium$Begin) ; sd(calcium$End)
-# </code r> ==================================================================== #
-@
-
-Histograms:
-
-<<fig.width=10, fig.height=5.75, fig.cap='(a) Histogram of the "Begin" variable; (b) Histogram of the "End" variable.'>>=
-# <code r> ===================================================================== #
-par(mfrow = c(1, 2), mar = c(3, 4, 4, 2))
-hist(calcium$Begin, col = "#0080ff", border = "orange", las = 1, xlab = ""
-     , main = "Begin\n(a)", xlim = c(90, 140))
-hist(calcium$End, col = "#0080ff", border = "orange", las = 1, xlab = ""
-     , main = "End\n(b)", xlim = c(90, 140))
-# </code r> ==================================================================== #
-@
-
-In average, the variable "Begin" is higher, but both are very similar. The
-variable "End" is more dispersed, but with the same commentary, both the variables
-are very similar (standard deviations very closer to each other). \\
-
-Variance of "End" for the placebo group:
-
-<<>>=
-# <code r> ===================================================================== #
-(x <- calcium[calcium$Treatment == "Placebo", ]$End)
-
-(x_bar <- mean(x))
-# </code r> ==================================================================== #
-@
-<<>>=
-# <code r> ===================================================================== #
-(deviations <- x - x_bar)
-# </code r> ==================================================================== #
-@
-<<>>=
-# <code r> ===================================================================== #
-(variance <- sum(deviations**2)/(length(x)-1)) ; variance == var(x)
-# </code r> ==================================================================== #
-@
-
-<<fig.width=10, fig.height=4.5, fig.cap='(a) Boxplot for the variable "Begin" in the group Calcium; (b) Boxplot for the variable "End" in the group Calcium; (c) Boxplot for the variable "Begin" in the group Placebo; (d) Boxplot for the variable "End" in the group Placebo.'>>=
-# <code r> ===================================================================== #
-par(mfrow = c(1, 4), mar = c(1, 4, 4, 2))
-boxplot(calcium[calcium$Treatment == "Calcium", ]$Begin, las = 1
-        , main = "Calcium (a)\n(Begin)", ylim = c(90, 140))
-boxplot(calcium[calcium$Treatment == "Calcium", ]$End, las = 1
-        , main = "Calcium (b)\n(End)", ylim = c(90, 140))
-boxplot(calcium[calcium$Treatment == "Placebo", ]$Begin, las = 1
-        , main = "Placebo (c)\n(Begin)", ylim = c(90, 140))
-boxplot(calcium[calcium$Treatment == "Placebo", ]$End, las = 1
-        , main = "Placebo (d)\n(End)", ylim = c(90, 140))
-# </code r> ==================================================================== #
-@
-
-We don't see much difference between "Begin" and "End" or between Calcium and 
-Placebo. The biggest values are observed in the treatment Calcium in the "Begin",
-and the smallest values in the treatment Placebo in the "End". We see the smallest
-variance in the treatment Calcium in the "End", and the biggest variance in the
-treatment Placebo in the "End". Even with this findings, we reiterate that the
-differences are very small between the treatments and variables.
+\underline{Solution:}
 
 \section*{Exercise 4} \addcontentsline{toc}{section}{Exercise 4}
 
