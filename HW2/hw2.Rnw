@@ -242,29 +242,37 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \textbf{Suppose that the systolic blood pressure (SBP) among white teens follows a
         normal distribution with mean \(\mu\) = 120 units (mm Hg) and standard
-        deviation \(\sigma\) = 4 units. (i.) What are the first and third quartile
-        SBP values in this population? (ii.) What is the 90-th percentile SBP
-        value? (iii.) Use the standard normal table to calculate the proportion of
-        teens with SBP between 112 and 126 units. (iv.) A teen was randomly
-        selected from the population. What is the probability that this teen has
-        SBP that is greater than 130 units? (v.) An investigator randomly selected
-        5 teens. What is the probability that none of them has SBP tha exceeds 130
-        units? (vi.) Again on the 5 teens: what is the probability that exactly 1
-        has SBP that exceeds 130 units.} \\
+        deviation \(\sigma\) = 4 units.} \\
+
+\textbf{(i.) What are the first and third quartile SBP values in this population?}
+\\
 
 \underline{Solution:} \\
 
-\textbf{(i.)} \\
+\textbf{(ii.) What is the 90-th percentile SBP value?} \\
 
-\textbf{(ii.)} \\
+\underline{Solution:} \\
 
-\textbf{(iii.)} \\
+\textbf{(iii.) Use the standard normal table to calculate the proportion of teens
+               with SBP between 112 and 126 units.} \\
 
-\textbf{(iv.)} \\
+\underline{Solution:} \\
 
-\textbf{(v.)} \\
+\textbf{(iv.) A teen was randomly selected from the population. What is the
+              probability that this teen has SBP that is greater than 130 units?}
+\\
 
-\textbf{(vi.)} \\
+\underline{Solution:} \\
+
+\textbf{(v.) An investigator randomly selected 5 teens. What is the probability
+             that none of them has SBP tha exceeds 130 units?} \\
+
+\underline{Solution:} \\
+
+\textbf{(vi.) Again on the 5 teens: what is the probability that exactly 1 has SBP
+              that exceeds 130 units.} \\
+
+\underline{Solution:} \\
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
