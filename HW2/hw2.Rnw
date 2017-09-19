@@ -171,6 +171,8 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \underline{Solution:}
 
+\[ \Omega = \{0, 1, 2, 3, 4, 5\}. \]
+
 \begin{itemize}
  \item Obtain the table of probability mass function, i.e., compute the
        probabilities \(\mathbb{P}(X = x)\) for each \(x\) in the sample space.
@@ -178,11 +180,39 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \underline{Solution:}
 
+\begin{minipage}{10cm}
+\[ \mathbb{P}(X = x) = \binom{n}{x} \pi^{x} (1 - \pi)^{n-x}
+                     = \binom{5}{x} 0.3^{x} (0.7)^{5-x}.
+\]
+\end{minipage}
+\begin{minipage}{6.5cm}
+\begin{table}[H]
+ \centering
+  \begin{tabular}{c|l}
+   \toprule
+   x & \(\mathbb{P}(X = x)\) \\
+   \midrule
+   0 & \Sexpr{dbinom(0, 5, .3)} \\
+   1 & \Sexpr{dbinom(1, 5, .3)} \\
+   2 & \Sexpr{dbinom(2, 5, .3)} \\
+   3 & \Sexpr{dbinom(3, 5, .3)} \\
+   4 & \Sexpr{dbinom(4, 5, .3)} \\
+   5 & \Sexpr{dbinom(5, 5, .3)} \\
+   \bottomrule
+  \end{tabular}
+\end{table}
+\end{minipage}
+
 \begin{itemize}
  \item Compute \(\mathbb{P}(X \geq 4)\).
 \end{itemize}
 
 \underline{Solution:}
+
+\[ \mathbb{P}(X \geq 4) = \mathbb{P}(X = 4) + \mathbb{P}(X = 5)
+                        = \Sexpr{dbinom(4, 5, .3)} + \Sexpr{dbinom(5, 5, .3)} \]
+
+\[ \boxed{\mathbb{P}(X \geq 4) = \Sexpr{dbinom(4, 5, .3) + dbinom(5, 5, .3)}.} \]
 
 \begin{itemize}
  \item Compute \(\mathbb{P}(X < 3)\).
@@ -190,48 +220,14 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \underline{Solution:}
 
-<<warning=FALSE>>=
-# <code r> ===================================================================== #
-(snore <- read.table("~/Dropbox/CLASS-DROPBOX/BOOK-DATA/snoreData.txt", skip = 1
-                     , header = TRUE))
-# </code r> ==================================================================== #
-@
-
-<<fig.height=5.75, fig.width=10, fig.cap="(a) Total number of people and number of people with heart disease by level of severity; (b) Proportion (people with heart disease/total) of people with heart disease by level of severity.">>=
-# <code r> ===================================================================== #
-library(latticeExtra)
-print(
-  barchart(total + heart_disease ~ factor(snoring_severity), snore
-           , col = c("#0080ff", "gray60"), border = "transparent"
-           , xlab = "Snoring severity", ylab = "Number of people"
-           , scales = list(y = list(at = c(30, sort(snore$total))))
-           , main = "Total numbers by level of severity", sub = "(a)"
-           , key = list(corner = c(.9, .9)
-                        , text = list(c("Total number", "Heart disease"))
-                        , rectangle = list(border = "transparent")
-                        , col = c("#0080ff", "gray60"))
-           , panel = function(...){
-             panel.abline(h = c(30, sort(snore$total)), col = "gray50", lty = 2)
-             panel.barchart(...)
-           }), position = c(0, 0, .5, 1), more = TRUE)
-print(
-  barchart(heart_disease/total ~ factor(snoring_severity), snore
-           , col = "#0080ff", border = "transparent"
-           , xlab = "Snoring severity", ylab = "Rate"
-           , main = "Prop. of people with heart disease by level of severity"
-           , sub = "(b)", scales = list(y = list(draw = FALSE))
-           , panel = function(...){
-             args <- list(...)
-             panel.text(args$x, args$y, paste0(round(args$y*100, 2),"%"), pos = 3)
-             panel.barchart(...)
-           }), position = c(.5, 0, 1, 1))
-# </code r> ==================================================================== #
-@
-
-A big part, more than half, was classified by the spouses as a low degree of
-snoring severity. In this low levels the percentage of heart disease is very low
-(2, 5\%). In the biggest degree, 5, the rate of heart disease is bigger, almost
-12\%, the double of the observed in the degree 2.
+\[ \mathbb{P}(X < 3) = 1 - \mathbb{P}(X \geq 3)
+                     = 1 - [\mathbb{P}(X = 3) + \mathbb{P}(X \geq 4)]
+                     = 1 - [\Sexpr{dbinom(3, 5, .3)} +
+                            \Sexpr{pbinom(3, 5, .3, lower.tail = FALSE)}
+                            ]
+                     = 1 -\Sexpr{pbinom(2, 5, .3, lower.tail = FALSE)}
+\]
+\[ \boxed{\mathbb{P}(X < 3) = \Sexpr{pbinom(2, 5, .3)}.} \]
 
 \section*{Exercise 3} \addcontentsline{toc}{section}{Exercise 3}
 
