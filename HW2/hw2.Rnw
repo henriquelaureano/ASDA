@@ -541,11 +541,29 @@ hist(diffs
 # </code r> ==================================================================== #
 @
 
-
 \textbf{(iii.) identify the acceptance and rejection regions for a given
         probability of type I error.} \\
 
 \underline{Solution:} \\
+
+The type I error rate or significance level is the probability of rejecting
+\(H_{0}\) given that it's true. We will use an type I error rate of 5\%. It means,
+the 95-th percentile of the reference distribution. We can see this region at red
+in the histogram below. To the left of the 95-th percentile we have the acceptance
+region, in the right we have the rejection region.
+
+<<fig.width=10, fig.cap="Histogram of the reference distribution. To the left of the red line we have the acceptance region, to the right of the red line we have the rejection region.">>=
+# <code r> ===================================================================== #
+hist(diffs
+     , xlab = "Proportion difference"
+     , main = "Reference distribution"
+     , las = 1
+     , xlim = range(diffs)
+     , col = "#0080ff"
+     , border = "orange")
+abline(v = quantile(diffs, .95), col = 2, lwd = 2)
+# </code r> ==================================================================== #
+@
 
 \textbf{(iv.) decision and conclusion.} \\
 
