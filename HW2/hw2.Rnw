@@ -414,6 +414,20 @@ For each Normal distributions the 90-th percentiles are:
 
 \underline{Solution:}
 
+\begin{align*}
+ \mathbb{P}(500 \leq X \leq 800) & = \mathbb{P}\bigg(
+ \frac{500-1000\cdot 0.65}{\sqrt{1000\cdot 0.65\cdot 0.35}} \leq
+ \frac{X-1000\cdot 0.65}{\sqrt{1000\cdot 0.65\cdot 0.35}} \leq
+ \frac{800-1000\cdot 0.65}{\sqrt{1000\cdot 0.65\cdot 0.35}}\bigg) \\ & =
+ \mathbb{P}\bigg(\Sexpr{-150/sqrt(650*.35)} \leq
+                 \frac{X-650}{\Sexpr{sqrt(650*.35)}} \leq
+                 \Sexpr{150/sqrt(650*.35)}\bigg) \\ & =
+ \mathbb{P}(Z \leq \Sexpr{150/sqrt(650*.35)}) -
+ \mathbb{P}(Z \leq \Sexpr{-150/sqrt(650*.35)}) = \approx 1 - \approx 0
+\end{align*}
+
+\[ \boxed{\mathbb{P}(500 \leq X \leq 800) \approx 1.} \]
+
 \section*{Exercise 5} \addcontentsline{toc}{section}{Exercise 5}
 
 \horrule{1pt} \\
