@@ -494,11 +494,11 @@ For each Normal distributions the 90-th percentiles are:
     \frac{0.7 \cdot 0.3}{100} + \frac{0.6 \cdot 0.4}{500}
                                               }} =
     \frac{0.1}{\sqrt{\Sexpr{.7*.3/100} + \Sexpr{.6*.4/500}}} =
-    \frac{0.1}{\Sexpr{.7*.3/100 + .6*.4/500}},
+    \frac{0.1}{\Sexpr{sqrt(.7*.3/100 + .6*.4/500)}},
  \]
 \end{minipage}
 \begin{minipage}{1cm}
- \[ \boxed{T_{1, {\rm obs}} = \Sexpr{.1/(.7*.3/100 + .6*.4/500)}} \]
+ \[ \boxed{T_{1, {\rm obs}} = \Sexpr{.1/sqrt(.7*.3/100 + .6*.4/500)}} \]
 \end{minipage}
 
 \vspace{.5cm}
@@ -508,34 +508,34 @@ For each Normal distributions the 90-th percentiles are:
 
 <<fig.width=10, fig.cap="Histogram of the reference distribution (1000 relications).">>=
 # <code r> ===================================================================== #
-# setting sample sizes
-n_a <- 100 ; n_b <- 500
-# setting probabilities
-p_a <- .7 ; p_b <- .6
-# creating empth vector to store the proportion difference
-diffs <- numeric(1000)
-# number of replications
-B <- 1e3
-
-# creating the reference distribution
+samp_a <- rbinom(100, 1, .7) # sampling from population A
+samp_b <- rbinom(500, 1, .6) # sampling from population B
+samp <- c(samp_a, samp_b) # putting the samples together
+B <- 1e3 # number of replication
+# computing the test statistic
+t1 <- function(prop_a, n_a, prop_b, n_b){
+  (prop_a - prop_b)/sqrt((prop_a*(1-prop_a))/n_a + (prop_b*(1-prop_b))/n_b)
+}
+store <- numeric(B) # empth vector to store the test statistics
+# generating the reference distribution
 for (i in 1:B){
-  # sampling
-  samp_a <- rbinom(1, n_a, p_a)
-  samp_b <- rbinom(1, n_b, p_b)
-  # calculating the proportions
-  prop_a <- mean(samp_a)
-  prop_b <- mean(samp_b)
-  # calculating the proportion difference
-  diff_ab <- prop_a - prop_b
-  # storing the proportion difference
-  diffs[i] <- diff_ab
+  # choosing randomly the members of population A
+  a_i <- sample(length(samp), size = length(samp_a), replace = FALSE)
+  samp_ai <- samp[a_i] ; n_ai <- length(samp_ai)
+  # the rest go to population B
+  samp_bi <- samp[-a_i] ; n_bi <- length(samp_bi)
+  # computing proportions
+  prop_ai <- mean(samp_ai) ; prop_bi <- mean(samp_bi)
+  # computing test statistic
+  t1_i <- t1(prop_a = prop_ai, n_a = n_ai, prop_b = prop_bi, n_b = n_bi)
+  store[i] <- t1_i # storing test statistic
 }
 # histogram
-hist(diffs
+hist(store
      , xlab = "Proportion difference"
      , main = "Reference distribution"
      , las = 1
-     , xlim = range(diffs)
+     , xlim = range(store)
      , col = "#0080ff"
      , border = "orange")
 # </code r> ==================================================================== #
@@ -554,20 +554,34 @@ region, in the right we have the rejection region.
 
 <<fig.width=10, fig.cap="Histogram of the reference distribution. To the left of the red line we have the acceptance region, to the right of the red line we have the rejection region.">>=
 # <code r> ===================================================================== #
-hist(diffs
+hist(store
      , xlab = "Proportion difference"
      , main = "Reference distribution"
      , las = 1
-     , xlim = range(diffs)
+     , xlim = range(store)
      , col = "#0080ff"
      , border = "orange")
-abline(v = quantile(diffs, .95), col = 2, lwd = 2)
+abline(v = quantile(store, .95), col = 2, lwd = 2)
 # </code r> ==================================================================== #
 @
 
 \textbf{(iv.) decision and conclusion.} \\
 
 \underline{Solution:} \\
+
+<<fig.width=10, fig.cap="Histogram of the reference distribution. To the left of the red line we have the acceptance region, to the right of the red line we have the rejection region.">>=
+# <code r> ===================================================================== #
+hist(store
+     , xlab = "Proportion difference"
+     , main = "Reference distribution"
+     , las = 1
+     , xlim = range(store)
+     , col = "#0080ff"
+     , border = "orange")
+abline(v = quantile(store, .95), col = 2, lwd = 2)
+abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
+# </code r> ==================================================================== #
+@
 
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
