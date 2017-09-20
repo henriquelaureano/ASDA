@@ -367,9 +367,12 @@ For each Normal distributions the 90-th percentiles are:
 \[ {\rm perc}_{90} = 1.28 \cdot \sqrt{50} + 600 = \Sexpr{1.28*sqrt(50)+600}, \quad
    {\rm perc}_{90} = 1.28 \cdot \sqrt{15} + 120 = \Sexpr{1.28*sqrt(15)+120}. \]
 
-So, based on the examination scores both applications shouldn't be automatically
-denied, because both scores are on the top 90-th percentile in the international
-examination.
+\vspace{.3cm}
+\fbox{\begin{minipage}{\textwidth}
+       Based on the examination scores both applications shouldn't be
+       automatically denied, because both scores are on the top 90-th percentile
+       in the international examination.
+      \end{minipage}}
 
 \section*{Exercise 4} \addcontentsline{toc}{section}{Exercise 4}
 
@@ -387,7 +390,22 @@ examination.
 \textbf{Compute the probability that at least 800 of the students in a sample of
         size \(n\) = 1000 will have a positive view of socialism.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+\(X\) = number of students with positive view of socialism.
+
+\begin{align*}
+ \mathbb{P}(X \geq 800) & = \mathbb{P}\bigg(\frac{X-n\pi}{\sqrt{n\pi(1-\pi)}}
+ \geq \frac{800-n\pi}{\sqrt{n\pi(1-\pi)}}\bigg) = \mathbb{P}\bigg(
+ \frac{X-1000\cdot 0.65}{\sqrt{1000\cdot 0.65\cdot 0.35}} \geq
+ \frac{800-1000\cdot 0.65}{\sqrt{1000\cdot 0.65\cdot 0.35}}\bigg) \\ & =
+ \mathbb{P}
+ \bigg(\frac{X-650}{\Sexpr{sqrt(650*.35)}} \geq \Sexpr{150/sqrt(650*.35)}\bigg) =
+ \mathbb{P}(Z \geq \Sexpr{150/sqrt(650*.35)}) =
+ 1 - \mathbb{P}(Z < \Sexpr{150/sqrt(650*.35)}) \\ & = 1 - \approx 1
+\end{align*}
+
+\[ \boxed{\mathbb{P}(X \geq 800) \approx 0.} \]
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
