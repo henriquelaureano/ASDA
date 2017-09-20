@@ -462,7 +462,15 @@ For each Normal distributions the 90-th percentiles are:
         drops in their blood pressure. Denote these to be \(\hat{\pi}_{A}\) and\
         \(\hat{\pi}_{B}\).} \\
 
-\underline{Solution:} \\
+\underline{Solution:}
+
+\begin{minipage}{10cm}
+ \[ \hat{\pi}_{A} = \frac{Y_{A}}{n_{A}} = \frac{70}{100} = \Sexpr{70/100}, \quad
+    \hat{\pi}_{B} = \frac{Y_{B}}{n_{B}} = \frac{300}{500} = \Sexpr{300/500}. \]
+\end{minipage}
+\begin{minipage}{5cm}
+ \[ \boxed{\hat{\pi}_{A} = \Sexpr{70/100}, \quad \hat{\pi}_{B} = \Sexpr{300/500}.}  \]
+\end{minipage}
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
