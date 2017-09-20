@@ -483,10 +483,35 @@ For each Normal distributions the 90-th percentiles are:
    \frac{\hat{\pi}_{B}(1 - \hat{\pi}_{B})}{n_{B}}}}.
 \]
 
-\textbf{To conduct this test you need to (i.) compute the observed test statistic
-        \(T_{1, obs}\); (ii.) state the reference distribution of \(T_{1}\);
-        (iii.) identify the acceptance and rejection regions for a given
-        probability of type I error; (iv.) decision and conclusion.} \\
+\textbf{To conduct this test you need to} \\
+
+\textbf{(i.) compute the observed test statistic \(T_{1, {\rm obs}}\).} \\
+
+\underline{Solution:}
+
+\begin{minipage}{12cm}
+ \[ T_{1, {\rm obs}} = \frac{0.7 - 0.6}{\sqrt{
+    \frac{0.7 \cdot 0.3}{100} + \frac{0.6 \cdot 0.4}{500}
+                                              }} =
+    \frac{0.1}{\sqrt{\Sexpr{.7*.3/100} + \Sexpr{.6*.4/500}}} =
+    \frac{0.1}{\Sexpr{.7*.3/100 + .6*.4/500}},
+ \]
+\end{minipage}
+\begin{minipage}{1cm}
+ \[ \boxed{T_{1, {\rm obs}} = \Sexpr{.1/(.7*.3/100 + .6*.4/500)}} \]
+\end{minipage}
+
+\vspace{.5cm}
+\textbf{(ii.) state the reference distribution of \(T_{1}\).} \\
+
+\underline{Solution:} \\
+
+\textbf{(iii.) identify the acceptance and rejection regions for a given
+        probability of type I error.} \\
+
+\underline{Solution:} \\
+
+\textbf{(iv.) decision and conclusion.} \\
 
 \underline{Solution:} \\
 
