@@ -356,7 +356,20 @@ The \(Z\) value that correspond to 0.9 (90-th percentile, \({\rm perc}_{90}\)) i
         scored 130 (out of 200). Check if either of these applicants should be
         automatically denied admission based on the examination scores.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+We have two Normal's, we can call \(X \sim {\rm N}(600, \sqrt{50})\) and
+\(Y \sim {\rm N}(120, \sqrt{15})\). In a Standard Normal, \({\rm N}(0, 1)\), the
+Z value that correspond to the 90-th percentile, \({\rm perc}_{90}\), is 1.28. \\
+
+For each Normal distributions the 90-th percentiles are:
+
+\[ {\rm perc}_{90} = 1.28 \cdot \sqrt{50} + 600 = \Sexpr{1.28*sqrt(50)+600}, \quad
+   {\rm perc}_{90} = 1.28 \cdot \sqrt{15} + 120 = \Sexpr{1.28*sqrt(15)+120}. \]
+
+So, based on the examination scores both applications shouldn't be automatically
+denied, because both scores are on the top 90-th percentile in the international
+examination.
 
 \section*{Exercise 4} \addcontentsline{toc}{section}{Exercise 4}
 
