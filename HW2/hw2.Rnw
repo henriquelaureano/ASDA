@@ -289,11 +289,16 @@ The \(Z\) value that correspond to 0.9 (90-th percentile, \({\rm perc}_{90}\)) i
 
 \(X\) = proportion of teens with some quantite of SBP (in units).
 
-\[ \mathbb{P}(112 \leq X \leq 126)
-   = \mathbb{P}\bigg(\frac{112-120}{4} \leq \frac{X-120}{4} \leq \frac{126-120}{4}
-               \bigg) = \dots
-\]
+\begin{align*}
+ \mathbb{P}(112 \leq X \leq 126) & =
+ \mathbb{P}\bigg(\frac{112-120}{4} \leq \frac{X-120}{4} \leq \frac{126-120}{4}
+           \bigg) = \mathbb{P}\bigg(-2 \leq Z \leq \frac{3}{2}\bigg) \\
+  & =  \mathbb{P}(Z \leq 1.5) - \mathbb{P}(Z \leq -2) = 0.9332 - 0.0228
+\end{align*}
 
+\[ \boxed{\mathbb{P}(112 \leq X \leq 126) = \Sexpr{.9332 - .0228}.} \]
+
+\vspace{.45cm}
 \textbf{(iv.) A teen was randomly selected from the population. What is the
               probability that this teen has SBP that is greater than 130 units?}
 \\
