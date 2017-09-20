@@ -160,10 +160,10 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 \horrule{1pt} \\
 
 \textbf{Exercises on calculating binomial probabilities. Let \(X\) be a binomial
-        random variable with n = 5 and probability parameter \(\pi\) = 0.3. Think
-        of this as counting the number of heads obtained by tossing n = 5
-        identical coins each of which has the probability of \(\pi\) = 0.3 that it
-        lands in heads.}
+        random variable with \(n\) = 5 and probability parameter \(\pi\) = 0.3.
+        Think of this as counting the number of heads obtained by tossing
+        \(n\) = 5 identical coins each of which has the probability of
+        \(\pi\) = 0.3 that it lands in heads.}
 
 \subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
 
@@ -375,171 +375,26 @@ examination.
 
 \horrule{1pt} \\
 
-\textbf{Download the “wdbc” data set. Provide a bar graph for the discrete
-        variable, and scatter plots for each pair of continuous variables. Provide
-        the box plots of continuous variables for each level of “Diagnosis”. In
-        one paragraph, discuss your findings based on these graphs.} \\
+\textbf{Exercises on calculating binomial probabilities when the sample size \(n\)
+        is large. A center is tasked with understanding the attitude of young
+        college-age adults towards socialist ideas. Suppose that the true
+        proportion in this population that has a positive attitude towards
+        socialism is \(\pi\) = 0.65. A random sample of \(n\) = 1.000 students
+        were selected.}
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Compute the probability that at least 800 of the students in a sample of
+        size \(n\) = 1000 will have a positive view of socialism.} \\
 
 \underline{Solution:}
 
-<<fig.width=10, fig.height=4.25, fig.cap='Frequency and percentage for each level of "Diagnosis".'>>=
-# <code r> ===================================================================== #
-library("kdevine") ; data(wdbc)
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
-barchart(wdbc$diagnosis, col = "#0080ff", xlab = "Frequency", xlim = c(0, 410)
-         , scales = list(x = list(draw = FALSE)
-                         , y = list(labels = c("Benign", "Malignant")))
-         , border = "transparent", main = "Diagnosis"
-         , panel = function(...){
-           args <- list(...)
-           panel.text(args$x, args$y, pos = 4
-                      , paste0(args$x," (", round(prop.table(args$x),3)*100,"%)"))
-           panel.barchart(...)})
-# </code r> ==================================================================== #
-@
+\textbf{What is the probability that between 500 and 800 students (in a sample of
+        \(n\) = 1000) will have a positive view of socialism.} \\
 
-This dataset contain measurements on cells in suspicious lumps in a women's
-breast. Variables are computed from a digitized image of a fine needle aspirate
-(FNA) of a breast mass. They describe characteristics of the cell nuclei present
-in the image. All samples are classsified as either \textit{benign} or
-\textit{malignant}. \\
-
-Ten real-valued variables are computed for each cell nucleus. \\
-
-The mean, standard error, and "worst" or largest (mean of the three largest
-values) of these variables were computed for each image, resulting in 30
-variables. \\
-
-This breast cancer database was obtained from the University of Wisconsin
-Hospitals, Madison from Dr. William H. Wolberg. \\
-
-Thus, we provide the scatter plots for each pair of variables divided by the
-mean, standard error and "worst" values, resulting in this way in three scatter
-plot matrices.
-
-\vspace{1.75cm}
-
-<<fig.width=10, fig.height=10, fig.cap="Scatter plots for each pair of mean variables in the lower triangular part of the matrix, in the upper triangular part we have the respectives correlations between the variables. In blue we have the corresponding observations to the benign diagnosis and in gray the corresponding observations to the malignant diagnosis.">>=
-# <code r> ===================================================================== #
-panel.cor <- function(x, y, ...){
-  usr <- par("usr")
-  on.exit(par(usr))
-  par(usr = c(0, 1, 0, 1))
-  r <- abs(cor(x, y))
-  txt <- format(c(r, 0.123456789), digits = 2)[1]
-  text(0.5, 0.5, txt, cex = .8/strwidth(txt))
-}
-rotulos <- tm::removeWords(names(wdbc[2:11]), "mean ")
-rotulos[c(5:6, 8, 10)] <- c("smooth", "compact", "concave", "fractal d.")
-
-pairs(wdbc[2:11]
-      , pch = 16
-      , gap = .25
-      , las = 1
-      , upper.panel = panel.cor
-      , col = c("#0080ff", "gray30")[unclass(wdbc$diagnosis)]
-      , labels = rotulos
-      , font.labels = 2
-      , main = "Mean")
-# </code r> ==================================================================== #
-@
-
-\vspace{-.5cm}
-<<fig.width=10, fig.height=10, fig.cap='Scatter plots for each pair of "worst" variables in the lower triangular part of the matrix, in the upper triangular part we have the respectives correlations between the variables. In blue we have the corresponding observations of the benign diagnosis and in gray the corresponding observations of the malignant diagnosis.'>>=
-# <code r> ===================================================================== #
-rotulos <- tm::removeWords(names(wdbc[12:21]), "worst ")
-rotulos[c(5:6, 8, 10)] <- c("smooth", "compact", "concave", "fractal d.")
-
-pairs(wdbc[12:21], pch = 16, gap = .25, las = 1, upper.panel = panel.cor
-      , col = c("#0080ff", "gray30")[unclass(wdbc$diagnosis)]
-      , labels = rotulos, font.labels = 2, main = '"Worst"')
-# </code r> ==================================================================== #
-@
-
-<<fig.width=10, fig.height=10, fig.cap="Scatter plots for each pair of standard error variables in the lower triangular part of the matrix, in the upper triangular part we have the respectives correlations between the variables. In blue we have the corresponding observations to the benign diagnosis and in gray the corresponding observations to the malignant diagnosis.">>=
-# <code r> ===================================================================== #
-rotulos <- tm::removeWords(names(wdbc[22:31]), "sd ")
-rotulos[c(5:6, 8, 10)] <- c("smooth", "compact", "concave", "fractal d.")
-pairs(wdbc[22:31], pch = 16, gap = .25, las = 1, upper.panel = panel.cor
-      , col = c("#0080ff", "gray30")[unclass(wdbc$diagnosis)]
-      , labels = rotulos, font.labels = 2, main = "Standard error")
-# </code r> ==================================================================== #
-@
-
-\newpage
-Box plots:
-
-<<fig.width=10, fig.cap='Box plots for each mean variable divided by "Diagnosis".'>>=
-# <code r> ===================================================================== #
-wdbc_mean <- reshape2::melt(wdbc[1:11], id.vars = "diagnosis")
-levels(wdbc_mean$diagnosis) <- c("Benign", "Malignant")
-levels(wdbc_mean$variable) <- tm::removeWords(levels(wdbc_mean$variable), "mean ")
-
-bwplot(value ~ diagnosis | variable, wdbc_mean
-       , layout = c(4, 3), scales = list(y = list(relation = "free", rot = 0))
-       , ylab = NULL, strip = strip.custom(bg = "white"), pch = "|"
-       , main = "Mean"
-       , par.settings = list(
-         box.rectangle = list(
-           col = c("#0080ff", "gray60"), fill = c("#0080ff", "gray60")
-           , alpha = .6, border = "transparent")
-         , box.umbrella = list(col = c("#0080ff", "gray60"))
-         , plot.symbol = list(col = "red", pch = 16, alpha = .6)))
-# </code r> ==================================================================== #
-@
-
-<<fig.width=10, fig.cap='Box plots for each "worst" variable divided by "Diagnosis".'>>=
-# <code r> ===================================================================== #
-wdbc_worst <- reshape2::melt(wdbc[c(1, 12:21)], id.vars = "diagnosis")
-levels(wdbc_worst$diagnosis) <- c("Benign", "Malignant")
-levels(wdbc_worst$variable) <-
-  tm::removeWords(levels(wdbc_worst$variable), "worst ")
-
-bwplot(value ~ diagnosis | variable, wdbc_worst
-       , layout = c(4, 3), scales = list(y = list(relation = "free", rot = 0))
-       , ylab = NULL, strip = strip.custom(bg = "white"), pch = "|"
-       , main = '"Worst"'
-       , par.settings = list(
-         box.rectangle = list(
-           col = c("#0080ff", "gray60"), fill = c("#0080ff", "gray60")
-           , alpha = .6, border = "transparent")
-         , box.umbrella = list(col = c("#0080ff", "gray60"))
-         , plot.symbol = list(col = "red", pch = 16, alpha = .6)))
-# </code r> ==================================================================== #
-@
-
-<<fig.width=10, fig.cap='Box plots for each standard error variable divided by "Diagnosis".'>>=
-# <code r> ===================================================================== #
-wdbc_sd <- reshape2::melt(wdbc[c(1, 22:31)], id.vars = "diagnosis")
-levels(wdbc_sd$diagnosis) <- c("Benign", "Malignant")
-levels(wdbc_sd$variable) <- tm::removeWords(levels(wdbc_sd$variable), "sd ")
-
-bwplot(value ~ diagnosis | variable, wdbc_sd
-       , layout = c(4, 3), scales = list(y = list(relation = "free", rot = 0))
-       , ylab = NULL, strip = strip.custom(bg = "white"), pch = "|"
-       , main = "Standard error"
-       , par.settings = list(
-         box.rectangle = list(
-           col = c("#0080ff", "gray60"), fill = c("#0080ff", "gray60")
-           , alpha = .6, border = "transparent")
-         , box.umbrella = list(col = c("#0080ff", "gray60"))
-         , plot.symbol = list(col = "red", pch = 16, alpha = .6)))
-# </code r> ==================================================================== #
-@
-
-Approximatelly 2/3 of the patients were with the exam classified as benign. When
-we look to the mean variables, three pairs present a correlation (linear
-correspondence) extremaly close to 1. Between this ten variables we see every
-behavior types. Relations with a very high correlation, with a medium correlation
-and with a very small correlation. In general, the same behavior is seen with the
-same variables when we looked to the "worst" and standard error variables. We can
-highlight as very high correlations the relations between the variables area and
-perimeter, radius and perimeter, and radius and area. As a very small correlation
-we can highlight the relations between the variables texture and symmetry, texture
-and fractal dimension, area and symmetry, and area and fractal dimension. When we
-looked to the box plots, in general, for all the ten variables in the three
-different measure types, the biggest values are present in the patients
-classified as malignant.
+\underline{Solution:}
 
 \section*{Exercise 5} \addcontentsline{toc}{section}{Exercise 5}
 
