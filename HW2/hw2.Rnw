@@ -321,18 +321,26 @@ The \(Z\) value that correspond to 0.9 (90-th percentile, \({\rm perc}_{90}\)) i
 \(Y\) = number of teens with SBP that exceeds 130 units.
 
 \begin{minipage}{8cm}
- \[ \mathbb{P}(X = 0) = \binom{5}{0} \Sexpr{1-.9938}^{0} (1-\Sexpr{1-.9938})^{5},
+ \[ \mathbb{P}(Y = 0) = \binom{5}{0} \Sexpr{1-.9938}^{0} (1-\Sexpr{1-.9938})^{5},
  \]
 \end{minipage}
 \begin{minipage}{5cm}
- \[ \boxed{\mathbb{P}(X = 0) = \Sexpr{dbinom(0, 5, 1-.9938)}.} \]
+ \[ \boxed{\mathbb{P}(Y = 0) = \Sexpr{dbinom(0, 5, 1-.9938)}.} \]
 \end{minipage}
 
 \vspace{.45cm}
 \textbf{(vi.) Again on the 5 teens: what is the probability that exactly 1 has SBP
               that exceeds 130 units.} \\
 
-\underline{Solution:} \\
+\underline{Solution:}
+
+\begin{minipage}{8cm}
+ \[ \mathbb{P}(Y = 1) = \binom{5}{1} \Sexpr{1-.9938}^{1} (1-\Sexpr{1-.9938})^{4},
+ \]
+\end{minipage}
+\begin{minipage}{5cm}
+ \[ \boxed{\mathbb{P}(Y = 1) = \Sexpr{dbinom(1, 5, 1-.9938)}.} \]
+\end{minipage}
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
