@@ -249,14 +249,50 @@ xyplot(prop_out ~ 200:n, type = c("h", "p"), pch = 16
 
 \underline{Solution:} \\
 
+First quartile: \(Q_{1}\), third quartile: \(Q_{3}\)
+
+\[ Z = \frac{Q_{1} - \mu}{\sigma} = \frac{Q_{1} - 120}{4}, \quad
+   Z = \frac{Q_{3} - \mu}{\sigma} = \frac{Q_{3} - 120}{4} \]
+
+The \(Z\) value that correspond to 0.25 (first quartile) is -0.67 (using standard
+normal probability table), and to 0.75 (third quartile) is 0.67. So,
+
+\begin{minipage}{10cm}
+ \[ Q_{1} = Z \cdot \sigma +\mu = -0.67 \cdot 4 + 120, \quad
+    Q_{3} = 0.67 \cdot 4 + 120. \]
+\end{minipage}
+\begin{minipage}{6cm}
+ \[ \boxed{Q_{1} = \Sexpr{-.67*4 + 120}, \quad Q_{3} = \Sexpr{.67*4 + 120}.} \]
+\end{minipage}
+
+\vspace{.6cm}
 \textbf{(ii.) What is the 90-th percentile SBP value?} \\
 
 \underline{Solution:} \\
 
+The \(Z\) value that correspond to 0.9 (90-th percentile, \({\rm perc}_{90}\)) is
+1.28 (using standard normal probability table). So, \\
+
+\begin{minipage}{10cm}
+ \[ 1.28 = \frac{{\rm perc}_{90} - 120}{4}, \quad
+    {\rm perc}_{90} = 1.28 \cdot 4 + 120, \]
+\end{minipage}
+\begin{minipage}{5cm}
+ \[ \boxed{{\rm perc}_{90} = \Sexpr{1.28*4 + 120}.} \]
+\end{minipage}
+
+\vspace{.4cm}
 \textbf{(iii.) Use the standard normal table to calculate the proportion of teens
                with SBP between 112 and 126 units.} \\
 
 \underline{Solution:} \\
+
+\(X\) = proportion of teens with some quantite of SBP (in units).
+
+\[ \mathbb{P}(112 \leq X \leq 126)
+   = \mathbb{P}\bigg(\frac{112-120}{4} \leq \frac{X-120}{4} \leq \frac{126-120}{4}
+               \bigg) = \dots
+\]
 
 \textbf{(iv.) A teen was randomly selected from the population. What is the
               probability that this teen has SBP that is greater than 130 units?}
