@@ -318,6 +318,17 @@ The \(Z\) value that correspond to 0.9 (90-th percentile, \({\rm perc}_{90}\)) i
 
 \underline{Solution:} \\
 
+\(Y\) = number of teens with SBP that exceeds 130 units.
+
+\begin{minipage}{8cm}
+ \[ \mathbb{P}(X = 0) = \binom{5}{0} \Sexpr{1-.9938}^{0} (1-\Sexpr{1-.9938})^{5},
+ \]
+\end{minipage}
+\begin{minipage}{5cm}
+ \[ \boxed{\mathbb{P}(X = 0) = \Sexpr{dbinom(0, 5, 1-.9938)}.} \]
+\end{minipage}
+
+\vspace{.45cm}
 \textbf{(vi.) Again on the 5 teens: what is the probability that exactly 1 has SBP
               that exceeds 130 units.} \\
 
