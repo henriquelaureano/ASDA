@@ -504,7 +504,43 @@ For each Normal distributions the 90-th percentiles are:
 \vspace{.5cm}
 \textbf{(ii.) state the reference distribution of \(T_{1}\).} \\
 
-\underline{Solution:} \\
+\underline{Solution:}
+
+<<fig.width=10, fig.cap="Histogram of the reference distribution (1000 relications).">>=
+# <code r> ===================================================================== #
+# setting sample sizes
+n_a <- 100 ; n_b <- 500
+# setting probabilities
+p_a <- .7 ; p_b <- .6
+# creating empth vector to store the proportion difference
+diffs <- numeric(1000)
+# number of replications
+B <- 1e3
+
+# creating the reference distribution
+for (i in 1:B){
+  # sampling
+  samp_a <- rbinom(1, n_a, p_a)
+  samp_b <- rbinom(1, n_b, p_b)
+  # calculating the proportions
+  prop_a <- mean(samp_a)
+  prop_b <- mean(samp_b)
+  # calculating the proportion difference
+  diff_ab <- prop_a - prop_b
+  # storing the proportion difference
+  diffs[i] <- diff_ab
+}
+# histogram
+hist(diffs
+     , xlab = "Proportion difference"
+     , main = "Reference distribution"
+     , las = 1
+     , xlim = range(diffs)
+     , col = "#0080ff"
+     , border = "orange")
+# </code r> ==================================================================== #
+@
+
 
 \textbf{(iii.) identify the acceptance and rejection regions for a given
         probability of type I error.} \\
