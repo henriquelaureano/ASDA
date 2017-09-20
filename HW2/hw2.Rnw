@@ -42,7 +42,17 @@
 
 \vspace{\fill}
 
+\horrule{1pt} \\
+
+\newpage
+
+\vspace{\fill}
+
 \tableofcontents
+
+\horrule{.5pt}
+
+\vspace{\fill}
 
 \horrule{1pt} \\
 
@@ -432,158 +442,104 @@ For each Normal distributions the 90-th percentiles are:
 
 \horrule{1pt} \\
 
-\textbf{Consider this dataset derived from the Framingham Heart Study where one of
-        the goals was to study possible links between high systolic blood pressure
-        (SBP) and coronary heart disease (CHD). Participants with SBP \(\geq\) 165
-        mm Hg were put in the ”high” SBP category.}
+\textbf{Two populations of patients are treated with two different drugs for
+        diabetes for a period of 6 months. The first population is given drug A
+        while the second is given drug B. At the end of 6 months, a researcher is
+        interested in comparing the proportions of patients in each of the two
+        populations who experience a significant drop in their blood pressure.
+        Denote these population proportion parameters to be \(\pi_{A}\) and
+        \(\pi_{B}\) respectively.} \\
+
+\textbf{A random sample of size \(n_{A}\) = 100 was taken from population \(A\)
+        and of these \(Y_{A}\) = 70 had significant drops in blood pressure.
+        Moreover a random sample of size \(n_{B}\) = 500 was taken from population
+        \(B\) and of these \(Y_{B}\) = 300 had significant drops in blood
+        pressure.}
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Compute the proportion of patients from each sample who had significant
+        drops in their blood pressure. Denote these to be \(\hat{\pi}_{A}\) and\
+        \(\hat{\pi}_{B}\).} \\
+
+\underline{Solution:} \\
+
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
+
+\textbf{Conduct a test of hypothesis \(H_{0} : \pi_{A} = \pi_{B}\) using the test
+        statistic}
+        
+\[ T_{1} =
+   \frac{\hat{\pi}_{A} - \hat{\pi}_{B}}{\sqrt{
+   \frac{\hat{\pi}_{A}(1 - \hat{\pi}_{A})}{n_{A}} +
+   \frac{\hat{\pi}_{B}(1 - \hat{\pi}_{B})}{n_{B}}}}.
+\]
+
+\textbf{To conduct this test you need to (i.) compute the observed test statistic
+        \(T_{1, obs}\); (ii.) state the reference distribution of \(T_{1}\);
+        (iii.) identify the acceptance and rejection regions for a given
+        probability of type I error; (iv.) decision and conclusion.} \\
+
+\underline{Solution:} \\
+
+\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
+
+\textbf{Construct the table of (estimated) \underline{expected} counts of patients
+        with significant drop under the null hypothesis \(H_{0}\). Construct the
+        table of \underline{observed} counts.}\\
+\textbf{Table of expected counts.}
 
 \begin{center}
  \begin{tabular}{|c|c|c|}
   \hline
-  & CHD & No CHD \\ \hline
-  High SBP & 144 & 62 \\ \hline
-  Normal SBP & 120 & 419 \\
+  & Expected count with significant drop & Expected count with no significant drop \\ \hline
+  Popn A & \(\hat{Y}_{A}\) & \(n_{A} - \hat{Y}_{A}\) \\ \hline
+  Popn B & \(\hat{Y}_{B}\) & \(n_{B} - \hat{Y}_{B}\) \\
   \hline
  \end{tabular}
 \end{center}
 
-\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
-
-\textbf{\textit{Marginal proportions}. From the table, what is the proportion of
-        participants who had CHD? What is the proportion of participants who had
-        high SBP?} \\
-
-\underline{Solution:} \\
-
-CHD = 144 + 120 = 264, \quad NoCHD = 62 + 419 = 481, \quad n = CHD + NoCHD = 745
-\\
-
-\boxed{\text{Proportion of participants who had CHD: CHD/n = 264/745 = 0.3543624
-             (35\%).}} \\
-
-HiSBP = 144 + 62 = 206, \quad NorSBP = 120 + 419 = 539, \\
-n = CHD + NoCHD = HiSBP + NorSBP = 745 \\
-
-\boxed{\text{Proportion of participants who had high SBP:
-             HiSBP/n = 206/745 = 0.2765101 (28\%).}}
-   
-\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
-
-\textbf{\textit{Conditional proportions}. Among the participants with high SBP,
-        what is the proportion of those who also have CHD? Among the participants
-        with normal SBP, what is the proportion of those who also have CHD? Does
-        this provide some evidence of a link between elevated systolic blood
-        pressure and coronary heart disease? Can one now claim that elevated
-        systolic blood pressure \underline{causes} coronary heart disease?} \\
-        
-\underline{Solution:} \\
-
-\fbox{\begin{minipage}{15cm}
-       Among the participants with high SBP, the proportion of those who also have
-       CHD: \\
-       CHD/HiSBP = 144/206 = 0.6990291 (70\%). 
-      \end{minipage}} \\
-
-\fbox{\begin{minipage}{15.5cm}
-       Among the participants with normal SBP, the proportion of those who also
-       have CHD: \\
-       CHD/NorSBP = 120/539 = 0.2226345 (22\%). 
-      \end{minipage}} \\
-
-Does this provide some evidence of a link between elevated systolic blood pressure
-and coronary heart disease? Yes. Because in the patients with normal SBP the
-proportion with CHD is 22 percent, almost 1/5, while in the patients with high SBP
-the proportion with CHD is 70 percent, much higher. \\
-
-Can one now claim that elevated systolic blood pressure causes coronary heart
-disease? No. With this descriptive analysis we can see a possible correlation 
-between high SBP and CHD, but this not implies in causality. we don't have enough
-information to claim this type of result. Correlation is different form causality.
-
-\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
-
-\textbf{\textit{Odds and odds ratios}. Compute the odds of having CHD among the
-        high SBP group. Compute the odds of having CHD among the normal SBP group.
-        Compute the odds ratio of having CHD for the high SBP vs normal SBP
-        groups.} \\
-        
-\underline{Solution:} \\
-
-\fbox{\begin{minipage}{8.25cm}
-       Odds of having CHD among the high SBP group:
-       \[ \frac{144/206}{1 - 144/206} = 2.322581. \]
-      \end{minipage}} \hfill
-\fbox{\begin{minipage}{8.25cm}
-       Odds of having CHD among the normal SBP group:
-       \[ \frac{120/539}{1 - 120/539} = 0.2863962. \]
-      \end{minipage}} \\
+\textbf{Table of observed counts.}
 
 \begin{center}
- \fbox{\begin{minipage}{12.25cm}
-        Odds ratio of having CHD for the high SBP vs normal SBP groups:
-        \[ \frac{2.322581}{0.286396} = 8.109678. \]
-       \end{minipage}}
+ \begin{tabular}{|c|c|c|}
+  \hline
+  & Observed count with significant drop & Observed count with no significant drop \\ \hline
+  Popn A & \(Y_{A}\) & \(n_{A} - Y_{A}\) \\ \hline
+  Popn B & \(Y_{B}\) & \(n_{B} - Y_{B}\) \\
+  \hline
+ \end{tabular}
 \end{center}
 
-The odds of having CHD for the high SBP groups is 8.11 times of the odds of CHD
-for the normal SBP group.
+\textbf{Conduct a test of the null hypothesis \(H_{0} : \pi_{A} = \pi_{B}\) using
+        the test statistic}
 
-\section*{Exercise 6} \addcontentsline{toc}{section}{Exercise 6}
+\[ T_{2} = \frac{(Y_{A} - \hat{Y}_{A})^{2}}{\hat{Y}_{A}} +
+           \frac{(n_{A}-Y_{A}-(n_{A}-\hat{Y}_{A}))^{2}}{(n_{A}-\hat{Y}_{A})} +
+           \frac{(Y_{B} - \hat{Y}_{B})^{2}}{\hat{Y}_{B}} +
+           \frac{(n_{B}-Y_{B}-(n_{B}-\hat{Y}_{B}))^{2}}{(n_{B}-\hat{Y}_{B})}.
+\]
 
-\horrule{1pt} \\
+\textbf{To conduct this test you need to (i.) compute the observed test statistic
+        \(T_{2, obs}\); (ii.) state the reference distribution of \(T_{2}\);
+        (iii.) identify the acceptance and rejection regions for a given 
+        probability of type I error; (iv.) decision and conclusion.} \\
 
-\textbf{The beetle mortality data. Groups of beetles were exposed to varying doses
-        of toxins and the number of deaths (\texttt{ytotal}) out of the total
-        exposure (\texttt{ntotal}) were recorded. Enter the variables in R:}
+\underline{Solution:} \\
 
-\begin{align*}
- \texttt{dose} & = {\rm c}(1.69, 1.72, 1.75, 1.78, 1.81, 1.84, 1.86, 1.88) \\
- \texttt{ntotal} & = {\rm c}(59, 60, 62, 56, 63, 59, 62, 60) \\
- \texttt{ytotal} & = {\rm c}(6, 13, 18, 28, 52, 53, 61, 60)
-\end{align*}
+\subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
 
-<<>>=
-# <code r> ===================================================================== #
-dose <- c(1.69, 1.72, 1.75, 1.78, 1.81, 1.84, 1.86, 1.88)
-ntotal <- c(59, 60, 62, 56, 63, 59, 62, 60)
-ytotal <- c(6, 13, 18, 28, 52, 53, 61, 60)
-# </code r> ==================================================================== #
-@
+\textbf{Conceptual question: suppose you ”do not reject” the null hypothesis
+        \(H_{0}\). Does this mean that \(H_{0}\) is ”correct”?} \\
 
-\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+\underline{Solution:} \\
 
-\textbf{Calculate the proportion of deaths for each dose-group.} \\
+\subsection*{(e)} \addcontentsline{toc}{subsection}{(e)}
 
-\underline{Solution:}
+\textbf{Another conceptual question: suppose you ”reject” the null hypothesis
+        \(H_{0}\). Does this mean that \(H_{0}\) is ”wrong”?} \\
 
-<<>>=
-# <code r> ===================================================================== #
-rbind(dose, "death proportion" = round(ytotal/ntotal, 2))
-# </code r> ==================================================================== #
-@
-
-\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
-
-\textbf{Plot the proportion of deaths against dose. Describe the trend: is it
-        increasing/ decreasing, is there an asymptote feature?} \\
-
-\underline{Solution:}
-
-<<fig.width=10, fig.height=5, fig.cap="Proportion of deaths against dose.">>=
-# <code r> ===================================================================== #
-xyplot(ytotal/ntotal ~ dose, type = c("p", "l")
-       , pch = 19, lwd = 1.5, xlab = "Dose", ylab = "Proportion of deaths"
-       , scales = list(x = list(at = dose))
-       , panel = function(...){
-         panel.abline(v = dose, h = seq(.2, 1, .2), col = "gray70")
-         panel.xyplot(...)})
-# </code r> ==================================================================== #
-@
-
-The trend is increasing. For small doses the proportions are very close to zero,
-with the biggest doses the proportions are very close to one. With the last dose 
-we have a proportion equal to one, the maximum possible. Whats means that with the
-biggest dose all the beetles are dead.
+\underline{Solution:} \\
 
 \hfill \(\blacksquare\)
 
