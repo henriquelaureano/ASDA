@@ -303,8 +303,16 @@ The \(Z\) value that correspond to 0.9 (90-th percentile, \({\rm perc}_{90}\)) i
               probability that this teen has SBP that is greater than 130 units?}
 \\
 
-\underline{Solution:} \\
+\underline{Solution:}
 
+\[ \mathbb{P}(X > 130) = 1 - \mathbb{P}(X \leq 130) = 1 -
+   \mathbb{P}\bigg(\frac{X-120}{4} \leq \frac{130-120}{4}\bigg) = 1 -
+   \mathbb{P}(Z \leq 2.5) = 1 - 0.9938
+\]
+
+\[ \boxed{\mathbb{P}(X > 130) = \Sexpr{1 - .9938}.} \]
+
+\vspace{.45cm}
 \textbf{(v.) An investigator randomly selected 5 teens. What is the probability
              that none of them has SBP tha exceeds 130 units?} \\
 
