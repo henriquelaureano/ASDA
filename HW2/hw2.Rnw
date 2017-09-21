@@ -777,6 +777,10 @@ No. This mean that we don't have statistical evidence against the null hypothesi
 
 \underline{Solution:} \\
 
+No. This mean that you have statistical evidence against the null hypothesis
+\(H_{0}\), in this way you reject it. Maybe, with an smallest sample size you
+"don't reject" this same hypothesis.
+
 \hfill \(\blacksquare\)
 
 \horrule{.5pt}
