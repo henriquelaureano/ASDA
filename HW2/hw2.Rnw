@@ -512,12 +512,12 @@ proportions). For this reason in the code below we put the samples together and
 randomly selected members and assume that this members are from the population A
 or B, because over the null hypothesis they don't differ.
 
-<<fig.width=10, fig.cap="Histogram of the reference distribution (1000 relications).">>=
+<<fig.width=10, fig.cap="Histogram of the reference distribution (10000 relications).">>=
 # <code r> ===================================================================== #
 samp_a <- rbinom(100, 1, .7) # sampling from population A
 samp_b <- rbinom(500, 1, .6) # sampling from population B
 samp <- c(samp_a, samp_b) # putting the samples together
-B <- 1e3 # number of replication
+B <- 1e4 # number of replication
 # computing the test statistic
 t1 <- function(prop_a, n_a, prop_b, n_b){
   (prop_a - prop_b)/sqrt((prop_a*(1-prop_a))/n_a + (prop_b*(1-prop_b))/n_b)}
@@ -680,10 +680,61 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
 
 \underline{Solution:} \\
 
+The construction of the reference distribution is over \(H_{0}\), with means that
+we considerer that don't exist difference between the samples (the sample
+proportions). For this reason in the code below we put the samples together and
+randomly selected members and assume that this members are from the population A
+or B, because over the null hypothesis they don't differ.
+
+<<fig.width=10, fig.cap="Histogram of the reference distribution (10000 relications).">>=
+# <code r> ===================================================================== #
+# first we use the same definitions that before
+# samp_a <- rbinom(100, 1, .7) ; samp_b <- rbinom(500, 1, .6)
+# samp <- c(samp_a, samp_b) ; B <- 1e3
+t2 <- function(n_a, n_b, n_sd, y_a, y_b, n){ # computing the test statistic
+  hy_a <- round((n_a*n_sd/n), 2)
+  hy_b <- round((n_b*n_sd/n), 2)
+  ((y_a-hy_a)**2)/hy_a + ((n_a-y_a-(n_a-hy_a))**2)/(n_a-hy_a) +
+    ((y_b-hy_b)**2)/hy_b + ((n_b-y_b-(n_b-hy_b))**2)/(n_b-hy_b)}
+store <- numeric(B) # empth vector to store the test statistics
+for (i in 1:B){ # generating the reference distribution
+  n <- length(samp)
+  a_i <- sample(n, size = length(samp_a), replace = FALSE)
+  samp_ai <- samp[a_i] ; n_ai <- length(samp_ai)
+  samp_bi <- samp[-a_i] ; n_bi <- length(samp_bi)
+  y_ai <- sum(samp_ai) ; y_bi <- sum(samp_bi)
+  n_sdi <- y_ai + y_bi
+  # computing test statistic
+  t2_i <- t2(n_a = n_ai, n_b = n_bi, n_sd = n_sdi, y_a = y_ai, y_b = y_bi, n = n)
+  store[i] <- t2_i}
+# histogram
+hist(store, xlab = "Proportion difference", main = "Reference distribution"
+     , las = 1, xlim = range(store), col = "#0080ff", border = "orange")
+# </code r> ==================================================================== #
+@
+
 \textbf{(iii.) identify the acceptance and rejection regions for a given 
         probability of type I error.} \\
 
 \underline{Solution:} \\
+
+We will use an type I error rate of 5\%. It means, the 95-th percentile of the
+reference distribution. We can see this region at red in the histogram below.
+
+<<fig.width=10, fig.cap="Histogram of the reference distribution. To the left of the red line we have the acceptance region, to the right of the red line we have the rejection region.">>=
+# <code r> ===================================================================== #
+hist(store
+     , xlab = "Proportion difference"
+     , main = "Reference distribution"
+     , las = 1
+     , xlim = range(store)
+     , col = "#0080ff"
+     , border = "orange")
+abline(v = quantile(store, .95)
+       , col = 2
+       , lwd = 2)
+# </code r> ==================================================================== #
+@
 
 \textbf{(iv.) decision and conclusion.} \\
 
