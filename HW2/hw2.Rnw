@@ -510,7 +510,7 @@ The construction of the reference distribution is over \(H_{0}\), with means tha
 we considerer that don't exist difference between the samples (the sample
 proportions). For this reason in the code below we put the samples together and
 randomly selected members and assume that this members are from the population A
-or B, because over the null hyphotesis they don't differ.
+or B, because over the null hypothesis they don't differ.
 
 <<fig.width=10, fig.cap="Histogram of the reference distribution (1000 relications).">>=
 # <code r> ===================================================================== #
@@ -605,8 +605,19 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
  \end{tabular}
 \end{center}
 
-\underline{Solution:} \\
+\underline{Solution:}
 
+\begin{center}
+ \begin{tabular}{|c|c|c|}
+  \hline
+  & Expected count with significant drop & Expected count with no significant drop \\ \hline
+  Popn A & \((n_{A} \cdot n_{{\rm SD}})/n = (100 \cdot 370)/600\) = \Sexpr{round(100*370/600, 2)} & 100 - \Sexpr{round(100*370/600, 2)} = \Sexpr{100-round(100*370/600, 2)} \\ \hline
+  Popn B & \((n_{B} \cdot n_{{\rm SD}})/n = (500 \cdot 370)/600\) = \Sexpr{round(500*370/600, 2)} & 500 - \Sexpr{round(500*370/600, 2)} = \Sexpr{500-round(500*370/600, 2)} \\
+  \hline
+ \end{tabular}
+\end{center}
+
+\newpage
 \textbf{Construct the table of \underline{observed} counts.} \\
 \textbf{Table of observed counts.}
 
@@ -620,7 +631,17 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
  \end{tabular}
 \end{center}
 
-\underline{Solution:} \\
+\underline{Solution:}
+
+\begin{center}
+ \begin{tabular}{|c|c|c|}
+  \hline
+  & Observed count with significant drop & Observed count with no significant drop \\ \hline
+  Popn A & 70 & 30 \\ \hline
+  Popn B & 300 & 200 \\
+  \hline
+ \end{tabular}
+\end{center}
 
 \textbf{Conduct a test of the null hypothesis \(H_{0} : \pi_{A} = \pi_{B}\) using
         the test statistic}
