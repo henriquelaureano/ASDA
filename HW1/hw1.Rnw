@@ -107,9 +107,9 @@ old, the percentage increases in females, not with the same velocity that betwee
 15 and 25 years old, but increases, reaching a local maximum around 20\%. After
 this age, like for the males, the percentage decreases, in a very similar rate. In
 the end, with base in this graph, we can say that the percentage of onset of
-Schizophrenia is bigger in females than in males for the intervals < 15 and > 65,
-and bigger in males in the complementar interval (age between 15 and 65 years
-old).
+Schizophrenia is bigger in females than in males for the intervals < 15 and
+> 35-45, and bigger in males in the complementar interval (age between 15 and 35
+years old, approximately).
 
 \section*{Exercise 2} \addcontentsline{toc}{section}{Exercise 2}
 
