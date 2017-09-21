@@ -592,8 +592,7 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
 \textbf{Construct the table of (estimated) \underline{expected} counts of patients
-        with significant drop under the null hypothesis \(H_{0}\). Construct the
-        table of \underline{observed} counts.}\\
+        with significant drop under the null hypothesis \(H_{0}\).}\\
 \textbf{Table of expected counts.}
 
 \begin{center}
@@ -606,6 +605,9 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
  \end{tabular}
 \end{center}
 
+\underline{Solution:} \\
+
+\textbf{Construct the table of \underline{observed} counts.} \\
 \textbf{Table of observed counts.}
 
 \begin{center}
@@ -618,6 +620,8 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
  \end{tabular}
 \end{center}
 
+\underline{Solution:} \\
+
 \textbf{Conduct a test of the null hypothesis \(H_{0} : \pi_{A} = \pi_{B}\) using
         the test statistic}
 
@@ -627,10 +631,24 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
            \frac{(n_{B}-Y_{B}-(n_{B}-\hat{Y}_{B}))^{2}}{(n_{B}-\hat{Y}_{B})}.
 \]
 
-\textbf{To conduct this test you need to (i.) compute the observed test statistic
-        \(T_{2, obs}\); (ii.) state the reference distribution of \(T_{2}\);
-        (iii.) identify the acceptance and rejection regions for a given 
-        probability of type I error; (iv.) decision and conclusion.} \\
+\textbf{To conduct this test you need to} \\
+
+\underline{Solution:} \\
+
+\textbf{(i.) compute the observed test statistic \(T_{2, obs}\).} \\
+
+\underline{Solution:} \\
+
+\textbf{(ii.) state the reference distribution of \(T_{2}\).} \\
+
+\underline{Solution:} \\
+
+\textbf{(iii.) identify the acceptance and rejection regions for a given 
+        probability of type I error.} \\
+
+\underline{Solution:} \\
+
+\textbf{(iv.) decision and conclusion.} \\
 
 \underline{Solution:} \\
 
