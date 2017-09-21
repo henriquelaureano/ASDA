@@ -740,6 +740,26 @@ abline(v = quantile(store, .95)
 
 \underline{Solution:} \\
 
+In the histogram below we can see that the observed test statistic is in the
+acceptance region, to the left of the 95-th percentile. This means that we don't
+reject the \(H_{0}\), which means that we have statistical evidence that the
+sample proportions are equal (statistically equal).
+
+<<fig.width=10, fig.cap="Histogram of the reference distribution. In red we have the 95-th percentile and in green the observed test statistic value.">>=
+# <code r> ===================================================================== #
+hist(store
+     , xlab = "Proportion difference"
+     , main = "Reference distribution"
+     , las = 1
+     , xlim = range(store)
+     , col = "#0080ff"
+     , border = "orange")
+abline(v = quantile(store, .95), col = 2, lwd = 2)
+abline(v = t2(n_a = n_ai, n_b = n_bi, n_sd = n_sdi, y_a = y_ai, y_b = y_bi, n = n)
+       , col = 3, lwd = 3)
+# </code r> ==================================================================== #
+@
+
 \subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
 
 \textbf{Conceptual question: suppose you ”do not reject” the null hypothesis
