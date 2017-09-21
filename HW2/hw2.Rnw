@@ -570,6 +570,11 @@ abline(v = quantile(store, .95), col = 2, lwd = 2)
 
 \underline{Solution:} \\
 
+In the histogram below we can see that the observed test statistic is in the
+rejection region, to the right of the 95-th percentile. This means that we
+reject the \(H_{0}\), which means that we don't have statistical evidence that the
+sample proportions are equal (statistically equal).
+
 <<fig.width=10, fig.cap="Histogram of the reference distribution. In red we have the 95-th percentile and in green the observed test statistic value.">>=
 # <code r> ===================================================================== #
 hist(store
