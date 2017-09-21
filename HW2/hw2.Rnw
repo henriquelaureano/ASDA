@@ -121,7 +121,7 @@ in_inter <- numeric(B) # creating empth object of size B
 
 ## simulation study code
 for (i in 1:B){
-  samp <- rbinom(1, n = n, p = p) # simulating samples from a binomal dist.
+  samp <- rbinom(n, 1, p) # simulating samples from a binomal dist.
   prop <- mean(samp) # sample proportion
   abs_samp <- abs(prop - p) # difference to the tolerance level
   in_inter[i] <- ifelse(abs_samp <= tol, "in", "out") # if is in or out
@@ -131,7 +131,7 @@ prop.table(table(in_inter))
 # </code r> ==================================================================== #
 @
 
-The proportion is of 14\%, bigger than the desired proportion of 10\%.
+The proportion is of 15\%, bigger than the desired proportion of 10\%.
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
@@ -146,7 +146,7 @@ The proportion is of 14\%, bigger than the desired proportion of 10\%.
 final_prop <- prop.table(table(in_inter)) ; prop_out <- final_prop[[2]]
 while (final_prop[[2]] > .1){
   for (i in 1:B){
-    samp <- rbinom(1, n = n + 1, p = p)
+    samp <- rbinom(n + 1, 1, p)
     prop <- mean(samp) ; abs_samp <- abs(prop - p)
     in_inter[i] <- ifelse(abs_samp <= tol, "in", "out")}
   final_prop <- prop.table(table(in_inter))
@@ -504,7 +504,13 @@ For each Normal distributions the 90-th percentiles are:
 \vspace{.5cm}
 \textbf{(ii.) state the reference distribution of \(T_{1}\).} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+The construction of the reference distribution is over \(H_{0}\), with means that
+we considerer that don't exist difference between the samples (the sample
+proportions). For this reason in the code below we put the samples together and
+randomly selected members and assume that this members are from the population A
+or B, because over the null hyphotesis they don't differ.
 
 <<fig.width=10, fig.cap="Histogram of the reference distribution (1000 relications).">>=
 # <code r> ===================================================================== #
@@ -514,11 +520,9 @@ samp <- c(samp_a, samp_b) # putting the samples together
 B <- 1e3 # number of replication
 # computing the test statistic
 t1 <- function(prop_a, n_a, prop_b, n_b){
-  (prop_a - prop_b)/sqrt((prop_a*(1-prop_a))/n_a + (prop_b*(1-prop_b))/n_b)
-}
+  (prop_a - prop_b)/sqrt((prop_a*(1-prop_a))/n_a + (prop_b*(1-prop_b))/n_b)}
 store <- numeric(B) # empth vector to store the test statistics
-# generating the reference distribution
-for (i in 1:B){
+for (i in 1:B){ # generating the reference distribution
   # choosing randomly the members of population A
   a_i <- sample(length(samp), size = length(samp_a), replace = FALSE)
   samp_ai <- samp[a_i] ; n_ai <- length(samp_ai)
@@ -532,12 +536,9 @@ for (i in 1:B){
 }
 # histogram
 hist(store
-     , xlab = "Proportion difference"
-     , main = "Reference distribution"
-     , las = 1
-     , xlim = range(store)
-     , col = "#0080ff"
-     , border = "orange")
+     , xlab = "Proportion difference", main = "Reference distribution"
+     , las = 1, xlim = range(store)
+     , col = "#0080ff", border = "orange")
 # </code r> ==================================================================== #
 @
 
@@ -569,7 +570,7 @@ abline(v = quantile(store, .95), col = 2, lwd = 2)
 
 \underline{Solution:} \\
 
-<<fig.width=10, fig.cap="Histogram of the reference distribution. To the left of the red line we have the acceptance region, to the right of the red line we have the rejection region.">>=
+<<fig.width=10, fig.cap="Histogram of the reference distribution. In red we have the 95-th percentile and in green the observed test statistic value.">>=
 # <code r> ===================================================================== #
 hist(store
      , xlab = "Proportion difference"
