@@ -656,10 +656,26 @@ abline(v = t1(prop_a = .7, n_a = 100, prop_b = .6, n_b = 500), col = 3, lwd = 3)
 
 \underline{Solution:} \\
 
-\textbf{(i.) compute the observed test statistic \(T_{2, obs}\).} \\
+\textbf{(i.) compute the observed test statistic \(T_{2, {\rm obs}}\).} \\
 
-\underline{Solution:} \\
+\underline{Solution:}
 
+\begin{align*}
+ T_{2, {\rm obs}} & = \frac{(70 - 61.67)^{2}}{61.67} +
+ \frac{(100-70-(100-61.67))^{2}}{(100-61.67)} +
+ \frac{(300 - 308.33)^{2}}{308.33} +
+ \frac{(500-300-(500-308.33))^{2}}{(500-308.33)} \\
+ & = \frac{\Sexpr{(70-61.67)**2}}{61.67} + \frac{\Sexpr{(30-38.33)**2}}{38.33} +
+     \frac{\Sexpr{(-8.33)**2}}{308.33} + \frac{\Sexpr{(200-191.67)**2}}{191.67}
+ = \Sexpr{((70-61.67)**2)/61.67} + \Sexpr{((30-38.33)**2)/38.33} +
+   \Sexpr{((-8.33)**2)/308.33} + \Sexpr{((200-191.67)**2)/191.67}.
+\end{align*}
+
+\[ \boxed{T_{2, {\rm obs}} =
+          \Sexpr{((70-61.67)**2)/61.67 + ((30-38.33)**2)/38.33 +
+                 ((-8.33)**2)/308.33 + ((200-191.67)**2)/191.67}.} \]
+
+\vspace{.4cm}
 \textbf{(ii.) state the reference distribution of \(T_{2}\).} \\
 
 \underline{Solution:} \\
