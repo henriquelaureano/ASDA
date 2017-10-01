@@ -92,12 +92,30 @@ opts_chunk$set(size='small'
 
 \textbf{Suppose that a population of scores has a normal distribution with mean
         \(\mu\) = 80 and variance \(\sigma^{2}\) = 9. Use the standard normal
-        table to determine the 2.5-th, 5-th, 25-th, 50- th, 75-th, 95-th and
+        table to determine the 2.5-th, 5-th, 25-th, 50-th, 75-th, 95-th and
         97.5-th percentile of this distribution of scores. Compare the answers you
         obtained manually by that provided by R (use the help function to
         determine if you need to use pnorm, rnorm, dnorm, etc.)} \\
 
 \underline{Solution:}
+
+\begin{table}[H]
+ \centering
+ \caption{In the second column (left to right) we have the values from the standard normal table; in the third column we have the percentiles obtained manually, after the percentiles provided by R and in the end the difference between them (we used two decimal places).} \vspace{.25cm}
+  \begin{tabular}{r|c|r|r|r}
+   \toprule
+   Percentile & Z & \(Q_{i} = Z \cdot \sigma + \mu\)  & R = \texttt{qnorm(\(Z\), 80, sqrt(9))} & Diff = \(Q_{i}\) - R \\
+   \midrule
+   2.5-th & -1.96 & \(-1.96 \cdot \sqrt{9} + 80 = \) \Sexpr{-1.96*sqrt(9)+80} & \Sexpr{round(qnorm(.025, 80, sqrt(9)), 2)} & \Sexpr{round(-1.96*sqrt(9)+80 - qnorm(.025, 80, sqrt(9)), 2)} \\
+   5-th & -1.64 & \(-1.64 \cdot \sqrt{9} + 80 = \) \Sexpr{-1.64*sqrt(9)+80} & \Sexpr{round(qnorm(.05, 80, sqrt(9)), 2)} & \Sexpr{round(-1.64*sqrt(9)+80 - qnorm(.05, 80, sqrt(9)), 2)} \\
+   25-th & -0.67 & \(-0.67 \cdot \sqrt{9} + 80 = \) \Sexpr{-.67*sqrt(9)+80} & \Sexpr{round(qnorm(.25, 80, sqrt(9)), 2)} & \Sexpr{round(-.67*sqrt(9)+80 - qnorm(.25, 80, sqrt(9)), 2)} \\
+   50-th & 0.00 & \(0 \cdot \sqrt{9} + 80 = \) \Sexpr{0*sqrt(9)+80} & \Sexpr{qnorm(.5, 80, sqrt(9))} & \Sexpr{0*sqrt(9)+80 - qnorm(.5, 80, sqrt(9))} \\
+   75-th & 0.67 & \(0.67 \cdot \sqrt{9} + 80 = \) \Sexpr{.67*sqrt(9)+80} & \Sexpr{round(qnorm(.75, 80, sqrt(9)), 2)} & \Sexpr{round(.67*sqrt(9)+80 - qnorm(.75, 80, sqrt(9)), 2)} \\
+   95-th & 1.64 & \(1.64 \cdot \sqrt{9} + 80 = \) \Sexpr{1.64*sqrt(9)+80} & \Sexpr{round(qnorm(.95, 80, sqrt(9)), 2)} & \Sexpr{round(1.64*sqrt(9)+80 - qnorm(.95, 80, sqrt(9)), 2)} \\
+   97.5-th & 1.96 & \(1.96 \cdot \sqrt{9} + 80 = \) \Sexpr{1.96*sqrt(9)+80} & \Sexpr{round(qnorm(.975, 80, sqrt(9)), 2)} & \Sexpr{round(1.96*sqrt(9)+80 - qnorm(.975, 80, sqrt(9)), 2)} \\
+   \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
@@ -106,24 +124,80 @@ opts_chunk$set(size='small'
         
 \textbf{(i.) degrees of freedom equal to 5.} \\
 
-\underline{Solution:} \\
+\underline{Solution:}
+
+\begin{table}[H]
+ \centering
+ \caption{In the second column (left to right) we have the percentiles provided by the \(\chi^{2}\) table; in the third column we have the percentiles provided by R and in the end the difference between them (we used three decimal places).} \vspace{.25cm}
+  \begin{tabular}{r|r|r|r}
+   \toprule
+   Percentile & \(\chi^{2}\) (using the table) & \texttt{qchisq(\(\chi^{2}\), 5, lower.tail = FALSE)} & Difference \\
+   \midrule
+   90-th & \(\chi^{2}_{0.10}\) = 9.236 & \Sexpr{round(qchisq(.1, 5, lower.tail = FALSE), 3)} & \Sexpr{round(9.236 - qchisq(.1, 5, lower.tail = FALSE), 3)} \\
+   95-th & \(\chi^{2}_{0.05}\) = 11.070 & \Sexpr{round(qchisq(.05, 5, lower.tail = FALSE), 3)} & \Sexpr{round(11.070 - qchisq(.05, 5, lower.tail = FALSE), 3)} \\
+   97.5-th & \(\chi^{2}_{0.025}\) = 12.833 & \Sexpr{round(qchisq(.025, 5, lower.tail = FALSE), 3)} & \Sexpr{round(12.833 - qchisq(.025, 5, lower.tail = FALSE), 3)} \\
+   \bottomrule
+  \end{tabular}
+\end{table}
 
 \textbf{(ii.) with degrees of freedom equal to 10.} \\
 
 \underline{Solution:}
+
+\begin{table}[H]
+ \centering
+ \caption{In the second column we have the percentiles provided by the \(\chi^{2}\) table; in the third column we have the percentiles provided by R and in the end the difference between them (used three decimal places).} \vspace{.25cm}
+  \begin{tabular}{r|r|r|r}
+   \toprule
+   Percentile & \(\chi^{2}\) (using the table) & \texttt{qchisq(\(\chi^{2}\), 10, lower.tail = FALSE)} & Difference \\
+   \midrule
+   90-th & \(\chi^{2}_{0.10}\) = 15.987 & \Sexpr{round(qchisq(.1, 10, lower.tail = FALSE), 3)} & \Sexpr{round(15.987 - qchisq(.1, 10, lower.tail = FALSE), 3)} \\
+   95-th & \(\chi^{2}_{0.05}\) = 18.307 & \Sexpr{round(qchisq(.05, 10, lower.tail = FALSE), 3)} & \Sexpr{round(18.307 - qchisq(.05, 10, lower.tail = FALSE), 3)} \\
+   97.5-th & \(\chi^{2}_{0.025}\) = 20.483 & \Sexpr{round(qchisq(.025, 10, lower.tail = FALSE), 3)} & \Sexpr{round(20.483 - qchisq(.025, 10, lower.tail = FALSE), 3)} \\
+   \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
 \textbf{Determine the 2.5-th, 95-th and 97.5-th percentile of a t-distribution
         with} \\
 
-\textbf{(i.) degrees of freedom equal to 5} \\
+\textbf{(i.) degrees of freedom equal to 5.} \\
 
-\underline{Solution:} \\
+\underline{Solution:}
+
+\begin{table}[H]
+ \centering
+ \caption{In the second column we have the percentiles provided by the table, using the cumulative probability; in the third column we have the percentiles provided by R and in the end the difference between them (we used three decimal places).} \vspace{.25cm}
+  \begin{tabular}{r|r|r|r}
+   \toprule
+   Percentile & cum. prob (using the table) & R = \texttt{qt({\rm cum. prob}, 5)} & Difference \\
+   \midrule
+   2.5-th & \(t_{0.025}\) = -2.571 & \Sexpr{round(qt(.025, 5), 3)} & \Sexpr{round(-2.571 - qt(.025, 5), 3)} \\
+   95-th & \(t_{0.95}\) = 2.015 & \Sexpr{round(qt(.95, 5), 3)} & \Sexpr{round(2.015 - qt(.95, 5), 3)} \\
+   97.5-th & \(t_{0.975}\) = 2.571 & \Sexpr{round(qt(.975, 5), 3)} & \Sexpr{round(2.571 - qt(.975, 5), 3)} \\
+   \bottomrule
+  \end{tabular}
+\end{table}
 
 \textbf{(ii.) with degrees of freedom equal to 1000.} \\
 
 \underline{Solution:}
+
+\begin{table}[H]
+ \centering
+ \caption{In the second column we have the percentiles provided by the table, using the cumulative probability; in the third column we have the percentiles provided by R and in the end the difference between them (we used three decimal places).} \vspace{.25cm}
+  \begin{tabular}{r|r|r|r}
+   \toprule
+   Percentile & cum. prob (using the table) & R = \texttt{qt({\rm cum. prob}, 1000)} & Difference \\
+   \midrule
+   2.5-th & \(t_{0.025}\) = -1.962 & \Sexpr{round(qt(.025, 1e3), 3)} & \Sexpr{round(-1.962 - qt(.025, 1e3), 3)} \\
+   95-th & \(t_{0.95}\) = 1.646 & \Sexpr{round(qt(.95, 1e3), 3)} & \Sexpr{round(1.646 - qt(.95, 1e3), 3)} \\
+   97.5-th & \(t_{0.975}\) = 1.962 & \Sexpr{round(qt(.975, 1e3), 3)} & \Sexpr{round(1.962 - qt(.975, 1e3), 3)} \\
+   \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
 
@@ -133,6 +207,64 @@ opts_chunk$set(size='small'
         75-th, 97.5-th).} \\
 
 \underline{Solution:}
+
+<<echo=FALSE, eval=FALSE>>=
+# <code r> ===================================================================== #
+da <- data.frame(
+  Percentile = rep(c("2.5-th", "25-th", "75-th", "97.5-th"), each = 7)
+  , df = rep(c(5, 10, 15, 20, 25, 30, 1000), 4)
+  , t = c(-2.571, -2.228, -2.131, -2.086, -2.06, -2.042, -1.962
+          , -0.727, -0.7, -0.691, -0.687, -0.684, -0.683, -0.675
+          , c(-0.727, -0.7, -0.691, -0.687, -0.684, -0.683, -0.675)*(-1)
+          , c(-2.571, -2.228, -2.131, -2.086, -2.06, -2.042, -1.962)*(-1))
+  , Z = c(rep(-1.96, 7), rep(-0.674, 7), rep(0.674, 7), rep(1.96, 7)))
+da$"|Difference|" <- abs(da[ , 4] - da[ , 3])
+library(xtable)
+print(xtable(da), include.rownames = FALSE)
+# </code r> ==================================================================== #
+@
+
+\begin{table}[H]
+ \centering
+ \caption{} \vspace{.25cm}
+  \begin{tabular}{r|r|r|r|r}
+   \toprule
+   Percentile & df & \(t\) & \(Z\) & |Difference| \\ 
+   \midrule
+   2.5-th & 5 & -2.57 & -1.96 & 0.61 \\
+   2.5-th & 10 & -2.23 & -1.96 & 0.27 \\
+   2.5-th & 15 & -2.13 & -1.96 & 0.17 \\
+   2.5-th & 20 & -2.09 & -1.96 & 0.13 \\
+   2.5-th & 25 & -2.06 & -1.96 & 0.10 \\
+   2.5-th & 30 & -2.04 & -1.96 & 0.08 \\
+   2.5-th & 1000 & -1.96 & -1.96 & 0.00 \\
+   \midrule
+   25-th & 5 & -0.73 & -0.67 & 0.05 \\
+   25-th & 10 & -0.70 & -0.67 & 0.03 \\
+   25-th & 15 & -0.69 & -0.67 & 0.02 \\
+   25-th & 20 & -0.69 & -0.67 & 0.01 \\
+   25-th & 25 & -0.68 & -0.67 & 0.01 \\
+   25-th & 30 & -0.68 & -0.67 & 0.01 \\
+   25-th & 1000 & -0.68 & -0.67 & 0.00 \\
+   \midrule
+   75-th & 5 & 0.73 & 0.67 & 0.05 \\
+   75-th & 10 & 0.70 & 0.67 & 0.03 \\
+   75-th & 15 & 0.69 & 0.67 & 0.02 \\
+   75-th & 20 & 0.69 & 0.67 & 0.01 \\
+   75-th & 25 & 0.68 & 0.67 & 0.01 \\
+   75-th & 30 & 0.68 & 0.67 & 0.01 \\
+   75-th & 1000 & 0.68 & 0.67 & 0.00 \\
+   \midrule
+   97.5-th & 5 & 2.57 & 1.96 & 0.61 \\
+   97.5-th & 10 & 2.23 & 1.96 & 0.27 \\
+   97.5-th & 15 & 2.13 & 1.96 & 0.17 \\
+   97.5-th & 20 & 2.09 & 1.96 & 0.13 \\
+   97.5-th & 25 & 2.06 & 1.96 & 0.10 \\
+   97.5-th & 30 & 2.04 & 1.96 & 0.08 \\
+   97.5-th & 1000 & 1.96 & 1.96 & 0.00 \\
+   \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection*{(e)} \addcontentsline{toc}{subsection}{(e)}
 
