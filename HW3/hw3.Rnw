@@ -494,6 +494,43 @@ is not known. Thus,}
 
 \underline{Solution:}
 
+<<>>=
+# <code r> ===================================================================== #
+# empty vector of size 1e4 (# of replications) to store the test statistics
+ts <- numeric(1e4)
+# function to generate the reference distribution
+ref.dist <- function(mua = 24, mub = 24, s2 = 32, na, nb, title){
+  # choosed population means: 24 ; choosed population variances: 32 
+  t <- function(xa, xb, mua, mub, na, nb){ # test statistic
+    sa2 <- sum((xa - mua)**2) / (na - 1)
+    sb2 <- sum((xb - mub)**2) / (nb - 1)
+    wa <- (na - 1) / ((na - 1) + (nb - 1))
+    wb <- (nb - 1) / ((na - 1) + (nb - 1))
+    sp2 <- wa * sa2 + wb * sb2 # pooled variance estimate
+    (mua - mub) / sqrt( sp2 * ((1/na) + (1/nb)) )
+  }
+  for (i in 1:length(ts)) { # computing the reference distribution
+    xa <- rnorm(na, mua, sqrt(s2))
+    xb <- rnorm(nb, mub, sqrt(s2))
+    hmua <- mean(xa)
+    hmub <- mean(xb)
+    ts[i] <- t(xa = xa, xb = xb, mua = hmua, mub = hmub, na = na, nb = nb)
+  }
+  # histogram
+  hist(ts, freq = FALSE, col = "gray60", las = 1, xlab = "", ylab = "", main = NA
+       , axes = FALSE) ; axis(side = 1, at = -4:4)
+  lines(density(ts), col = "#0080ff", lwd = 3)
+  abline(v = c(quantile(ts, .025), quantile(ts, .975)), col = 2, lwd = 2)
+  mtext(side = 3, text = title, adj = 0, cex = 1.3)
+}
+par(mfrow = c(1, 2), mar = c(2, 2, 4, 2))
+# generating the reference distribution
+ref.dist(na = 30, nb = 30, title = bquote(paste(n[A], " = " , n[B], " = 30")))
+ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")))
+# </code r> ==================================================================== #
+@
+
+
 \section*{Exercise 3} \addcontentsline{toc}{section}{Exercise 3}
 
 \horrule{1pt} \\
