@@ -379,6 +379,28 @@ In the table we don't have \(df_{d}\) = 31, so we approximate to 30.
 
 \underline{Solution:} \\
 
+<<>>=
+# <code r> ===================================================================== #
+na <- nb <- 30 # sample sizes
+pia <- pib <- .67 # population proportions
+# empty vector of size 1e4 (# of replications) to store the test statistics
+ts <- numeric(1e4)
+t1 <- function(pia, pib, na, nb){ # test statistic
+  (pia - pib) / sqrt( (pia*(1-pia)/na) + (pib*(1-pib)/nb) )
+}
+# generating the reference distribution
+for (i in 1:length(ts)) {
+  hpia <- mean(rbinom(na, 1, pia))
+  hpib <- mean(rbinom(nb, 1, pib))
+  ts[i] <- t1(pia = hpia, pib = hpib, na = na, nb = nb)
+}
+hist(ts, freq = FALSE, col = "gray60", las = 1, xlab = "", ylab = ""
+     , axes = FALSE, main = "something, be creative!")
+lines(density(ts), col = "#0080ff", lwd = 2)
+axis(side = 1, at = -4:4)
+# </code r> ==================================================================== #
+@
+
 \textbf{(ii.) \(n_{A}\) = 25, \(n_{B}\) = 40.} \\
 
 \underline{Solution:}
