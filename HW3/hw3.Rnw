@@ -378,13 +378,13 @@ In the table we don't have \(df_{d}\) = 31, so we approximate to 30.
 
 \underline{Solution:}
 
-<<fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T_{1}\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
+<<2a, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T_{1}\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
 # <code r> ===================================================================== #
-pia <- pib <- .67 # population proportions
 # empty vector of size 1e4 (# of replications) to store the test statistics
 ts <- numeric(1e4)
 # function to generate the reference distribution
 ref.dist <- function(pia = .67, pib = .67, na, nb, title){
+  # choosed population proportions: 0.67
   t1 <- function(pia, pib, na, nb){ # test statistic
     (pia - pib) / sqrt( (pia*(1-pia)/na) + (pib*(1-pib)/nb) )
   }
@@ -407,6 +407,13 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 # </code r> ==================================================================== #
 @
 
+We can see in Figure \ref{fig:2a} that in both simulation scenarios we found a 
+bell shape behavior, and, in red we have the 2.5th and 97.5th percentiles, and in
+both cases this percentiles are very close to -2, 2. Which is a sign that the
+reference distributions are very similar to a Standard Normal distribution,
+because we know that in a Standard Normal we have 95\% of the data between \(\pm\)
+1.96 (very close to 2).
+
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
 \textbf{In testing for the equality of the means of two Gaussian populations with
@@ -419,6 +426,36 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 \]
 
 \underline{Solution:}
+
+<<2b, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(Z\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
+# <code r> ===================================================================== #
+# empty vector of size 1e4 (# of replications) to store the test statistics
+zs <- numeric(1e4)
+# function to generate the reference distribution
+ref.dist <- function(mua = 24, mub = 24, s2 = 32, na, nb, title){
+  # choosed population means: 24 ; choosed population variances: 32 
+  z <- function(mua, mub, s2, na, nb){ # test statistic
+    (mua - mub) / sqrt( s2 * ((1/na) + (1/nb)) )
+  }
+  for (i in 1:length(zs)) { # computing the reference distribution
+    hmua <- mean(rnorm(na, mua, sqrt(s2)))
+    hmub <- mean(rnorm(nb, mub, sqrt(s2)))
+    zs[i] <- z(mua = hmua, mub = hmub, s2, na = na, nb = nb)
+  }
+  # histogram
+  hist(zs, freq = FALSE, col = "gray60", las = 1, xlab = "", ylab = "", main = NA
+       , axes = FALSE) ; axis(side = 1, at = -4:4)
+  lines(density(zs), col = "#0080ff", lwd = 3)
+  abline(v = c(quantile(zs, .025), quantile(zs, .975)), col = 2, lwd = 2)
+  mtext(side = 3, text = title, adj = 0, cex = 1.3)
+}
+par(mfrow = c(1, 2), mar = c(2, 2, 4, 2))
+# generating the reference distribution
+ref.dist(na = 30, nb = 30, title = bquote(paste(n[A], " = " , n[B], " = 30")))
+ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")))
+# </code r> ==================================================================== #
+@
+
 
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
