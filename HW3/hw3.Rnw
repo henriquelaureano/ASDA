@@ -494,7 +494,7 @@ is not known. Thus,}
 
 \underline{Solution:}
 
-<<>>=
+<<2c, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
 # <code r> ===================================================================== #
 # empty vector of size 1e4 (# of replications) to store the test statistics
 ts <- numeric(1e4)
@@ -530,6 +530,10 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 # </code r> ==================================================================== #
 @
 
+We can see in Figure \ref{fig:2c} that in both simulation scenarios we found a 
+bell shape behavior, with median around zero and with 2.5th and 97.5th
+percentiles very close to -2, 2. Which is a sign that the reference distributions
+are very similar to a Standard Normal distribution.
 
 \section*{Exercise 3} \addcontentsline{toc}{section}{Exercise 3}
 
@@ -558,6 +562,11 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 
 \underline{Solution:}
 
+\[ {\rm Proportion} =
+   \frac{\text{Support restriction} \cap \text{Support DJ Trump}}{n} =
+   \frac{150}{500} = \Sexpr{150/500}.
+\]
+
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
 \textbf{What is the marginal sample proportion of DJT supporters? What is the
@@ -565,41 +574,111 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 
 \underline{Solution:}
 
+\begin{align*}
+ \text{Proportion of DJT supporters} & = \frac{\text{Support DJT}}{n} =
+ \frac{200}{500} = \Sexpr{200/500}. \\
+ \text{Proportion of the restriction on immigration} & =
+ \frac{\text{Support restriction}}{n} = \frac{150 + 100}{500} = \Sexpr{250/500}.
+\end{align*}
+
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
 \textbf{Among those who do not support the restriction, what is the proportion of
-        DJT sup- porters? What is the odds of selecting a participant who support
+        DJT supporters? What is the odds of selecting a participant who support
         DJT?} \\
 
 \underline{Solution:}
+
+\begin{align*}
+ {\rm Proportion} & =
+ \frac{\text{DJT supporters | Do not support the restriction}}{
+       \text{Do not support restriction}} = \frac{50}{250} = \Sexpr{50/250}. \\
+ {\rm Odds} & = \frac{50/250}{1-50/250} = \Sexpr{(50/250) / (1 - 50/250)}.
+\end{align*}
 
 \subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
 
 \textbf{Conduct a formal test of association between support for DJT and support  
         for restriction on immigration. Note that a formal test should include} \\
 
-\textbf{(i.) the the null and alternative hypotheses.} \\
+\textbf{(i.) the null and alternative hypotheses.} \\
 
 \underline{Solution:} \\
+
+\(H_{0}\): There isn't not a relationship between support for DJT and whether or
+           not someone support restriction on immigration (they are independent).
+\\
+
+\(H_{a}\): There is a relationship between support for DJT and whether or not
+           someone support restriction on immigration (they are dependent). \\
 
 \textbf{(ii.) the test stastistic.} \\
 
 \underline{Solution:} \\
 
+\(\chi^{2}\) Test.
+
+\begin{align*}
+ E_{\text{Support DJT, Support restriction}} & = \frac{200 \cdot 250}{500} =
+                                                 \Sexpr{200*250/500} \\
+ E_{\text{Support DJT, Don't support restriction}} & = \frac{200 \cdot 250}{500} =
+                                                 \Sexpr{200*250/500} \\
+ E_{\text{Don't support DJT, Support restriction}} & = \frac{300 \cdot 250}{500} =
+                                                 \Sexpr{300*250/500} \\
+ E_{\text{Don't support DJT, Don't support restriction}} & =
+ \frac{300 \cdot 250}{500} = \Sexpr{300*250/500} \\
+\end{align*}
+
+Observed and expected counts are often presented together in a contingency table.
+In the table below, expected values are presented in parentheses.
+
+\begin{center}
+ \begin{tabular}{|c|c|c|c|}
+  \hline
+  & Support restriction & Do not support restriction & Total \\ \hline
+  Support DJT & 150 (100) & 50 (100) & 200 \\ \hline
+  Do not support DJT & 100 (150) & 200 (150) & 300 \\ \hline
+  Total & 250 & 250 & 500 \\
+  \hline
+ \end{tabular}
+\end{center}
+
+\(\chi^{2}\) Test Statistic:
+
+\begin{align*}
+ \chi^{2} & = \sum \frac{(O - E)^{2}}{E} \\
+          & = \frac{(150-100)^{2}}{100} + \frac{(50-100)^{2}}{100} +
+              \frac{(100-150)^{2}}{150} + \frac{(200-150)^{2}}{150} \\
+          & = \Sexpr{(50**2)/100} + \Sexpr{(50**2)/100} +
+              \Sexpr{(50**2)/150} + \Sexpr{(50**2)/150} \\
+          & = \Sexpr{(50**2)/100 + (50**2)/100 + (50**2)/150 + (50**2)/150}
+\end{align*}
+
 \textbf{(iii.) its null distribution and the rejection region based on the
                probability of Type I error of \(\alpha\) = 0.05.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+The \(\chi^{2}\) test statistic is 83.33 with \(df\) = (number of rows - 1)
+\(\cdot\) (number of columns - 1) = (2 - 1) \(\cdot\) (2 - 1) = 1. \\
+
+Using the table, we find that for a probability of Type I error of \(\alpha\) =
+0.05, with 1 degree of freedom, the rejection region is determined by the value
+3.841, which is much smaller than the value of the test statistic. Therefore, we
+have significant statistical evidence to reject \(H_{0}\). We have statistical
+evidence that there is a relationship between support for DJT and whether or not
+someone support restriction on immigration (we have significant statistical
+evidence that they are dependent).
 
 \section*{Exercise 4} \addcontentsline{toc}{section}{Exercise 4}
 
 \horrule{1pt} \\
 
 \textbf{Assume that children’s score in the KidScore data set has a
-        \(N(\mu_{1}, \sigma^{2}\) distribution if the mother has graduated from
-        high school, and \(N(\mu_{2}, \sigma^{2}\) if the mother has not graduated
-        from high school. Using the random sample collected in the KidScore data
-        set,} \\
+        \(N(\mu_{1}, \sigma^{2})\) distribution if the mother has graduated from
+        high school, and \(N(\mu_{2}, \sigma^{2})\) if the mother has not
+        graduated from high school. Using the random sample collected in the
+        KidScore dataset,}
 
 \subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
 
