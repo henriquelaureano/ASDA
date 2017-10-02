@@ -408,11 +408,11 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 @
 
 We can see in Figure \ref{fig:2a} that in both simulation scenarios we found a 
-bell shape behavior, and, in red we have the 2.5th and 97.5th percentiles, and in
-both cases this percentiles are very close to -2, 2. Which is a sign that the
-reference distributions are very similar to a Standard Normal distribution,
-because we know that in a Standard Normal we have 95\% of the data between \(\pm\)
-1.96 (very close to 2).
+bell shape behavior, with median around zero. In red we have the 2.5th and 97.5th
+percentiles, and in both cases this percentiles are very close to -2, 2, which is
+a sign that the reference distributions are very similar to a Standard Normal
+distribution, because we know that in a Standard Normal we have 95\% of the data
+between \(\pm\) 1.96 (very close to 2).
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
@@ -456,6 +456,10 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 # </code r> ==================================================================== #
 @
 
+We can see in Figure \ref{fig:2b} that in both simulation scenarios we found a 
+bell shape behavior, with median around zero and with 2.5th and 97.5th
+percentiles very close to -2, 2. Which is a sign that the reference distributions
+are very similar to a Standard Normal distribution.
 
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
