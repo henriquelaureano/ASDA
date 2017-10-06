@@ -18,4 +18,6 @@ Homework I ([HW1](https://mynameislaure.github.io/amcs210/hw1.pdf))
 
 Homework II ([HW2](https://mynameislaure.github.io/amcs210/hw2.pdf))
 
+Homework III ([HW3]())
+
 ***
