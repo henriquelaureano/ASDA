@@ -378,7 +378,7 @@ In the table we don't have \(df_{d}\) = 31, so we approximate to 30.
 
 \underline{Solution:}
 
-<<2a, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T_{1}\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
+<<2a, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T_{1}\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the mean, the 2.5th and 97.5th percentiles.">>=
 # <code r> ===================================================================== #
 # empty vector of size 1e4 (# of replications) to store the test statistics
 ts <- numeric(1e4)
@@ -397,7 +397,8 @@ ref.dist <- function(pia = .67, pib = .67, na, nb, title){
   hist(ts, freq = FALSE, col = "gray60", las = 1, xlab = "", ylab = "", main = NA
        , axes = FALSE) ; axis(side = 1, at = -4:4)
   lines(density(ts), col = "#0080ff", lwd = 3)
-  abline(v = c(quantile(ts, .025), quantile(ts, .975)), col = 2, lwd = 2)
+  abline(v = c(quantile(ts, .025), mean(ts), quantile(ts, .975))
+         , col = 2, lwd = 2)
   mtext(side = 3, text = title, adj = 0, cex = 1.3)
 }
 par(mfrow = c(1, 2), mar = c(2, 2, 4, 2))
@@ -408,11 +409,13 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 @
 
 We can see in Figure \ref{fig:2a} that in both simulation scenarios we found a 
-bell shape behavior, with median around zero. In red we have the 2.5th and 97.5th
-percentiles, and in both cases this percentiles are very close to -2, 2, which is
-a sign that the reference distributions are very similar to a Standard Normal
-distribution, because we know that in a Standard Normal we have 95\% of the data
-between \(\pm\) 1.96 (very close to 2).
+bell shape behavior, with mean around zero. In red we have the mean, the 2.5th and
+97.5th percentiles, and in both cases this percentiles are very close to -2, 2,
+which is a sign that the reference distributions are very similar to a Standard
+Normal distribution, because we know that in a Standard Normal we have 95\% of the
+data between \(\pm\) 1.96 (very close to 2). The mean close to zero is another
+sign that the reference distributions are very similar to a Standard Normal
+distribution, since in a Standard Normal the mean is zero.
 
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
@@ -427,7 +430,7 @@ between \(\pm\) 1.96 (very close to 2).
 
 \underline{Solution:}
 
-<<2b, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(Z\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
+<<2b, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(Z\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the mean, the 2.5th and 97.5th percentiles.">>=
 # <code r> ===================================================================== #
 # empty vector of size 1e4 (# of replications) to store the test statistics
 zs <- numeric(1e4)
@@ -446,7 +449,8 @@ ref.dist <- function(mua = 24, mub = 24, s2 = 32, na, nb, title){
   hist(zs, freq = FALSE, col = "gray60", las = 1, xlab = "", ylab = "", main = NA
        , axes = FALSE) ; axis(side = 1, at = -4:4)
   lines(density(zs), col = "#0080ff", lwd = 3)
-  abline(v = c(quantile(zs, .025), quantile(zs, .975)), col = 2, lwd = 2)
+  abline(v = c(quantile(zs, .025), mean(ts), quantile(zs, .975))
+         , col = 2, lwd = 2)
   mtext(side = 3, text = title, adj = 0, cex = 1.3)
 }
 par(mfrow = c(1, 2), mar = c(2, 2, 4, 2))
@@ -457,9 +461,9 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 @
 
 We can see in Figure \ref{fig:2b} that in both simulation scenarios we found a 
-bell shape behavior, with median around zero and with 2.5th and 97.5th
-percentiles very close to -2, 2. Which is a sign that the reference distributions
-are very similar to a Standard Normal distribution.
+bell shape behavior, with mean around zero and with 2.5th and 97.5th percentiles
+very close to -2, 2. Which is a sign that the reference distributions are very
+similar to a Standard Normal distribution.
 
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
@@ -494,7 +498,7 @@ is not known. Thus,}
 
 \underline{Solution:}
 
-<<2c, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the 2.5th and 97.5th percentiles.">>=
+<<2c, fig.width=10, fig.height=4.25, fig.cap="Empirical distribution of \\(T\\) when the null hypothesis in correct for two different pair of sample sizes. In blue we have the estimated density for this distributions and in red the mean, the 2.5th and 97.5th percentiles.">>=
 # <code r> ===================================================================== #
 # empty vector of size 1e4 (# of replications) to store the test statistics
 ts <- numeric(1e4)
@@ -520,7 +524,8 @@ ref.dist <- function(mua = 24, mub = 24, s2 = 32, na, nb, title){
   hist(ts, freq = FALSE, col = "gray60", las = 1, xlab = "", ylab = "", main = NA
        , axes = FALSE) ; axis(side = 1, at = -4:4)
   lines(density(ts), col = "#0080ff", lwd = 3)
-  abline(v = c(quantile(ts, .025), quantile(ts, .975)), col = 2, lwd = 2)
+  abline(v = c(quantile(ts, .025), mean(ts), quantile(ts, .975))
+         , col = 2, lwd = 2)
   mtext(side = 3, text = title, adj = 0, cex = 1.3)
 }
 par(mfrow = c(1, 2), mar = c(2, 2, 4, 2))
@@ -531,9 +536,9 @@ ref.dist(na = 25, nb = 40, title = bquote(paste(n[A], " = 25, " , n[B], " = 40")
 @
 
 We can see in Figure \ref{fig:2c} that in both simulation scenarios we found a 
-bell shape behavior, with median around zero and with 2.5th and 97.5th
-percentiles very close to -2, 2. Which is a sign that the reference distributions
-are very similar to a Standard Normal distribution.
+bell shape behavior, with mean around zero and with 2.5th and 97.5th percentiles
+very close to -2, 2. Which is a sign that the reference distributions are very
+similar to a Standard Normal distribution.
 
 \section*{Exercise 3} \addcontentsline{toc}{section}{Exercise 3}
 
@@ -607,8 +612,7 @@ are very similar to a Standard Normal distribution.
 
 \(H_{0}\): There isn't not a relationship between support for DJT and whether or
            not someone support restriction on immigration (they are independent).
-\\
-
+\vspace{.4cm} \\
 \(H_{a}\): There is a relationship between support for DJT and whether or not
            someone support restriction on immigration (they are dependent). \\
 
@@ -687,11 +691,33 @@ evidence that they are dependent).
 
 \underline{Solution:}
 
+<<4a, fig.width=10, fig.height=5.15, fig.cap="Boxplot for the child's test score at age 3 by mothers that completed, or not, the high school.">>=
+# <code r> ===================================================================== #
+path <- "~/Dropbox/CLASS-DROPBOX/BOOK-DATA/"
+da <- read.table(paste0(path, "KidScore.txt"), header = TRUE, sep = ",")
+da$momHs <- with(da, factor(momHs, labels = c("No", "Yes")))
+
+boxplot(kidScore ~ momHs, da, las = 1, xlab = "Mother Completed High School?"
+        , main = "Child's Test Score at Age 3")
+# </code r> ==================================================================== #
+@
+
+We can see in the Figure \ref{fig:4a} that childrens of mothers that completed the
+high school present biggest medians and smallest variance, than the childrens of
+mothers that didn't completed the high school.
+
 \subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
 
 \textbf{Compute the sample means and variances for each of the two groups.} \\
 
 \underline{Solution:}
+
+<<>>=
+# <code r> ===================================================================== #
+library(plyr)
+ddply(da, .(momHs), summarise, Mean = mean(kidScore), Variance = var(kidScore))
+# </code r> ==================================================================== #
+@
 
 \subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
 
@@ -699,13 +725,65 @@ evidence that they are dependent).
 
 \underline{Solution:}
 
+\[ \text{Pooled variance:} \qquad
+   S_{P}^{2} = W_{\text{momHs: No}} S_{\text{momHs: No}}^{2} +
+               W_{\text{momHs: Yes}} S_{\text{momHs: Yes}}^{2}.
+\]
+\begin{align*}
+ S_{\text{momHs: No}}^{2} & = \frac{1}{n_{\text{momHs: No}}-1}
+ \sum_{i=1}^{n_{\text{momHs: No}}}
+ \Big(X_{i}^{\text{momHs: No}}-\bar{X}_{\text{momHs: No}}\Big)^{2} =
+ \Sexpr{sum(with(subset(da, momHs == "No")
+        , kidScore-mean(kidScore))**2)/(table(da$momHs)[[1]]-1)}. \\
+ W_{\text{momHs: No}} & = \frac{n_{\text{momHs: No}}-1}{
+                           (n_{\text{momHs: No}}-1) + (n_{\text{momHs: Yes}}-1)} =
+ \frac{92}{92 + 340} = \Sexpr{92/(92+340)}. \\
+ S_{\text{momHs: Yes}}^{2} & = \frac{1}{n_{\text{momHs: Yes}}-1}
+ \sum_{i=1}^{n_{\text{momHs: Yes}}}
+ \Big(X_{i}^{\text{momHs: Yes}}-\bar{X}_{\text{momHs: Yes}}\Big)^{2} =
+ \Sexpr{sum(with(subset(da, momHs == "Yes")
+        , kidScore-mean(kidScore))**2)/(table(da$momHs)[[2]]-1)}. \\
+ W_{\text{momHs: Yes}} & = \frac{n_{\text{momHs: Yes}}-1}{
+                           (n_{\text{momHs: Yes}}-1) + (n_{\text{momHs: No}}-1)} =
+ \frac{340}{340 + 92} = \Sexpr{340/(340+92)}.
+\end{align*}
+\[ \boxed{
+   S_{P}^{2} =
+   \Sexpr{(sum(with(subset(da, momHs == "No")
+          , kidScore-mean(kidScore))**2)/(table(da$momHs)[[1]]-1))*(92/(92+340))}
+   + \Sexpr{(sum(with(subset(da, momHs == "Yes")
+            , kidScore-mean(kidScore))**2)/(table(da$momHs)[[2]]-1))*
+            (340/(340+92))} =
+   \Sexpr{(sum(with(subset(da, momHs == "No")
+          , kidScore-mean(kidScore))**2)/(table(da$momHs)[[1]]-1))*(92/(92+340)) +
+          (sum(with(subset(da, momHs == "Yes")
+          , kidScore-mean(kidScore))**2)/(table(da$momHs)[[2]]-1))*(340/(340+92))}
+        .}
+\]
+
 \subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
 
 \textbf{Conduct a formal test for comparing the means \(\mu_{1}\) and \(\mu_{2}\).
         Again - you already should know the complete information that is needed to
         conduct this test.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+We will test the \textbf{hypothese} that the \textbf{difference} between the mean
+of the child's test score at age 3 of mothers that completed the high school 
+\textbf{are not statiscally significant} to the mean of the child's test score at
+age 3 of mothers that didn't completed the high school.
+
+\[ {\rm Hypotheses:} \qquad
+   H_{0}: \mu_{\text{momHs: No}} = \mu_{\text{momHs: Yes}}, \qquad
+   H_{a} = \mu_{\text{momHs: No}} \neq \mu_{\text{momHs: Yes}}.
+\]
+
+\[ \text{Test Statistic:} \quad
+   T = \frac{\bar{X}_{\text{momHs: No}}-\bar{X}_{\text{momHs: Yes}}}{
+       \sqrt{S_{P}^{2}\bigg(\frac{1}{n_{\text{momHs: Yes}}} + 
+                            \frac{1}{n_{\text{momHs: No}}}\bigg)}}
+\]
 
 \hfill \(\blacksquare\)
 
