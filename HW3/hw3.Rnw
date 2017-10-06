@@ -779,11 +779,53 @@ age 3 of mothers that didn't completed the high school.
    H_{a} = \mu_{\text{momHs: No}} \neq \mu_{\text{momHs: Yes}}.
 \]
 
-\[ \text{Test Statistic:} \quad
-   T = \frac{\bar{X}_{\text{momHs: No}}-\bar{X}_{\text{momHs: Yes}}}{
-       \sqrt{S_{P}^{2}\bigg(\frac{1}{n_{\text{momHs: Yes}}} + 
-                            \frac{1}{n_{\text{momHs: No}}}\bigg)}}
-\]
+<<echo=FALSE>>=
+# <code r> ===================================================================== #
+nhs <- subset(da, momHs == "No")
+hs <- subset(da, momHs == "Yes")
+# </code r> ==================================================================== #
+@
+
+\begin{align*}
+ \text{Test Statistic:} \quad
+ T & = \frac{\bar{X}_{\text{momHs: No}}-\bar{X}_{\text{momHs: Yes}}}{
+        \sqrt{S_{P}^{2}\bigg(\frac{1}{n_{\text{momHs: No}}} + 
+                             \frac{1}{n_{\text{momHs: Yes}}}\bigg)}} \\
+   & = \frac{\Sexpr{mean(nhs$kidScore)}-\Sexpr{mean(hs$kidScore)}}{
+             \sqrt{394.1231264 \cdot
+                   \Big(\frac{1}{\Sexpr{nrow(nhs)}}+
+                        \frac{1}{\Sexpr{nrow(hs)}}\Big)
+                  }} \\
+   & = \Sexpr{(mean(nhs$kidScore)-mean(hs$kidScore))/
+              sqrt(394.1231264*((1/nrow(nhs))+(1/nrow(hs))))}
+\end{align*}
+
+Reference distribution: \(t\)-Student with
+\((n_{\text{momHs: No}}-1)+(n_{\text{momHs: Yes}}-1) = \Sexpr{92+340}\) degrees of
+freedom. We will also consider an \(\alpha = 0.05\). \\
+
+For this probability of Type I error and this amount of degrees of freedom, the 
+critical value is
+
+<<>>=
+# <code r> ===================================================================== #
+qt(.975, 432)
+# </code r> ==================================================================== #
+@
+
+\(t_{0.025, 432} = -1.965471\), \(t_{0.975, 432} = 1.965471\). Extremely closer
+to a Standard Normal. \\
+
+\fbox{As our Test Statistic is less than the critical value, we reject the
+      \(H_{0}\).} \\
+
+\fbox{\begin{minipage}{\linewidth}
+       We have statistical evidence to reject \(H_{0}\), in other words, we have
+       evidence that exist difference statiscally significant between the mean of
+       the child's test score at age 3 of mothers that completed the high school
+       and the mean of the child's test score at age 3 of mothers that didn't
+       completed the high school.
+      \end{minipage}} \\
 
 \hfill \(\blacksquare\)
 
