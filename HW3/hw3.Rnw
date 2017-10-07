@@ -610,11 +610,11 @@ similar to a Standard Normal distribution.
 
 \underline{Solution:} \\
 
-\(H_{0}\): There isn't not a relationship between support for DJT and whether or
-           not someone support restriction on immigration (they are independent).
+\(H_{0}\): There isn't not a association between support for DJT and whether or
+           not someone support restriction on immigration.
 \vspace{.4cm} \\
-\(H_{a}\): There is a relationship between support for DJT and whether or not
-           someone support restriction on immigration (they are dependent). \\
+\(H_{a}\): There is a association between support for DJT and whether or not
+           someone support restriction on immigration. \\
 
 \textbf{(ii.) the test stastistic.} \\
 
@@ -669,10 +669,9 @@ The \(\chi^{2}\) test statistic is 83.33 with \(df\) = (number of rows - 1)
 Using the table, we find that for a probability of Type I error of \(\alpha\) =
 0.05, with 1 degree of freedom, the rejection region is determined by the value
 3.841, which is much smaller than the value of the test statistic. Therefore, we
-have significant statistical evidence to reject \(H_{0}\). We have statistical
-evidence that there is a relationship between support for DJT and whether or not
-someone support restriction on immigration (we have significant statistical
-evidence that they are dependent).
+have significant statistical evidence to don't accept \(H_{0}\). We have
+statistical evidence that there is a association between support for DJT and
+whether or not someone support restriction on immigration.
 
 \section*{Exercise 4} \addcontentsline{toc}{section}{Exercise 4}
 
@@ -816,15 +815,15 @@ qt(.975, 432)
 \(t_{0.025, 432} = -1.965471\), \(t_{0.975, 432} = 1.965471\). Extremely closer
 to a Standard Normal. \\
 
-\fbox{As our Test Statistic is less than the critical value, we reject the
+\fbox{As our Test Statistic is less than the critical value, we don't accept the
       \(H_{0}\).} \\
 
 \fbox{\begin{minipage}{\linewidth}
-       We have statistical evidence to reject \(H_{0}\), in other words, we have
-       evidence that exist difference statiscally significant between the mean of
-       the child's test score at age 3 of mothers that completed the high school
-       and the mean of the child's test score at age 3 of mothers that didn't
-       completed the high school.
+       We have statistical evidence to don't accept \(H_{0}\), in other words, we
+       have evidence that exist difference statiscally significant between the
+       mean of the child's test score at age 3 of mothers that completed the high
+       school and the mean of the child's test score at age 3 of mothers that
+       didn't completed the high school.
       \end{minipage}} \\
 
 \hfill \(\blacksquare\)
