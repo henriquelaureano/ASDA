@@ -241,6 +241,31 @@ hist(c(dataY[ , 3:4]), las = 1, xlim = c(0, 30), ylim = c(0, 25), main = NA
 
 \underline{Solution:}
 
+<<3, fig.cap="Boxplots and histograms of the reduction in Blood Glucose Level (BGL) for all the four treatment groups. RD: Regular Diet; LD: Low sugar Diet ; LI: Low Intensity; HI: High Intensity.", fig.height=4.35>>=
+# <code r> ===================================================================== #
+layout(matrix(c(rep(1, 4), 2, 3, 4, 5), 2, 4, byrow = TRUE))
+par(mar = c(3, 4, .1, 2))
+boxplot(dataY, las = 1, pch = 16, ylab = "Reduction in BLG", ylim = c(5, 25))
+par(mar = c(4, 4, 2, 2))
+hist(dataY[ , 1], las = 1, xlab = "Reduction in BLG", main = "RD-LI"
+     , xlim = c(5, 25), ylim = c(0, 20))
+hist(dataY[ , 2], las = 1, xlab = "Reduction in BLG", main = "RD-HI"
+     , xlim = c(5, 25), ylim = c(0, 20))
+hist(dataY[ , 3], las = 1, xlab = "Reduction in BLG", main = "LD-LI"
+     , xlim = c(5, 25), ylim = c(0, 20))
+hist(dataY[ , 4], las = 1, xlab = "Reduction in BLG", main = "LD-HI"
+     , xlim = c(5, 25), ylim = c(0, 20))
+# </code r> ==================================================================== #
+@
+
+We can see in Figure \ref{fig:3} that for low intensity exercise program the 
+diet type didn't show very important, with a median and variance very similar for
+both. For high intensity exercise program group the medians are considerably
+bigger, with the biggest values of reduction of blood glucose level obtained in
+the combination with a strict low sugar diet. In general, all the variances are
+similar. With this graphs we can imagine that exist a difference between the
+combination of treatments, with a greater emphasis in LD-HI.
+
 \section*{Question 4} \addcontentsline{toc}{section}{Question 4}
 
 \horrule{1pt} \\
