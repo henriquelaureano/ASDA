@@ -76,7 +76,7 @@ opts_chunk$set(size='small'
         level on subjects with early signs of diabetes. In this study, \(N\) = 200
         participants with \textit{similar} clinical data are randomly assigned
         into four treatment groups with each treatment described below. There are
-        50 participants in each group.}
+        50 participants in each group.} \vspace{-.4cm}
 
 \textbf{
  \begin{itemize}
@@ -103,13 +103,33 @@ opts_chunk$set(size='small'
 
 \begin{center}
  \texttt{dataY = matrix(scan("BloodSugar4"), byrow = T, ncol = 4);}
-\end{center}
+\end{center} \vspace{-.4cm}
+
+<<>>=
+# <code r> ===================================================================== #
+path <- "~/Dropbox/CLASS-DROPBOX/BOOK-DATA/"
+dataY <- matrix(scan(paste0(path, "BloodSugar4")), byrow = TRUE, ncol = 4)
+# </code r> ==================================================================== #
+@
 
 \textbf{Check that there should be 4 columns and that the \(k\)-th column
-        corresponds to the k-th treatment. Moreover, you can combine columns 1 and
-        2 as consisting of all participants who were given a regular diet; columns
-        1 and 3 as all participants who were enrolled in a low-intensity exercise
-        and so on.}
+        corresponds to the k-th treatment.}
+
+<<>>=
+# <code r> ===================================================================== #
+ncol(dataY)
+# </code r> ==================================================================== #
+@
+
+\textbf{Moreover, you can combine columns 1 and 2 as consisting of all
+        participants who were given a regular diet; columns 1 and 3 as all
+        participants who were enrolled in a low-intensity exercise and so on.}
+
+<<>>=
+# <code r> ===================================================================== #
+colnames(dataY) <- c("RD-LI", "RD-HI", "LD-LI", "LD-HI")
+# </code r> ==================================================================== #
+@
 
 \section*{Question 1} \addcontentsline{toc}{section}{Question 1}
 
