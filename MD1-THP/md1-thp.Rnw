@@ -149,8 +149,8 @@ par(mar = c(1, 4, 3, 2))
 
 boxplot(c(dataY[ , c(1, 3)]), las = 1, pch = 16, ylim = c(5, 25)
         , main = "Low intensity", ylab = "Reduction in BGL")
-boxplot(c(dataY[ , c(2, 4)]), las = 1, pch = 16, ylim = c(5, 25)
-        , main = "High intensity", ylab = "Reduction in BGL")
+boxplot(c(dataY[ , c(2, 4)]), las = 1, ylim = c(5, 25), main = "High intensity"
+        , ylab = "Reduction in BGL")
 
 par(mar = c(4, 4, .75, 2))
 
@@ -190,6 +190,46 @@ hist(c(dataY[ , c(2, 4)]), las = 1, xlim = c(0, 30), ylim = c(0, 30), main = NA
         this study).} \\
 
 \underline{Solution:}
+
+<<2, fig.show='hide'>>=
+# <code r> ===================================================================== #
+par(mfrow = c(2, 2))
+par(mar = c(1, 4, 3, 2))
+
+boxplot(c(dataY[ , 1:2]), las = 1, ylim = c(5, 25), main = "Regular diet"
+        , ylab = "Reduction in BGL")
+boxplot(c(dataY[ , 3:4]), las = 1, ylim = c(5, 25), main = "Strict low sugar diet"
+        , ylab = "Reduction in BGL")
+
+par(mar = c(4, 4, .75, 2))
+
+hist(c(dataY[ , 1:2]), las = 1, xlim = c(0, 30), main = NA
+     , xlab = "Reduction in BLG")
+hist(c(dataY[ , 3:4]), las = 1, xlim = c(0, 30), ylim = c(0, 25), main = NA
+     , xlab = "Reduction in BLG")
+# </code r> ==================================================================== #
+@
+
+\begin{minipage}{.6\textwidth}
+ \begin{figure}[H]
+  \centering
+   \includegraphics[width = \textwidth, height = .9\textwidth]{iBagens/2-1.pdf}
+  \caption{Boxplots and histograms of the reduction in Blood Glucose Level (BGL)
+           for the two diet groups. Regular diet group in the left, strict low
+           sugar diet in the right.}
+  \label{fig:q2}
+ \end{figure}
+\end{minipage}
+\begin{minipage}{.4\textwidth}
+ We can see in the Figure \ref{fig:q2} that the variability and the median are
+ bigger in the strict low sugar diet. The median in the strict low sugar diet (LD)
+ is less than five units bigger than in the regular diet (RD) group. The
+ variability is around 25\% bigger in the LD than in the RD group. Looking for
+ this values we can see that exist a difference, but that the difference is small
+ and maybe not sufficient to be significatily.
+ 
+ \hfill \(\square\)
+\end{minipage}
 
 \section*{Question 3} \addcontentsline{toc}{section}{Question 3}
 
