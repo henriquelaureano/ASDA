@@ -273,7 +273,103 @@ combination of treatments, with a greater emphasis in LD-HI.
 \textbf{Conduct a formal test comparing the mean reduction for the four treatment
         groups.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+\(\bullet\) Hyphotesis: \\
+
+\fbox{\begin{minipage}{.65\linewidth}
+       \(H_{0} = \mu_{{\rm RD-LI}} = \mu_{{\rm RD-HI}} = \mu_{{\rm LD-LI}}
+               = \mu_{{\rm LD-HI}}\) \\
+       \(H_{a} =\) At least one mean reduction is different from the others.
+      \end{minipage}
+     } \vspace{.3cm} \\
+
+\(\bullet\) Test Statistic: \\
+
+\fbox{\(F\) Test.}
+
+<<echo=FALSE>>=
+# <code r> ===================================================================== #
+bx_rd.li <- mean(dataY[ , 1])
+bx_rd.hi <- mean(dataY[ , 2])
+bx_ld.li <- mean(dataY[ , 3])
+bx_ld.hi <- mean(dataY[ , 4])
+
+s_4 <-
+  50*(mean(dataY[ , 1])-mean(dataY))**2 +
+  50*(mean(dataY[ , 2])-mean(dataY))**2 +
+  50*(mean(dataY[ , 3])-mean(dataY))**2 +
+  50*(mean(dataY[ , 4])-mean(dataY))**2
+
+s_p.2 <-
+  .25*sum((dataY[ , 1]-mean(dataY[ , 1]))**2)/49 +
+  .25*sum((dataY[ , 2]-mean(dataY[ , 2]))**2)/49 +
+  .25*sum((dataY[ , 3]-mean(dataY[ , 3]))**2)/49 +
+  .25*sum((dataY[ , 4]-mean(dataY[ , 4]))**2)/49
+
+f <- (s_4/3)/s_p.2
+
+cv <- qf(.95, 3, 196)
+# </code r> ==================================================================== #
+@
+
+\[ F = \frac{S_{4}/(4-1)}{(200-4)\cdot S_{p}^{2}/(200-4)}
+       \overset{H_{0}}{\sim} F_{4-1, 200-4}.
+\]
+\[ \bar{X}_{{\rm RD-LI}} = \Sexpr{round(bx_rd.li, 4)}, \quad
+   \bar{X}_{{\rm RD-HI}} = \Sexpr{round(bx_rd.hi, 4)}, \quad
+   \bar{X}_{{\rm LD-LI}} = \Sexpr{round(bx_ld.li, 4)}, \quad
+   \bar{X}_{{\rm LD-HI}} = \Sexpr{round(bx_ld.hi, 4)}
+\]
+\[ \bar{X} = \Sexpr{round(mean(dataY), 4)} \]
+\begin{align*}
+ S_{4} & = 50 \cdot (\bar{X}_{{\rm RD-LI}}-\bar{X})^{2} +
+           50 \cdot (\bar{X}_{{\rm RD-HI}}-\bar{X})^{2} +
+           50 \cdot (\bar{X}_{{\rm LD-LI}}-\bar{X})^{2} +
+           50 \cdot (\bar{X}_{{\rm LD-HI}}-\bar{X})^{2} \\
+       & = \Sexpr{round(s_4, 4)}
+\end{align*}
+\[ \eta_{{\rm RD-LI}} = \eta_{{\rm RD-HI}} = \eta_{{\rm LD-LI}}
+                      = \eta_{{\rm LD-HI}}
+                      = \frac{50-1}{200-4} = \Sexpr{49/196}
+\]
+\begin{align*}
+ S_{{\rm RD-LI}}^{2} & =
+ \sum_{i=1}^{50} \frac{(X_{i}^{{\rm RD-LI}} - \bar{X}_{{\rm RD-LI}})^{2}}{50-1} =
+ \Sexpr{round(sum((dataY[ , 1]-mean(dataY[ , 1]))**2)/49, 4)} \quad
+ & S_{{\rm RD-HI}}^{2} =
+ \sum_{i=1}^{50} \frac{(X_{i}^{{\rm RD-HI}} - \bar{X}_{{\rm RD-HI}})^{2}}{50-1} =
+ \Sexpr{round(sum((dataY[ , 2]-mean(dataY[ , 2]))**2)/49, 4)} \\
+ S_{{\rm LD-LI}}^{2} & =
+ \sum_{i=1}^{50} \frac{(X_{i}^{{\rm LD-LI}} - \bar{X}_{{\rm LD-LI}})^{2}}{50-1} =
+ \Sexpr{round(sum((dataY[ , 3]-mean(dataY[ , 3]))**2)/49, 4)} \quad
+ & S_{{\rm LD-HI}}^{2} =
+ \sum_{i=1}^{50} \frac{(X_{i}^{{\rm LD-HI}} - \bar{X}_{{\rm LD-HI}})^{2}}{50-1} =
+ \Sexpr{round(sum((dataY[ , 4]-mean(dataY[ , 4]))**2)/49, 4)}
+\end{align*}
+\begin{align*}
+ S_{p}^{2} & = 0.25 \cdot S_{{\rm RD-LI}}^{2} + 0.25 \cdot S_{{\rm RD-HI}}^{2}
+               0.25 \cdot S_{{\rm LD-LI}}^{2} + 0.25 \cdot S_{{\rm LD-HI}}^{2} \\
+           & = \Sexpr{round(s_p.2, 4)}
+\end{align*}
+\[ \boxed{F = \frac{S_{4}/3}{S_{p}^{2}} = \Sexpr{round(f, 4)}.} \]
+
+\(\bullet\) Critical value: \\
+
+Considering a \fbox{\(\mathbb{P}(\text{Error type I}) = \alpha = 0.05\).}
+
+\[ \boxed{F = \Sexpr{round(f, 4)} \overset{H_{0}}{\sim} F_{3, 196; 0.95}
+            = \Sexpr{round(cv, 4)}.}
+\]
+
+\(\bullet\) Decision-making: \\
+
+\fbox{\begin{minipage}{\textwidth}
+       The test statistic value is \underline{much} bigger than the critical
+       value, \(\Sexpr{round(f, 4)} > \Sexpr{round(cv, 4)}\). Therefore we don't
+       accept the null hyphotesis, \(H_{0}\). We have stronger statistical
+       evidence that at least one mean reduction is different from the others.
+      \end{minipage}}
 
 \section*{Question 5} \addcontentsline{toc}{section}{Question 5}
 
