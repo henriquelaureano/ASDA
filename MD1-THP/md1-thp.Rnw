@@ -340,16 +340,16 @@ s_p.2 <-
 \begin{align*}
  S_{{\rm RD-LI}}^{2} & =
  \sum_{i=1}^{50} \frac{(X_{i}^{{\rm RD-LI}} - \bar{X}_{{\rm RD-LI}})^{2}}{50-1} =
- \Sexpr{round(sum((dataY[ , 1]-mean(dataY[ , 1]))**2)/49, 4)} \quad
+ \Sexpr{round(sum((dataY[ , 1] - bx_rd.li)**2)/49, 4)} \quad
  & S_{{\rm RD-HI}}^{2} =
  \sum_{i=1}^{50} \frac{(X_{i}^{{\rm RD-HI}} - \bar{X}_{{\rm RD-HI}})^{2}}{50-1} =
- \Sexpr{round(sum((dataY[ , 2]-mean(dataY[ , 2]))**2)/49, 4)} \\
+ \Sexpr{round(sum((dataY[ , 2] - bx_rd.hi)**2)/49, 4)} \\
  S_{{\rm LD-LI}}^{2} & =
  \sum_{i=1}^{50} \frac{(X_{i}^{{\rm LD-LI}} - \bar{X}_{{\rm LD-LI}})^{2}}{50-1} =
- \Sexpr{round(sum((dataY[ , 3]-mean(dataY[ , 3]))**2)/49, 4)} \quad
+ \Sexpr{round(sum((dataY[ , 3] - bx_ld.li)**2)/49, 4)} \quad
  & S_{{\rm LD-HI}}^{2} =
  \sum_{i=1}^{50} \frac{(X_{i}^{{\rm LD-HI}} - \bar{X}_{{\rm LD-HI}})^{2}}{50-1} =
- \Sexpr{round(sum((dataY[ , 4]-mean(dataY[ , 4]))**2)/49, 4)}
+ \Sexpr{round(sum((dataY[ , 4] - bx_ld.hi)**2)/49, 4)}
 \end{align*}
 \begin{align*}
  S_{p}^{2} & = 0.25 \cdot S_{{\rm RD-LI}}^{2} + 0.25 \cdot S_{{\rm RD-HI}}^{2}
@@ -396,7 +396,88 @@ cv <- qf(.95, 3, 196)
         intensity exercise is greater than those engaged in low intensity
         exercise. Conduct a formal test of hypothesis.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+\(\bullet\) Hyphotesis:
+
+\[ \boxed{H_{0} = \mu_{{\rm HI}} = \mu_{{\rm LI}} \qquad
+          H_{a} = \mu_{{\rm HI}} > \mu_{{\rm LI}}}
+\]
+
+\(\bullet\) Test Statistic: \\
+
+\fbox{\(t\) Test.}
+
+\[ t = \frac{\bar{X}_{{\rm HI}}-\bar{X}_{{\rm LI}}}{S_{p}^{2}
+             \Big(\frac{1}{100}+\frac{1}{100}\Big)}
+       \overset{H_{0}}{\sim} t_{99 + 99}.
+\]
+
+<<>>=
+# <code r> ===================================================================== #
+bx_hi <- mean(dataY[ , c(2, 4)]) ; bx_li <- mean(dataY[ , c(1, 3)])
+# </code r> ==================================================================== #
+@
+
+\[ \bar{X}_{{\rm HI}} = \Sexpr{round(bx_hi, 4)}, \qquad
+   \bar{X}_{{\rm LI}} = \Sexpr{round(bx_li, 4)}
+\]
+\[ W_{{\rm HI}} = W_{{\rm LI}} = \frac{99}{99 + 99} = \Sexpr{99/198} \]
+
+<<>>=
+# <code r> ===================================================================== #
+s_p.2 <-
+  .5*sum((c(dataY[ , c(2, 4)]) - bx_hi)**2)/99 +
+  .5*sum((c(dataY[ , c(1, 3)]) - bx_li)**2)/99
+# </code r> ==================================================================== #
+@
+
+\[
+ S_{{\rm HI}}^{2} =
+ \sum_{i=1}^{100} \frac{(X_{i}^{{\rm HI}} - \bar{X}_{{\rm HI}})^{2}}{100-1} =
+ \Sexpr{round(sum((c(dataY[ , c(2, 4)]) - bx_hi)**2)/99, 4)} \qquad
+ S_{{\rm LI}}^{2} =
+ \sum_{i=1}^{100} \frac{(X_{i}^{{\rm LI}} - \bar{X}_{{\rm LI}})^{2}}{100-1} =
+ \Sexpr{round(sum((c(dataY[ , c(1, 3)]) - bx_li)**2)/99, 4)}
+\]
+\begin{align*}
+ S_{p}^{2} & = 0.5 \cdot S_{{\rm HI}}^{2} + 0.5 \cdot S_{{\rm LI}}^{2} \\
+           & = \Sexpr{round(s_p.2, 4)}
+\end{align*}
+
+<<>>=
+# <code r> ===================================================================== #
+t <- (bx_hi - bx_li)/sqrt(s_p.2*(2/100))
+# </code r> ==================================================================== #
+@
+
+\[ \boxed{t = \frac{\bar{X}_{{\rm HI}}-\bar{X}_{{\rm LI}}}{S_{p}^{2}
+                    \Big(\frac{2}{100}\Big)} = \Sexpr{round(t, 4)}.
+         }
+\]
+\(\bullet\) Critical value: \\
+
+Considering a \fbox{\(\mathbb{P}(\text{Error type I}) = \alpha = 0.05\).}
+
+<<>>=
+# <code r> ===================================================================== #
+cv <- qt(.95, 198)
+# </code r> ==================================================================== #
+@
+
+\[ \boxed{t = \Sexpr{round(t, 4)} \overset{H_{0}}{\sim} t_{198; 0.95}
+            = \Sexpr{round(cv, 4)}. \quad \text{(one-tail)}}
+\]
+
+\(\bullet\) Decision-making: \\
+
+\fbox{\begin{minipage}{\textwidth}
+       The test statistic value is much bigger than the critical value,
+       \(\Sexpr{round(t, 4)} > \Sexpr{round(cv, 4)}\). Therefore we don't accept
+       the null hyphotesis, \(H_{0}\). We have stronger statistical evidence that
+       the mean reduction among those engaged in high intensity exercise is
+       greater than those engaged in low intensity exercise.
+      \end{minipage}}
 
 \section*{Question 6} \addcontentsline{toc}{section}{Question 6}
 
