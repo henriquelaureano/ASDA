@@ -225,8 +225,8 @@ hist(c(dataY[ , 3:4]), las = 1, xlim = c(0, 30), ylim = c(0, 25), main = NA
  bigger in the strict low sugar diet. The median in the strict low sugar diet (LD)
  is less than five units bigger than in the regular diet (RD) group. The
  variability is around 25\% bigger in the LD than in the RD group. Looking for
- this values we can see that exist a difference, but that the difference is small
- and maybe not sufficient to be significatily.
+ this values we can see that exist a difference, and that this difference is
+ smaller than the difference observed between the two exercise groups.
  
  \hfill \(\square\)
 \end{minipage}
@@ -385,7 +385,8 @@ cv <- qf(.95, 3, 196)
        The test statistic value is \underline{much} bigger than the critical
        value, \(\Sexpr{round(f, 4)} > \Sexpr{round(cv, 4)}\). Therefore we don't
        accept the null hyphotesis, \(H_{0}\). We have stronger statistical
-       evidence that at least one mean reduction is different from the others.
+       evidence that at least one mean reduction is different from the others (at
+       least one treatment group is different from the others).
       \end{minipage}}
 
 \section*{Question 5} \addcontentsline{toc}{section}{Question 5}
@@ -487,7 +488,88 @@ cv <- qt(.95, 198)
         low sugar diet is greater than those given only regular diet. Conduct a
         formal test of hypothesis.} \\
 
-\underline{Solution:}
+\underline{Solution:} \\
+
+\(\bullet\) Hyphotesis:
+
+\[ \boxed{H_{0} = \mu_{{\rm LD}} = \mu_{{\rm RD}} \qquad
+          H_{a} = \mu_{{\rm LD}} > \mu_{{\rm RD}}}
+\]
+
+\(\bullet\) Test Statistic: \\
+
+\fbox{\(t\) Test.}
+
+\[ t = \frac{\bar{X}_{{\rm LD}}-\bar{X}_{{\rm RD}}}{S_{p}^{2}
+             \Big(\frac{1}{100}+\frac{1}{100}\Big)}
+       \overset{H_{0}}{\sim} t_{99 + 99}.
+\]
+
+<<>>=
+# <code r> ===================================================================== #
+bx_ld <- mean(dataY[ , 3:4]) ; bx_rd <- mean(dataY[ , 1:2])
+# </code r> ==================================================================== #
+@
+
+\[ \bar{X}_{{\rm LD}} = \Sexpr{round(bx_ld, 4)}, \qquad
+   \bar{X}_{{\rm RD}} = \Sexpr{round(bx_rd, 4)}
+\]
+\[ W_{{\rm LD}} = W_{{\rm RD}} = \frac{99}{99 + 99} = \Sexpr{99/198} \]
+
+<<>>=
+# <code r> ===================================================================== #
+s_p.2 <-
+  .5*sum((c(dataY[ , 3:4]) - bx_ld)**2)/99 +
+  .5*sum((c(dataY[ , 1:2]) - bx_rd)**2)/99
+# </code r> ==================================================================== #
+@
+
+\[
+ S_{{\rm LD}}^{2} =
+ \sum_{i=1}^{100} \frac{(X_{i}^{{\rm LD}} - \bar{X}_{{\rm LD}})^{2}}{100-1} =
+ \Sexpr{round(sum((c(dataY[ , 3:4]) - bx_ld)**2)/99, 4)} \qquad
+ S_{{\rm RD}}^{2} =
+ \sum_{i=1}^{100} \frac{(X_{i}^{{\rm RD}} - \bar{X}_{{\rm RD}})^{2}}{100-1} =
+ \Sexpr{round(sum((c(dataY[ , 1:2]) - bx_rd)**2)/99, 4)}
+\]
+\begin{align*}
+ S_{p}^{2} & = 0.5 \cdot S_{{\rm LD}}^{2} + 0.5 \cdot S_{{\rm RD}}^{2} \\
+           & = \Sexpr{round(s_p.2, 4)}
+\end{align*}
+
+<<>>=
+# <code r> ===================================================================== #
+t <- (bx_ld - bx_rd)/sqrt(s_p.2*(2/100))
+# </code r> ==================================================================== #
+@
+
+\[ \boxed{t = \frac{\bar{X}_{{\rm LD}}-\bar{X}_{{\rm RD}}}{S_{p}^{2}
+                    \Big(\frac{2}{100}\Big)} = \Sexpr{round(t, 4)}.
+         }
+\]
+\(\bullet\) Critical value: \\
+
+Considering a \fbox{\(\mathbb{P}(\text{Error type I}) = \alpha = 0.05\).}
+
+<<>>=
+# <code r> ===================================================================== #
+cv <- qt(.95, 198)
+# </code r> ==================================================================== #
+@
+
+\[ \boxed{t = \Sexpr{round(t, 4)} \overset{H_{0}}{\sim} t_{198; 0.95}
+            = \Sexpr{round(cv, 4)}. \quad \text{(one-tail)}}
+\]
+
+\(\bullet\) Decision-making: \\
+
+\fbox{\begin{minipage}{\textwidth}
+       The test statistic value is bigger than the critical value,
+       \(\Sexpr{round(t, 4)} > \Sexpr{round(cv, 4)}\). Therefore we don't accept
+       the null hyphotesis, \(H_{0}\). We have statistical evidence that the mean
+       reduction among those given a strict low sugardiet is greater than those
+       given only regular diet.
+      \end{minipage}} \\
 
 \hfill \(\blacksquare\)
 
@@ -495,6 +577,6 @@ cv <- qt(.95, 198)
 
 \vspace{\fill}
 
-\horrule{1pt} \\
+\horrule{1pt} %\\
 
 \end{document}
