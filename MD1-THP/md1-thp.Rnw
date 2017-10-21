@@ -577,6 +577,6 @@ cv <- qt(.95, 198)
 
 \vspace{\fill}
 
-\horrule{1pt} %\\
+\horrule{1pt} % \\
 
 \end{document}
