@@ -409,8 +409,8 @@ cv <- qf(.95, 3, 196)
 
 \fbox{\(t\) Test.}
 
-\[ t = \frac{\bar{X}_{{\rm HI}}-\bar{X}_{{\rm LI}}}{S_{p}^{2}
-             \Big(\frac{1}{100}+\frac{1}{100}\Big)}
+\[ t = \frac{\bar{X}_{{\rm HI}}-\bar{X}_{{\rm LI}}}{\sqrt{S_{p}^{2}
+             \Big(\frac{1}{100}+\frac{1}{100}\Big)}}
        \overset{H_{0}}{\sim} t_{99 + 99}.
 \]
 
@@ -452,8 +452,8 @@ t <- (bx_hi - bx_li)/sqrt(s_p.2*(2/100))
 # </code r> ==================================================================== #
 @
 
-\[ \boxed{t = \frac{\bar{X}_{{\rm HI}}-\bar{X}_{{\rm LI}}}{S_{p}^{2}
-                    \Big(\frac{2}{100}\Big)} = \Sexpr{round(t, 4)}.
+\[ \boxed{t = \frac{\bar{X}_{{\rm HI}}-\bar{X}_{{\rm LI}}}{\sqrt{S_{p}^{2}
+                    \Big(\frac{2}{100}\Big)} = \Sexpr{round(t, 4)}}.
          }
 \]
 \(\bullet\) Critical value: \\
@@ -475,7 +475,7 @@ cv <- qt(.95, 198)
 \fbox{\begin{minipage}{\textwidth}
        The test statistic value is much bigger than the critical value,
        \(\Sexpr{round(t, 4)} > \Sexpr{round(cv, 4)}\). Therefore we don't accept
-       the null hyphotesis, \(H_{0}\). We have stronger statistical evidence that
+       the null hyphotesis, \(H_{0}\). We have strong statistical evidence that
        the mean reduction among those engaged in high intensity exercise is
        greater than those engaged in low intensity exercise.
       \end{minipage}}
@@ -500,8 +500,8 @@ cv <- qt(.95, 198)
 
 \fbox{\(t\) Test.}
 
-\[ t = \frac{\bar{X}_{{\rm LD}}-\bar{X}_{{\rm RD}}}{S_{p}^{2}
-             \Big(\frac{1}{100}+\frac{1}{100}\Big)}
+\[ t = \frac{\bar{X}_{{\rm LD}}-\bar{X}_{{\rm RD}}}{\sqrt{S_{p}^{2}
+             \Big(\frac{1}{100}+\frac{1}{100}\Big)}}
        \overset{H_{0}}{\sim} t_{99 + 99}.
 \]
 
@@ -543,8 +543,8 @@ t <- (bx_ld - bx_rd)/sqrt(s_p.2*(2/100))
 # </code r> ==================================================================== #
 @
 
-\[ \boxed{t = \frac{\bar{X}_{{\rm LD}}-\bar{X}_{{\rm RD}}}{S_{p}^{2}
-                    \Big(\frac{2}{100}\Big)} = \Sexpr{round(t, 4)}.
+\[ \boxed{t = \frac{\bar{X}_{{\rm LD}}-\bar{X}_{{\rm RD}}}{\sqrt{S_{p}^{2}
+                    \Big(\frac{2}{100}\Big)}} = \Sexpr{round(t, 4)}.
          }
 \]
 \(\bullet\) Critical value: \\
