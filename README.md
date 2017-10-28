@@ -22,6 +22,6 @@ Homework III ([HW3](https://mynameislaure.github.io/amcs210/hw3.pdf))
 
 Midterm I: Take-Home Part ([MD1-THP](https://mynameislaure.github.io/amcs210/md1-thp.pdf))
 
-Project ([proj](https://mynameislaure.github.io/amcs210/project.pdf))
+Project ([PROJ](https://mynameislaure.github.io/amcs210/project.pdf))
 
 ***
