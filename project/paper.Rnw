@@ -1,0 +1,248 @@
+\documentclass[fleqn, 10pt]{SelfArx}
+
+\definecolor{color1}{RGB}{0, 0 ,90} % Color of the article title and sections
+\definecolor{color2}{RGB}{0, 20, 20} % Color of the boxes behind the abstract and 
+                                     % headings
+
+\usepackage{hyperref} % Required for hyperlinks
+\hypersetup{hidelinks, colorlinks, breaklinks = true, urlcolor = color2,
+            citecolor = color1, linkcolor = color1, bookmarksopen = false,
+            pdftitle = {Title}, pdfauthor = {Author}}
+
+% \JournalInfo{Journal, Vol. XXI, No. 1, 1-5, 2013} % Journal information
+% \Archive{Additional note} % Additional notes (e.g. copyright, DOI, review/research article)
+
+\JournalInfo{AMCS 243 - Applied Statistics and Data Analysis,
+             Hernando Catequista Ombao - Fall Semester 2017}
+\Archive{King Abdullah University of Science and Technology (KAUST) -
+         CEMSE Divison}
+
+\PaperTitle{Aanlysis of Diabetic Retinopathy Debrecen Data via Logistic
+            Regression}
+
+\Authors{Henrique Aparecido Laureano\textsuperscript{1},
+         Azza Al-Thagafi\textsuperscript{2}}
+\affiliation{\textsuperscript{1}\textit{Ms/PhD Student in Statistics}}
+\affiliation{\textsuperscript{2}\textit{Ms Student in Computer Science}}
+\affiliation{\textbf{Email}: \{henrique.laureano, azza.althagafi\}
+                             [@] kaust.edu.sa} % Corresponding author
+
+\Keywords{} % Keywords - if you don't want any simply remove all the text between
+            %            the curly brackets
+\newcommand{\keywordname}{Keywords} % Defines the keywords heading name
+
+\Abstract{The choosed dataset contains features extracted from the Messidor image
+          set to predict whether an image contains signs of diabetic retinopathy
+          or not. 1151 observations, 20 variables. Data donated to UCI in November
+          3, 2014. \\
+          All features represent either a detected lesion, a descriptive feature
+          of a anatomical part or an image-level descriptor. The underlying method
+          image analysis and feature extraction as well as our classification
+          technique is described in Balint Antal, Andras Hajdu: An ensemble-based
+          system for automatic screening of diabetic retinopathy, Knowledge-Based
+          Systems 60 (April 2014), 20-27.
+}
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+
+\maketitle % Print the title and abstract box
+
+% \tableofcontents % Print the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+<<include=FALSE>>=
+# <code r> ===================================================================== #
+library(knitr)
+
+tema <- knit_theme$get("acid")
+
+knit_theme$set(tema)
+
+opts_chunk$set(size='small'
+               , cache=TRUE
+               , cache.path='cache/'
+               , comment=NA
+               , warning=FALSE
+               , message=FALSE
+               , fig.align='center'
+               , dpi=100
+               , fig.path='iBagens/'
+               , background='#ffffff'
+               , results='hold'
+               , fig.show='hold'
+               , fig.pos='H'
+               , echo=FALSE)
+# </code r> ==================================================================== #
+@
+
+\section{Introduction}
+
+\subsection{Background}
+
+\subsection{Dataset Description}
+
+\begin{table}[H]
+ \centering
+ \caption{Description of Diabetic Retinopathy Debrecen Data.}
+          \vspace{.15cm}
+  \begin{tabular}{l|l}
+   \toprule
+   \thead{Covariate} & \thead{Description} \\
+   \midrule
+   Quality assessment & Binary result (0 = Bad quality, 1 = Sufficient quality) \\
+   Pre-screening & Binary result (0 = Lack of SRA,
+   1 = Severe Retinal Abnormality (SRA)) \\
+   MA detection 0.5 to 1 & \makecell{Numeric. Number of MAs found at the
+                                     confidence levels \(\alpha\) = 0.5, 0.6,
+                                     0.7, 0.8, 0.9 and 1 \\ (number of pixels
+                                     constructing the lesions)} \\
+   Exudates detection 1 to 8 & \makecell{Numeric. Number of points in the results
+                                         of exudates detection in different set of
+                                         points. \\ The values are normalized by
+                                         dividing the number of lesions with the
+                                         diameter of the \\ ROI to compensate
+                                         different image sizes} \\
+   Euclidian distance & \makecell{Numeric. The euclidean distance of the center of
+                                  the macula and the center of the optic \\
+                                  disc to provide important information regarding
+                                  the patients condition. The values are \\
+                                  normalized with the diameter of the ROI} \\
+   Diameter & Numeric. Diameter of the optic disc \\
+   AM/FM-based classification & Binary result (0 = No signs of DR, 1 = contains
+                                signs of Diabetic Retinopathy (DR)) \\
+   \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Scientific Goals and Primary Questions of Interest}
+
+\textbf{Keep in mind:} Explanation of impact of the study.
+
+\section{Statistical Methods}
+
+<<include=FALSE>>=
+# packages
+pkg <- c("latticeExtra", "Matrix")
+sapply(pkg, library, character.only = TRUE, logical.return = TRUE)
+@
+
+
+\subsection{Preliminary Data Exploration}
+
+<<>>=
+path <- "~/Dropbox/KAUST/applied_statistics_and_data_analysis/project/"
+da <- read.table(paste0(path, "data.txt"), sep = ",")
+
+# all the variables are numeric, changing some to factor
+
+colnames(da)[1] <- "qa" # quality assessment
+da$qa <- factor(da$qa, labels = c("bad", "sufficient")) # .. quality
+
+colnames(da)[2] <- "ps" # pre-screening
+da$ps <- factor(da$ps, labels = c("lack", "sra")) # severe retinal abnormality
+
+colnames(da)[19] <- "amfm" # am/fm-based classification
+da$amfm <- factor(da$amfm, labels = c("neg", "pos"))
+
+colnames(da)[20] <- "dr" # diabetic retinopathy
+da$dr <- factor(da$dr, labels = c("no", "yes"))
+@
+<<cat_var, fig.width=10, fig.height=3.75, fig.cap="Categorical independent variables.">>=
+print(barchart(da$qa, horizontal = FALSE, ylab = NULL, main = "Quality assessment"
+               , scales = list(x = list(labels = c("Bad", "Sufficient"))
+                               , y = list(draw = FALSE))
+               , col = "#23C372", border = FALSE
+               , ylim = c(0, max(table(da$qa)) + max(table(da$qa)) / 6)
+               , panel = function(...){
+                 args <- list(...)
+                 panel.text(args$x, args$y
+                            , paste0(round(prop.table(args$y), 3)*100, "%")
+                            , pos = 3)
+                 panel.barchart(...)}), pos = c(0, 0, 1/3, 1), more = TRUE)
+print(barchart(da$ps, horizontal = FALSE, ylab = NULL
+               , main = "Severe Retinal Abnormality"
+               , scales = list(x = list(labels = c("No", "Yes"))
+                               , y = list(draw = FALSE))
+               , col = "#23C372", border = FALSE
+               , ylim = c(0, max(table(da$ps)) + max(table(da$ps)) / 6)
+               , panel = function(...){
+                 args <- list(...)
+                 panel.text(args$x, args$y
+                            , paste0(round(prop.table(args$y), 3)*100, "%"),
+                            pos = 3)
+                 panel.barchart(...)}), pos = c(1/3, 0, 2/3, 1), more = TRUE)
+print(barchart(da$amfm, horizontal = FALSE, ylab = NULL
+               , main = "AM/FM-based classification"
+               , scales = list(x = list(labels = c("Negative", "Positive"))
+                               , y = list(draw = FALSE))
+               , col = "#23C372", border = FALSE
+               , ylim = c(0, max(table(da$amfm)) + max(table(da$amfm)) / 6)
+               , panel = function(...){
+                 args <- list(...)
+                 panel.text(args$x, args$y
+                            , paste0(round(prop.table(args$y), 3)*100, "%"),
+                            pos = 3)
+                 panel.barchart(...)}), pos = c(2/3, 0, 1, 1))
+@
+<<big_pairs, fig.cap="Scatter plots and correlations for all numeric variables. In blue the pacients without signs of diabetic retinopathy (DR), in orange the pacients with signs of DR.">>=
+pairs(da[ , 3:18], pch = 16, gap = .25, xaxt = "n", yaxt = "n"
+      , upper.panel = function(x, y, ...) {
+        usr <- par("usr") ; on.exit(par(usr)) ; par(usr = c(0, 1, 0, 1))
+        r <- abs(cor(x, y))
+        txt <- format(c(r, 0.123456789), digits = 2)[1]
+        text(.5, .5, txt, cex = .8/strwidth(txt))}
+      , diag.panel = function(a,b, ...) {
+        usr <- par("usr") ; on.exit(par(usr)) ; par(usr = c(0, 1, 0, 1))
+        rect(0, 0, 1, 1, col = "#37B9DA")}
+      , col = c("#0080FF", "#F3953E")[unclass(da$dr)]
+      , labels =
+        c(paste0("MA:", seq(.5, 1, by = .1)), paste0("EXU", 1:8), "EUC", "DIAM")
+      , label.pos = .5, oma = c(1, 1, 1, 1))
+@
+
+<<fig.width=10, fig.cap="Correlations between the different confidence levels of the MA detection, in the left. In the right, correlations between the different numbers (\\#) of set of points of the exudates detection.">>=
+ma <- cor(da[ , 3:8])
+
+for (i in 1:6) {
+  for (j in 1:6) ma[i, j] <- ifelse(j >= i, 0, ma[i, j]) }
+
+ma <- as(Matrix(ma), "dgTMatrix")
+
+cols <- c("#50EFF0", "#4AE0E1", "#45D1D3", "#40C2C4", "#3BB3B6", "#36A5A7"
+          , "#319799", "#2C898B", "#277B7E", "#226E70", "#1D6063", "#185456"
+          , "#14474A", "#0F3B3D", "#0B2F31", "#072426")
+
+print(image(ma, useAbs = FALSE, col.regions = cols, xlab = NULL, ylab = NULL
+      , scales = list(x = list(label = c(seq(.5, .9, by = .1), ""), at = 1:6)
+                      , y = list(label = c("", seq(.6, 1, by = .1)), at = 1:6))
+      , sub = NULL, main = "MA detection correlation by confidence levels") +
+  layer(panel.text(ma@j+1L, ma@i+1L, round(ma@x, 2), col = gray(ma@x > 0)))
+  , position = c(0, 0, .5, 1), more = TRUE)
+
+exu <- cor(da[ , 9:16])
+
+for (i in 1:8) {
+  for (j in 1:8) exu[i, j] <- ifelse(j >= i, 0, exu[i, j]) }
+
+exu <- as(Matrix(exu), "dgTMatrix")
+
+print(image(exu, useAbs = FALSE, col.regions = cols, xlab = NULL, ylab = NULL
+      , scales = list(x = list(label = c(1:7, ""), at = 1:8)
+                      , y = list(label = c("", 2:8), at = 1:8))
+      , sub = NULL, main = "Exudates detection correlation by # of set of points") +
+  layer(panel.text(exu@j+1L, exu@i+1L, round(exu@x, 2), col = gray(exu@x > 0)))
+  , position = c(.5, 0, 1, 1))
+@
+
+\subsection{Modeling Process \& Methodology}
+
+\subsection{Diagnosis \& Goodness of Fit}
+
+\section{Results}
+
+\section{Conclusion}
+
+\end{document}
