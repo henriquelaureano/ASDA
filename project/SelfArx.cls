@@ -28,6 +28,7 @@
 \RequirePackage{multicol}
 \RequirePackage{float}
 \RequirePackage{makecell}
+\RequirePackage{indentfirst}
 
 \renewcommand\theadfont{\bfseries}
 \renewcommand\theadalign{cl}
