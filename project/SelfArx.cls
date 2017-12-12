@@ -26,6 +26,7 @@
 %\RequirePackage[brazilian, brazil]{babel}
 \RequirePackage{booktabs}
 \RequirePackage{multicol}
+\RequirePackage{multirow}
 \RequirePackage{float}
 \RequirePackage{makecell}
 \RequirePackage{indentfirst}

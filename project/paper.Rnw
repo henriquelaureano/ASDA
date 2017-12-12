@@ -3,6 +3,34 @@
 \definecolor{color1}{RGB}{0, 0 ,90} % Color of the article title and sections
 \definecolor{color2}{RGB}{0, 20, 20} % Color of the boxes behind the abstract and 
                                      % headings
+\definecolor{darkturquoise}{rgb}{0.0, 0.81, 0.82}
+\definecolor{mediumseagreen}{rgb}{0.24, 0.7, 0.44}
+\definecolor{verdigris}{rgb}{0.26, 0.7, 0.68}
+\definecolor{darkspringgreen}{rgb}{0.09, 0.45, 0.27}
+\usepackage{listings}
+\usepackage{color}
+\lstset{ 
+ language = R, % the language of the code
+ numbers = left, % where to put the line-numbers
+ numbersep = 5pt, % how far the line-numbers are from the code
+ backgroundcolor = \color{white}, % choose the background color. You must add
+                                  % \usepackage{color}
+ showspaces = false, % show spaces adding particular underscores
+ showstringspaces = false, % underline spaces within strings
+ showtabs = false, % show tabs within strings adding particular underscores
+ frame = single, % adds a frame around the code
+ rulecolor = \color{black}, % if not set, the frame-color may be changed on
+                            % line-breaks within not-black text
+                            % (e.g. commens (green here))
+ tabsize = 2, % sets default tabsize to 2 spaces
+ captionpos = b, % sets the caption-position to bottom
+ breaklines = true, % sets automatic line breaking
+ breakatwhitespace = false, % sets if automatic breaks should only happen at
+                            % whitespace
+ keywordstyle = \color{verdigris}, % keyword style
+ commentstyle = \color{mediumseagreen}, % comment style
+ stringstyle = \color{darkspringgreen} % string literal style
+}
 
 \usepackage{hyperref} % Required for hyperlinks
 \hypersetup{hidelinks, colorlinks, breaklinks = true, urlcolor = color2,
@@ -10,7 +38,8 @@
             pdftitle = {Title}, pdfauthor = {Author}}
 
 % \JournalInfo{Journal, Vol. XXI, No. 1, 1-5, 2013} % Journal information
-% \Archive{Additional note} % Additional notes (e.g. copyright, DOI, review/research article)
+% \Archive{Additional note} % Additional notes (e.g. copyright, DOI,
+%                                                    review/research article)
 
 \JournalInfo{AMCS 243 - Applied Statistics and Data Analysis,
              Hernando Catequista Ombao - Fall Semester 2017}
@@ -24,39 +53,45 @@
 \affiliation{\textsuperscript{1}\textit{Ms/PhD Student in Statistics}}
 \affiliation{\textsuperscript{2}\textit{Ms Student in Computer Science}}
 \affiliation{\textbf{Email}:
-          \{henrique.laureano, azza.althagafi\}@kaust.edu.sa} % Corresponding author
+             \{henrique.laureano, azza.althagafi\}@kaust.edu.sa}
+             % Corresponding author
 
-\Keywords{Diabetic Retinopathy; t-Test; Logistic Regression; Link functions.}
+\Keywords{Diabetic Retinopathy; \(t\)-test; \(\chi^{2}\)-test;
+          Logistic Regression; Link functions; Akaike information criterion.}
 % Keywords - if you don't want any simply remove all the text between the curly
 %            brackets
 \newcommand{\keywordname}{Keywords} % Defines the keywords heading name
 
 \Abstract{Diabetic Retinopathy (DR) is the most common diabetic eye disease and is
-          the leading cause of new blindness among the diabetes patients. The exact
-          technique by which diabetes causes this condition is unclear, and it can
-          develop without any serious symptoms. Therefore, the early detection of
-          this disease is crucial. This paper focuses on the analysis of the retina
-          in the diabetes patients via a logistic linear regression model. Moreover,
-          it aims to test the accuracy of the prediction by using this methodology
-          with different link functions, to predict whether a particular person has
-          a diabetic retinopathy signs disease or not. The data was taken from UCI
-          repository [1], it contains features extracted from the Messidor (Methods
-          to evaluate segmentation and indexing techniques in the field of retinal
-          ophthalmology) image set to predict whether an image contains signs of
-          diabetic retinopathy or not. In a preliminary analysis, we see that
-          practically all the data (99.7\%) present a sufficient quality assessment
-          and that more than 90\% of the patients present a Severe Retinal
-          Abnormality (SRA). Looking marginally to the means among the groups
-          (patients with and without signs of DR) of the features (1) Euclidian 
-          distance of the center of the macula to the center of the optic disc and
-          (2) the diameter of the optic disc, we see through a \(t\)-test that their
-          means don't differ significantly, being in reality very closer. Fitting a
-          logistic regression with all the features this same result was obtained.
-          In a initial analysis the goodness of fit of the model was satisfactory,
-          having almost all features related with Microaneurism Detection (MD) as
-          significant. In the next steps a selection of variables will be made and
-          others link funcions in the model will be tested. In the end, besides the
-          intrepretation of the coefficients, a predictive model will be trained.
+          the leading cause of new blindness among the diabetes patients. The
+          exact technique by which diabetes causes this condition is unclear, and
+          it can develop without any serious symptoms. Therefore, the early
+          detection of this disease is crucial. This paper focuses on the analysis
+          of the retina in the diabetes patients via a logistic linear regression
+          model. Moreover, it aims to test, quantity and interpret the variables
+          significance at the differentiation of the patient status (diabetic
+          retinopathy signs disease or not). Test the accuracy of the prediction
+          by using this methodology with different link functions was also a goal
+          of this paper. The data was taken from UCI repository [1], it contains
+          features extracted from the Messidor (Methods to evaluate segmentation
+          and indexing techniques in the field of retinal ophthalmology) image set
+          to predict whether an image contains signs of diabetic retinopathy or
+          not. In a exploratory analysis we saw that practically all the data
+          (99.7\%) present a sufficient quality assessment and that more than 90\%
+          of the patients present a Severe Retinal Abnormality (SRA). Looking
+          marginally to the means among the groups (patients with and without
+          signs of DR) of the features (1) Euclidian distance of the center of the
+          macula to the center of the optic disc and (2) the diameter of the optic
+          disc, we saw through a \(t\)-test that their means don't differ
+          significantly, being in reality very closer. With a \(\chi^{2}\)-test
+          we saw no relation between this desease status with an AM/FM-based
+          classification. Fitting a logistic regression with all the features the
+          same result was obtained. The logistic link function presented the 
+          better results when compared with others. The goodness of fit was
+          satisfactory, having almost all features related with Microaneurism
+          Detection (MD) and Exudates detection as significant. A predicitive
+          model was also trained and good results was obtained, as a AUC of 0.798,
+          a sensitivity of 0.805 and a specificity of 0.686.
 }
 \begin{document}
 
@@ -98,27 +133,28 @@ opts_chunk$set(size='small'
 \subsection{Background} \vspace{.25cm}
 
 \noindent
-The diabetes is the disease in which the ability of the body to produce and respond
-to the hormone insulin is impaired. A number of medical risks are associated with
+Diabetes is a disease in which the ability of the body to produce and respond to
+the hormone insulin is impaired. A number of medical risks are associated with
 diabetes and many of them stem from damage to the tiny blood vessels in the eyes,
 called Diabetic Retinopathy (DR) [2]. DR is a condition that happens when the high
-blood sugar levels cause damage to the blood vessels in the retina that lines the
+blood sugar levels cause damage to the blood vessels in the retina that lines the 
 back of the eye [3]. These blood vessels can swell or close and stopping the blood
-from passing through. And in the most advanced stage, the new abnormal blood vessels
-grow on the retina, which can lead to a potential of severe vision loss and
-blindness to the people with diabetes [4]. The aforementioned features of this
+from passing through. And in the most advanced stage, the new abnormal blood
+vessels grow on the retina, which can lead to a potential of severe vision loss
+and blindness to the people with diabetes [4]. The aforementioned features of this
 condition show up in fundoscopy images in Figure \ref{fig:retina}.
 
 The number of patients with diabetic retinopathy nowadays increased very rapidly
-[4], and the complications associated with the long duration of the disease becomes
-one of the challenges that faced the health care system. During the development of
-DR, the patients may not notice any changes in their vision, and the DR might be
-very advanced by the time that patients have visual complaints and experience visual
-loss eventually [5]. So, to detect DR in an early stage, people with diabetes should
-get a dilated eye exam at least once a year, thus in case of an early diagnosis, the
-progression of DR can be reduced by an appropriate therapy. That’s mean the early
-detection, timely treatment, and appropriate follow-up care of diabetic eye disease
-can protect the people with diabetic against vision loss.
+[4], and the complications associated with the long duration of the disease
+becomes one of the challenges that faced the health care system. During the
+development of DR, the patients may not notice any changes in their vision, and
+the DR might be very advanced by the time that patients have visual complaints and
+experience visual loss eventually [5]. So, to detect DR in an early stage, people
+with diabetes should get a dilated eye exam at least once a year, thus in case of
+an early diagnosis, the progression of DR can be reduced by an appropriate
+therapy. That’s mean the early detection, timely treatment, and appropriate
+follow-up care of diabetic eye disease can protect the people with diabetic
+against vision loss.
 
 \begin{figure}[H]
  \centering
@@ -129,10 +165,11 @@ can protect the people with diabetic against vision loss.
 \end{figure}
 
 Automatic Computer-Aided diagnosis system of retinal images is an important field
-that assist doctors in the interpretation of medical images and to easily check the
-state of the patient eyes. This type of system uses a wide ranges of data analysis
-and machine learning techniques to automatically diagnose the vessels, optic disk,
-and bright lesions, as well as to assess the image quality of the eyes [6].
+that assist doctors in the interpretation of medical images and to easily check
+the state of the patient eyes. This type of system uses a wide ranges of data
+analysis and machine learning techniques to automatically diagnose the vessels,
+optic disk, and bright lesions, as well as to assess the image quality of the eyes
+[6].
 
 This paper aims to use statistical techniques to understand which features are
 related with the response variable (presence or not of signs of DR) and try to
@@ -148,8 +185,8 @@ The Diabetic Retinopathy Dataset was taken from the UCI repository website [1].
 \noindent
 This dataset contains features extracted from the Messidor image set and aims to
 predict whether a particular image contains signs of diabetic retinopathy or not.
-All the variables represent either a detected lesion, a characteristic feature of an
-anatomical part or an image-level descriptor.
+All the variables represent either a detected lesion, a characteristic feature of
+an anatomical part or an image-level descriptor.
 
 \subsubsection{Dataset Characteristics} \vspace{.25cm}
 
@@ -189,30 +226,32 @@ The attributes data view of each records are shown in Table \ref{tab:str_data}.
   1 = Severe Retinal Abnormality (SRA)) \\
   \midrule
   MD (six features, 0.5 to 1) & \makecell{Numeric. The results of Microaneurism
-                                          Detection (MD). Each feature\\value stand
-                                          for the number of microaneurisms found at
-                                          the confidence\\level \(\alpha\) = 0.5,
-                                          0.6, 0.7, 0.8, 0.9 and 1} \\
+                                          Detection (MD). Each feature\\value
+                                          stand for the number of microaneurisms
+                                          found at the confidence\\level
+                                          \(\alpha\) = 0.5, 0.6, 0.7, 0.8, 0.9 and
+                                          1} \\
   \midrule
-  Exudates detection 1 to 8 & \makecell{Numeric. Number of points in the results of
-                                        exudates detection in different\\set of
+  Exudates detection 1 to 8 & \makecell{Numeric. Number of points in the results
+                                        of exudates detection in different\\set of
                                         points. The values are normalized by
                                         dividing the number of lesions\\with the
-                                        diameter of the ROI (Region of Interest) to
-                                        compensate different\\image sizes} \\
+                                        diameter of the ROI (Region of Interest)
+                                        to compensate different\\image sizes} \\
   \midrule
   Euclidian distance & \makecell{Numeric. The euclidean distance of the center of
                                  the macula to the center\\of the optic disc to
                                  provide important information regarding the
-                                 patients\\condition. The values are normalized with
-                                 the diameter of the ROI} \\
+                                 patients\\condition. The values are normalized
+                                 with the diameter of the ROI} \\
   \midrule
   Diameter & Numeric. Diameter of the optic disc \\
   \midrule
   AM/FM-based classification & \makecell{Binary result of the multiscale AM/FM\\
-                                         (Amplitude-Modulation/Frequency-Modulation)
-                                         - based classification\\(0 = Normal retinal
-                                         structures, 1 = pathological lesions)} \\
+                                       (Amplitude-Modulation/Frequency-Modulation)
+                                         - based classification\\(0 = Normal
+                                         retinal structures, 1 = pathological
+                                         lesions)} \\
   \bottomrule
  \end{tabular}
 \end{table}
@@ -222,30 +261,35 @@ The attributes data view of each records are shown in Table \ref{tab:str_data}.
 \noindent
 The number of patient with DR increased rapidly, and the exact technique by which
 diabetes causes this disease remains unclear. In addition to that, DR can develop
-without any severe symptoms. Therefore, there is a high need to improve the methods
-that can diagnose DR as soon as possible because the early detection and treatment
-can reduce the risk of blindness by 95\%[4]. The project will provide a quick way
-for an early detection of diabetic retinopathy so the patient can receive an early
-treatment that can limit the potential for significant vision loss. 
+without any severe symptoms. Therefore, there is a high need to improve the
+methods that can diagnose DR as soon as possible because the early detection and
+treatment can reduce the risk of blindness by 95\%[4]. The project provide a
+selection and a study of the variables which have a significant impact on the
+diabetic retinopathy. Knowing these relationships better the patient can receive
+an early treatment that can limit the potential for significant vision loss. 
 
-The principal goal of this study is verifying which variables have a difference
+The principal goal of this study was to check which variables have a difference
 statically significant between the two levels of the response variable, i.e.,
 between patients without signs of DR, and with signs of DR. Besides verify which
 variables, we aim to quantify and interpret this difference. Another goal of this
-study is verifying which variables are statistically significant to predict if the
+study was to check which variables are statistically significant to predict if the
 patient has or hasn't signs of DR.
 
+\newpage
 \section{Statistical Methods} \vspace{.25cm}
 
 <<include=FALSE>>=
+# <code r> ===================================================================== #
 # packages
-pkg <- c("latticeExtra", "Matrix", "xtable", "generalhoslem", "pROC")
+pkg <- c("latticeExtra", "Matrix", "xtable", "generalhoslem", "pROC", "psych")
 sapply(pkg, library, character.only = TRUE, logical.return = TRUE)
+# </code r> ==================================================================== #
 @
 
 \subsection{Preliminary Data Exploration} \vspace{.25cm}
 
 <<>>=
+# <code r> ===================================================================== #
 path <- "~/Dropbox/KAUST/applied_statistics_and_data_analysis/project/"
 da <- read.table(paste0(path, "data.txt"), sep = ",")
 
@@ -262,20 +306,23 @@ da$amfm <- factor(da$amfm, labels = c("neg", "pos"))
 
 colnames(da)[20] <- "dr" # diabetic retinopathy
 da$dr <- factor(da$dr, labels = c("no", "yes"))
+# </code r> ==================================================================== #
 @
 
 \noindent
-From the 1151 patients in the study, 611 (\Sexpr{round(611/1151, 2)*100}\%) present
-signs of DR. The three categorical features presented in the dataset are shown in
-the Figure \ref{fig:cat_var}. Practically all the patients (99.7\%) have a
-sufficient quality assessment and more than 90\% present a Severe Retinal
+From the 1151 patients in the study, 611 (\Sexpr{round(611/1151, 2)*100}\%)
+present signs of DR. The three categorical features presented in the dataset are
+shown in the Figure \ref{fig:cat_var}. Practically all the patients (99.7\%) have
+a sufficient quality assessment and more than 90\% present a Severe Retinal
 Abnormality (SRA). Given this disproportionality, this two features will not be
 used in the statistical analysis. Also in Figure \ref{fig:cat_var} we see that 1/3
-of the patients present a positive result AM/FM classification, i.e., using this
-instrument 33.6\% of the patients present pathological lesions in the retinal
-structures.
+of the patients present a positive result AM/FM classification, i.e., 33.6\% of
+the patients present pathological lesions in the retinal structures. A summary
+with the mean, median and standard deviation for all the numerical variables are
+presented in Table \ref{tab:da_numm}.
 
-<<cat_var, fig.width=10, fig.height=3.25, fig.cap="Barcharts for the categorical features.">>=
+<<cat_var, fig.width=10, fig.height=3.25, fig.cap="Barcharts for the three categorical features: status of quality assessment (left), presence of severe retinal abnormality (center) and result of an AM/FM-based classification (right).">>=
+# <code r> ===================================================================== #
 print(barchart(da$qa, horizontal = FALSE, ylab = NULL, main = "Quality assessment"
                , scales = list(x = list(labels = c("Bad", "Sufficient"))
                                , y = list(draw = FALSE))
@@ -311,19 +358,114 @@ print(barchart(da$amfm, horizontal = FALSE, ylab = NULL
                             , paste0(round(prop.table(args$y), 3)*100, "%"),
                             pos = 3)
                  panel.barchart(...)}), pos = c(2/3, 0, 1, 1))
+# </code r> ==================================================================== #
 @
 
-In the Figure \ref{fig:big_pairs} are provided 2x2 scatter plots and the
-correlations for all the numerical variables. For the MD features we see a clear
-linear relationship. The linear relationship looks more stronger for the patients
-in blue, without signs of DR. In the left-graph of the Figure \ref{fig:images} we
+<<include=FALSE>>=
+# <code r> ===================================================================== #
+da_num_no <- da[da$dr == "no", 3:18] ; da_num_yes <- da[da$dr == "yes", 3:18]
+
+basics <- function(da) {
+  media <- mean(da) ; mediana <- median(da) ; dp <- sd(da)
+  results <- c("mean" = media, "median" = mediana, "sd" = dp)
+}
+da_numm_no  <- t(as.matrix(apply(da_num_no , 2, basics)))
+da_numm_yes <- t(as.matrix(apply(da_num_yes, 2, basics)))
+
+da_numm <- cbind(  da_numm_no[ , 1], da_numm_yes[ , 1]
+                 , da_numm_no[ , 2], da_numm_yes[ , 2]
+                 , da_numm_no[ , 3], da_numm_yes[ , 3])
+
+print(xtable(da_numm, digits = 3
+             , caption = "Summary of the numerical variables in the Diabetic
+                          Retinopathy Dataset. Mean, median and standard deviation
+                          are presented divided by the presense, or not, of signs
+                          of DR. Between the MD and exudates features, the biggest
+                          and smallest values are in bold, for easy
+                          identification."
+             , label = "tab:da_numm")
+      , caption.placement = "top"
+      , table.placement = "H"
+      , booktabs = TRUE)
+# </code r> ==================================================================== #
+@
+
+\begin{table}[H]
+ \centering
+ \caption{Summary of the numerical variables in the Diabetic Retinopathy Dataset.
+          Mean, median and standard deviation are presented divided by the
+          presense, or not, of signs of DR. Between the MD and exudates features,
+          the biggest and smallest values are in bold, for easy identification.} 
+ \label{tab:da_numm}
+ \vspace{.15cm}
+ \begin{tabular}{l|r|r|r|r|r|r}
+  \toprule
+  \multirow{2}{*}{\textbf{Feature}} & \multicolumn{2}{c}{\textbf{Mean}}
+                   & \multicolumn{2}{c}{\textbf{Median}}
+                   & \multicolumn{2}{c}{\textbf{Standard deviation}} \\
+  \cmidrule{2-3} \cmidrule{4-5} \cmidrule{6-7}
+  & \textbf{No sign of DR} & \textbf{Sign of DR}
+  & \textbf{No sign of DR} & \textbf{Sign of DR}
+  & \textbf{No sign of DR} & \textbf{Sign of DR} \\ 
+  \midrule
+  MD: 0.5 & \textbf{30.457} & \textbf{45.473} & \textbf{25.000} & \textbf{44.000}
+          & \textbf{20.743} & \textbf{27.411} \\
+  MD: 0.6 & 30.083 & 42.943 & \textbf{25.000} & 42.000 & 20.473 & 25.444 \\
+  MD: 0.7 & 29.450 & 40.170 & 24.000 & 39.000 & 20.183 & 23.802 \\
+  MD: 0.8 & 27.863 & 36.216 & 22.000 & 34.000 & 19.321 & 21.860 \\
+  MD: 0.9 & 25.394 & 31.710 & 20.000 & 29.000 & 18.317 & 20.058 \\
+  MD: 1 & \textbf{19.098} & \textbf{22.966} & \textbf{15.000} & \textbf{20.000}
+        & \textbf{14.257} & \textbf{15.598} \\
+  EXU 1 & \textbf{60.489} & \textbf{67.285} & \textbf{47.577} & \textbf{40.526}
+        & \textbf{50.765} & \textbf{64.418} \\
+  EXU 2 & 23.077 & 23.098 & 18.988 & 15.297 & 19.719 & 23.156 \\
+  EXU 3 & 8.234 & 9.121 & 4.576 & 4.368 & 10.565 & 12.380 \\
+  EXU 4 & 1.402 & 2.221 & 0.435 & 0.575 & 2.794 & 4.670 \\
+  EXU 5 & 0.185 & 0.893 & 0.011 & 0.051 & 0.555 & 3.335 \\
+  EXU 6 & 0.042 & 0.363 & \textbf{0.000} & 0.004 & 0.156 & 1.427 \\
+  EXU 7 & 0.007 & 0.155 & \textbf{0.000} & \textbf{0.000} & 0.035 & 0.537 \\
+  EXU 8 & \textbf{0.003} & \textbf{0.067} & \textbf{0.000} & \textbf{0.000}
+        & \textbf{0.016} & \textbf{0.241} \\
+  EUC & 0.523 & 0.523 & 0.523 & 0.523 & 0.029 & 0.028 \\
+  DIAM & 0.109 & 0.108 & 0.107 & 0.106 & 0.018 & 0.018 \\
+  \bottomrule
+ \end{tabular}
+\end{table}
+
+In the MD measures the biggest mean, median and standard deviations are observed
+in the patients without signs of DR, for all the confidence levels. We see that
+conform the confidence level became bigger all the three statistics became smaller
+with a considerable drop. For the patients without signs of DR, comparing the
+measures of the 0.5 level with the 1 level the mean decay
+\Sexpr{(1-round(19.098/30.457, 2))*100}\%, the median decay
+\Sexpr{(1-round(15/25, 2))*100}\% and the standard deviation decay
+\Sexpr{(1-round(14.257/20.743, 2))*100}\%. Already for this patients with signs of
+DR, the mean decay \Sexpr{(1-round(22.966/45.473, 2))*100}\%, the median decay
+\Sexpr{(1-round(20/44, 2))*100}\% and the standard deviation decay
+\Sexpr{(1-round(15.598/27.411, 2))*100}\%. Similar behavior is seen with the
+exudates detection measures. Comparing the measures of 1 point with 8 points, the
+mean falls to practically 0. Only by doubling the number of points, 1 to 2, the
+mean and the median decay more than 50\%, independent if the patient present or
+not signs of DR. Patients with no signs of DR present bigger mean and standard
+deviations than the patients with signs of DR, for all number of set of points.
+For bigger set of points, the opposity behavior is seen with the medians. Also in
+Table \ref{tab:da_numm}, we see that for the euclidean distance of the center of
+the macula to the center of the optic disc and for the diameter of the optic disc
+extremally similar values are absorved in the three statistics, for both groups
+(patients with and without signs of DR).
+
+A 2x2 scatter plots and the correlations for all the numerical variables is
+provided in Figure \ref{fig:big_pairs}. For the MD features we see a clear linear
+relationship. The linear relationship looks more stronger for the patients in
+blue, without signs of DR. In the left-graph of the Figure \ref{fig:images} we
 can see better the correlations between the confidence levels of the MD features.
-The detections are correlated in all confidence levels, with a minimum
-correlation of 0.86 (between the most far levels). Closer confidence levels are
-extremely correlated (superior a 0.95). Thus, we see here a pattern. The further
-away the confidence levels, the lower is the correlation.
+The detections are correlated in all confidence levels, with a minimum correlation
+of 0.86 (between the most far levels). Closer confidence levels are extremely
+correlated (superior a 0.95). Thus, we see here a pattern. The further away the
+confidence levels, the lower is the correlation.
 
 <<images, fig.width=10, fig.height=4.5, fig.cap="Correlations between the different confidence levels of the MD detection, in the left. In the right, correlations between the different numbers (\\#) of set of points of the exudates detection.">>=
+# <code r> ===================================================================== #
 ma <- cor(da[ , 3:8])
 
 for (i in 1:6) {
@@ -335,12 +477,13 @@ cols <- c("#50EFF0", "#4AE0E1", "#45D1D3", "#40C2C4", "#3BB3B6", "#36A5A7"
           , "#319799", "#2C898B", "#277B7E", "#226E70", "#1D6063", "#185456"
           , "#14474A", "#0F3B3D", "#0B2F31", "#072426")
 
-print(image(ma, useAbs = FALSE, col.regions = cols, xlab = NULL, ylab = NULL
-      , scales = list(x = list(label = c(seq(.5, .9, by = .1), ""), at = 1:6)
-                      , y = list(label = c("", seq(.6, 1, by = .1)), at = 1:6))
-      , aspect = "fill"
-      , sub = NULL, main = "MD detection correlation by confidence levels") +
-  layer(panel.text(ma@j+1L, ma@i+1L, round(ma@x, 2), col = gray(ma@x > 0)))
+print(
+  image(ma, useAbs = FALSE, col.regions = cols, xlab = NULL, ylab = NULL
+        , scales = list(x = list(label = c(seq(.5, .9, by = .1), ""), at = 1:6)
+                        , y = list(label = c("", seq(.6, 1, by = .1)), at = 1:6))
+        , aspect = "fill"
+        , sub = NULL, main = "MD detection correlation by confidence levels") +
+    layer(panel.text(ma@j+1L, ma@i+1L, round(ma@x, 2), col = gray(ma@x > 0)))
   , position = c(0, 0, .5, 1), more = TRUE)
 
 exu <- cor(da[ , 9:16])
@@ -350,26 +493,37 @@ for (i in 1:8) {
 
 exu <- as(Matrix(exu), "dgTMatrix")
 
-print(image(exu, useAbs = FALSE, col.regions = cols, xlab = NULL, ylab = NULL
-      , scales = list(x = list(label = c(1:7, ""), at = 1:8)
-                      , y = list(label = c("", 2:8), at = 1:8))
-      , aspect = "fill"
-      , sub = NULL, main = "Exudates detection correlation by # of set of points") +
-  layer(panel.text(exu@j+1L, exu@i+1L, round(exu@x, 2), col = gray(exu@x > 0)))
+print(
+  image(exu, useAbs = FALSE, col.regions = cols, xlab = NULL, ylab = NULL
+        , scales = list(x = list(label = c(1:7, ""), at = 1:8)
+                        , y = list(label = c("", 2:8), at = 1:8))
+        , aspect = "fill", sub = NULL
+        , main = "Exudates detection correlation by # of set of points") +
+    layer(panel.text(exu@j+1L, exu@i+1L, round(exu@x, 2), col = gray(exu@x > 0)))
   , position = c(.5, 0, 1, 1))
+# </code r> ==================================================================== #
 @
 
-In the scatter plots for the exudates detection by several sets of points, in Figure
-\ref{fig:big_pairs}, a linear relationship is observed only for very close numbers
-of the set of points. Conform the difference between this numbers became larger, the
-linear behavior disappears, and the correlation goes to less than 0.4 (right-graph
-of Figure \ref{fig:images}). We also see in the scatterplots that, in general, exist
-much more variability among the values of the patients with signs of DR (in orange).
+In the scatter plots for the exudates detection by several sets of points, in
+Figure \ref{fig:big_pairs}, a linear relationship is observed only for very close
+numbers of the set of points. Conform the difference between this numbers became
+larger, the linear behavior disappears, and the correlation goes to less than 0.4
+(right-graph of Figure \ref{fig:images}). We also see in the scatterplots that, in
+general, exist much more variability among the values of the patients with signs
+of DR (in orange). Comparing the euclidian distance and the diameter features with
+the others, none evident stronger relation is observed.
 
-Comparing the euclidian distance and the diameter features with the others, none
-evident stronger relation is observed.
+\subsection{Modeling Process \& Methodology} \vspace{.25cm}
+
+\noindent
+Before study the effect of all the variables together with the goal of seeing
+which features are significant to explain the signs of DR and to predict this
+signs, in the presence of the others, we looked for some of the features
+individually. To verify if their means are different from one response group
+(signs of DR or not) to the other, we used a \(t\)-test.
 
 <<big_pairs, fig.height=6.25, fig.width=6.25, fig.cap="Scatter plots and correlations for all numeric features. In blue the pacients without signs of diabetic retinopathy (DR), in orange the pacients with signs of DR.">>=
+# <code r> ===================================================================== #
 pairs(da[ , 3:18], pch = 16, gap = .25, xaxt = "n", yaxt = "n"
       , upper.panel = function(x, y, ...) {
         usr <- par("usr") ; on.exit(par(usr)) ; par(usr = c(0, 1, 0, 1))
@@ -383,28 +537,20 @@ pairs(da[ , 3:18], pch = 16, gap = .25, xaxt = "n", yaxt = "n"
       , labels =
         c(paste0("MD:", seq(.5, 1, by = .1)), paste0("EXU", 1:8), "EUC", "DIAM")
       , label.pos = .5, oma = c(1, 1, 1, 1))
+# </code r> ==================================================================== #
 @
 
-\subsection{Modeling Process \& Methodology} \vspace{.25cm}
-
-\noindent
-Before study the effect of all the variables together with the goal of seeing which
-features are significant to explain the signs of DR and to predict this signs, in
-the presence of the others, we can look for some of the features individually. To
-verify if their means are different from one response group (signs of DR or not) to
-the other, we use a \(t\)-test.
-
-The formula of the \(t\) test statistic is described in the equation
-\ref{eq:t.test}, with \(W\) being a weight (the sample size of one group divided by
-the total sample size) for the sample size and with \(S^{2}\) being the estimated
-sample variance among each group.
+The formula of the \(t\)-test statistic is described in the Equation
+\ref{eq:t.test}, with \(W\) being a weight (the sample size of one group divided
+by the total sample size) for the sample size and with \(S^{2}\) being the
+estimated sample variance among each group.
 
 \begin{align}
 \label{eq:t.test}
  t_{\rm est} = \frac{\bar{X}_{\rm No} - \bar{X}_{\rm Yes}}{\sqrt{
                  S_{p}^{2} \cdot
                  \Big(\frac{1}{n_{\rm No}} + \frac{1}{n_{\rm Yes}}\Big)}},
- \quad \text{ where } \quad S_{p}^{2} = W_{\rm No} \cdot S_{\rm No}^{2} +
+ \quad \text{ with } \quad S_{p}^{2} = W_{\rm No} \cdot S_{\rm No}^{2} +
                                         W_{\rm Yes} \cdot S_{\rm Yes}^{2}.
 \end{align}
 
@@ -412,36 +558,55 @@ sample variance among each group.
 The test statistic \(t_{\rm est}\) follow (\(\sim\)) a \(t\)-distribution with
 \(n = n_{\rm No} + n_{\rm Yes}\) degrees of freedom.
 
-To verify the significance of one feature in the presence of others, we choosed to
-use the logistic regression model. The logistic regression is the most famous and
-used model in medicine and epidemiology, the reason for this is because this 
-methodology combines simplicity, power and interpretation. Simplicity because isn't
-a very complex model. Powerful because this model is able to provide very good
-results in a general way, and their parameter interpretation is given in terms of
-odds ratio.
+To test the association between variables we use the \(\chi^{2}\)-test, with it
+formula is described in Equation \ref{eq:chi2}.
 
-The logistic regression [7] can be understood as finding the values of the \(\beta\)
-parameters that best fit:
+\begin{align}
+\label{eq:chi2}
+ \chi^{2}_{\rm est} = \sum_{i=1}^{n} \frac{(O_{i} - E_{i})^{2}}{E_{i}}, \quad
+ \text{ with } i \text{ being the intersection classes of the variables}.
+\end{align}
 
-\begin{align*}
- y = \begin{cases}
-      1 & \text{ if } \beta_{0} + \beta_{1}x + \varepsilon  > 0 \\
-      0 & \text{ if } \text{ otherwise} 
-     \end{cases}, \quad \text{ where } \varepsilon
-     \text{ is an error distributed by the standard logistic distribution}.
-\end{align*}
+\noindent
+For each intersection of the classes of the variables we have the observed counts,
+expressed by \(O\), and the expected counts expressed by \(E\). The expected 
+counts can be computed as the product of the marginal totals divided by the total
+overall. The test statistic \(\chi^{2}_{\rm est}\) follow (\(\sim\)) a
+\(\chi^{2}\) distribution with (number of classes in the first variable - 1)
+\(\cdot\) (number of classes in the second variable - 1) degrees of freedom.
 
-And the logistic function is defined by:
+To verify the significance of one feature in the presence of others we used the
+logistic regression model. The logistic regression is the most famous and
+used model in medicine and epidemiology, and the reason for this is because this 
+methodology combines simplicity, power and interpretation. Simplicity because
+isn't a very complex model, powerful because this model is able to provide very
+good results in a general way and their parameter interpretation can be given in
+terms of odds ratio. The logistic regression [7] can be understood as finding the
+values of the \(\beta\) parameters that best fit \(Y | X \sim\) Bernoulli
+distributed, with expectation:
 
-\[ F(x) = \frac{1}{1 + e^{-(\beta_{0} + \beta_{1} x)}}. \]
+\[ E(Y | X = x) =
+   P(Y = 1 | X = x) =
+   \frac{\exp(\beta_{0} + \beta_{1} x)}{1 + \exp(\beta_{0} + \beta_{1} x)}.
+\]
 
+\noindent
+The logistic function is defined by: 
+
+\[ F(x) = \frac{1}{1 + \exp(-(\beta_{0} + \beta_{1} x))}.
+\]
+
+\noindent
 The inverse of the logistic function, \(g\), also called of logit (log odds) is
 defined by: 
 
-\[ g(F(x)) = \ln \left(\frac{F(x)}{1-F(x)}\right) = \beta_{0} + \beta_{1} x
-  \qquad \Rightarrow \qquad \frac{F(x)}{1-F(x)} = e^{\beta_{0} + \beta_{1} x}.
+\[ g(F(x)) =
+   \ln \left(\frac{F(x)}{1-F(x)}\right) = \beta_{0} + \beta_{1} x
+  \qquad \Rightarrow \qquad
+  \frac{F(x)}{1-F(x)} = \exp(\beta_{0} + \beta_{1} x) = {\rm OR}.
 \]
 
+\noindent
 Where:
 
 \begin{itemize}
@@ -449,15 +614,17 @@ Where:
        the logit (i.e., the log-odds) is equivalent to the linear regression
        expression.
  \item \(F(x)\) is the probability that the response variable equals a case, given
-       some linear combination of the predictors. This is important in that it shows
-       that the value of the linear regression expression can vary from negative to
-       positive infinity and yet, after transformation, the resulting expression for
-       the probability \(F(x)\) ranges between 0 and 1.
- \item \(\beta_{0}\) is the intercept from the linear regression equation (the value
-       of the criterion when the predictor is equal to zero).
- \item \(\beta_{1}x\) is the regression coefficient multiplied by some value of the
-       feature.
+       some linear combination of the predictors. This is important in that it
+       shows that the value of the linear regression expression can vary from
+       negative to positive infinity and yet, after transformation, the resulting
+       expression for the probability \(F(x)\) ranges between 0 and 1.
+ \item \(\beta_{0}\) is the intercept from the linear regression equation (the
+       value of the criterion when the predictor is equal to zero).
+ \item \(\beta_{1}x\) is the regression coefficient multiplied by some value of
+       the feature.
 \end{itemize}
+
+The terms interpretation can be done by odds ratio (OR).
 
 In the context of generalized linear models for binary data, the logit is the
 canonical link function and when used the resulting model is called  of logistic
@@ -466,57 +633,77 @@ functions are:
 
 \begin{itemize}
  \item Probit or inverse Normal function: \(g(F(x)) = \Phi^{-1}(F(x))\).
- \item Log-log function: \(g(F(x)) = -\log(-\log(F(x)))\).
  \item Complementary log-log function: \(g(F(x)) = \log(-\log(1 - F(x)))\).
  \item Cauchit function: \(\tan\left(\pi F(x) - \frac{\pi}{2}\right)\).
 \end{itemize}
 
-For estimate the model we use maximum likelihood. To test the significance of the
-coefficients we can use likelihood ratio test or the Wald statistic. More details
-about this techniques can be seen in [9].
+To estimate the model we used maximum likelihood. To test the significance of the
+coefficients we used the Akaike information criterion (AIC). Given a collection of
+models, AIC estimates the quality of each model, relative to each of the other
+models. Thus, AIC provides a means for model selection. The AIC value of a given
+model is the following:
 
-Thinking in the classification, we can separate the data into two parts. One for
+\[ {\rm AIC} = 2 p - 2 \log \hat{L}. \]
+
+\noindent
+With \(\hat{L}\) being the maximum value of the likelihood function for the model
+and \(p\) being the number of estimated parameters in the model. More details
+about this technique can be seen in [9].
+
+Thinking in the classification, we separate the data into two parts. One for
 training the model and other for test. In general between 60 \(\sim\) 70\% of the
 data are separeted for the train, and the rest stays for the test.
 
-To do all the fits and computation we use the R language [10].
+Looking to the Figures \ref{fig:images} and \ref{fig:big_pairs} and thinking in
+the nature of the data, we see a correlation between the MD variables and the
+EXU variables. When we have this type of characteristic a famous alternative is
+the use of principal component analysis (PCA). PCA uses an orthogonal
+transformation to convert a set of observations of possibly correlated variables
+into a set of values of linearly uncorrelated variables called principal
+components. The number of distinct principal components is equal to the smaller of
+the number of original variables or the number of observations minus one. This
+transformation is defined in such a way that the first principal component has the
+largest possible variance (that is, accounts for as much of the variability in the
+data as possible), and each succeeding component in turn has the highest variance
+possible under the constraint that it is orthogonal to the preceding components.
+The resulting vectors are an uncorrelated orthogonal basis set [10].
+
+To do all the fits and computation we used the R language [11].
 
 \subsection{Diagnosis \& Goodness of Fit} \vspace{.25cm}
 
 \noindent
-Under the null hypothesis that the model fit is satisfactory, to verify the goodness
-of fit, we can use statistics that summarise the concordance among the observed
-values and the predicted values by the model. In the presence of continuous
-features, the most popular statistic is the test of Hosmer and Lemeshow [11] and
-[12]. 
-
-Beyond this we can also use the Pearson and Deviance residuals, the sensitivity,
-specificity, predict value and the ROC curve [13] and [14].
+Under the null hypothesis that the model fit is satisfactory, to verify the
+goodness of fit we used statistics that summarise the concordance among the
+observed values and the predicted values by the model. In the presence of
+continuous features, the most popular statistic is the test of Hosmer and Lemeshow
+[12] and [13]. Beyond this we also used the Pearson and Deviance residuals, the
+sensitivity, specificity, predict value and the ROC curve [14] and [15].
 
 \section{Results} \vspace{.25cm}
 
 \noindent
-As a first step, we can look marginally for the two continuous variables that aren’t
-strictly related to the others. We are talking about the (1) euclidian distance of
-the center of the macula to the center of the optic disc and (2) the diameter of the
-optic disc. To verify if we have evidence of the difference between the means of
-each one of these variables in relation to the presence (or not) of signs of DR we
-used a \(t\)-test.
-
-We tested a null hypothesis  \(H_{\rm Null}\) of equality, i.e., that the difference
-of the means isn't statistically significant, versus an alternative hypothesis
-\(H_{\rm Alt}\) of significant difference. In the Tables \ref{tab:t.test_euc} and
+As a first step we looked marginally to the two continuous variables that aren’t
+strictly related to the others. We are talking about the (1) euclidian
+distance of the center of the macula to the center of the optic disc and (2) the
+diameter of the optic disc. To verify if we have evidence of the difference
+between the means of each one of these variables in relation to the presence (or
+not) of signs of DR we used a \(t\)-test. We tested a null hypothesis
+\(H_{\rm Null}\) of equality, i.e., that the difference of the means isn't
+statistically significant, versus an alternative hypothesis \(H_{\rm Alt}\) of
+significant difference. In the Tables \ref{tab:t.test_euc} and
 \ref{tab:t.test_diam} we present the results of the \(t\)-test for the two
 variables.
 
 <<>>=
+# <code r> ===================================================================== #
 ## t.test for the euclidian distance
 # \bar{X}'s
 euc.no <- da[da$dr == "no", 17] ; euc.yes <- da[da$dr == "yes", 17]
 
 # weights
 wei.no <- (length(euc.no) - 1) / ( (length(euc.no) - 1) + (length(euc.yes) - 1) )
-wei.yes <- (length(euc.yes) - 1) / ( (length(euc.no) - 1) + (length(euc.yes) - 1) )
+wei.yes <- (length(euc.yes) - 1) / ( (length(euc.no) - 1) + (length(euc.yes) - 1))
 
 # pooled variance estimate
 sp2 <- wei.no * var(euc.no) + wei.yes * var(euc.yes)
@@ -527,11 +714,12 @@ deno <- sqrt(sp2 * ( 1/length(euc.no) + 1/length(euc.yes) ))
 
 # test statistic and value of the reference distribution
 tt <- num / deno ; ref <- qt(.95, nrow(da) - 2)
+# </code r> ==================================================================== #
 @
 
 \begin{table}[H]
  \centering
- \caption{Summary of the \(t\)-test results for the euclidian distance by sign of
+ \caption{Summary of the \(t\)-test results to the euclidian distance, by sign of
           DR.} \label{tab:t.test_euc}
  \vspace{.15cm}
  \begin{tabular}{l|l|l|l|l}
@@ -548,14 +736,20 @@ tt <- num / deno ; ref <- qt(.95, nrow(da) - 2)
  \end{tabular}
 \end{table}
 
+We see that for both variables the means are extremely similar in each group
+(presence or not of signs of DR), and in consequence the reference distribution
+is bigger than the test statistic in both cases, which means that we don't have
+enough evidence to reject the null hypothesis.
+
 <<>>=
+# <code r> ===================================================================== #
 ## t.test for the diameter
 # \bar{X}'s
 diam.no <- da[da$dr == "no", 18] ; diam.yes <- da[da$dr == "yes", 18]
 
 # weights
-wei.no <- (length(diam.no) - 1) / ( (length(diam.no) - 1) + (length(diam.yes) - 1) )
-wei.yes <- (length(diam.yes) - 1) / ( (length(diam.no) - 1) + (length(diam.yes) -1))
+wei.no <- (length(diam.no) - 1) / ( (length(diam.no) - 1) + (length(diam.yes) -1))
+wei.yes <- (length(diam.yes) - 1) / ( (length(diam.no) - 1) +(length(diam.yes)-1))
 
 # pooled variance estimate
 sp2 <- wei.no * var(diam.no) + wei.yes * var(diam.yes)
@@ -566,12 +760,13 @@ deno <- sqrt(sp2 * ( 1/length(diam.no) + 1/length(diam.yes) ))
 
 # test statistic
 tt <- num / deno
+# </code r> ==================================================================== #
 @
 
 \begin{table}[H]
  \centering
- \caption{Summary of the \(t\)-test results for the diameter by sign of
-          DR.} \label{tab:t.test_diam}
+ \caption{Summary of the \(t\)-test results to the diameter, by sign of DR.}
+ \label{tab:t.test_diam}
  \vspace{.15cm}
  \begin{tabular}{l|l|l|l|l}
   \toprule
@@ -587,173 +782,457 @@ tt <- num / deno
  \end{tabular}
 \end{table}
 
-\noindent
-We see that for both variables the means are extremely similar in each group
-(presence or not of signs of DR), and in consequence, the reference distribution is
-bigger than the test statistic in both cases, which means that we don't have enough
-evidence to reject the null hypothesis.
-
 Thinking in a regression model with several variables, with this result we can
-already expect that this two variables, (1) euclidian distance of the center of the
-macula and the center to the optic disc and (2) the diameter of the optic disc will
-not be significant to separate the patients between the two groups.
+already expect that this two variables, (1) euclidian distance of the center of
+the macula and the center to the optic disc and (2) the diameter of the optic disc
+will not be significant to separate the patients between the two groups.
+
+<<>>=
+# <code r> ===================================================================== #
+## \chi-square test for the am/fm-based classification
+# expected counts
+exp_neg.nodr <- 764 * 540 / 1151 ; exp_neg.dr <- 764 * 611 / 1151
+exp_pos.nodr <- 387 * 540 / 1151 ; exp_pos.dr <- 387 * 611 / 1151
+
+# test statistic
+neg.nodr <- ( (347 - exp_neg.nodr)**2 ) / exp_neg.nodr
+neg.dr   <- ( (417 - exp_neg.dr  )**2 ) / exp_neg.dr
+pos.nodr <- ( (193 - exp_pos.nodr)**2 ) / exp_pos.nodr
+pos.dr   <- ( (194 - exp_pos.dr  )**2 ) / exp_pos.dr
+
+chi <- neg.nodr + neg.dr + pos.nodr + pos.dr
+# </code r> ==================================================================== #
+@
 
 In Figure \ref{fig:cat_var} we saw that using the AM/FM classification 1/3 of the
 patients present pathological lesions in the retinal structures. In Table
-\ref{tab:xtabs_desc} we compare the AM/FM classification of the patients with the
-DR classification. Among the patients with no signs of DR,
-\Sexpr{round(193/540, 2)*100}\% (193/540) present pathological lesions in the
-retinal structures. Among the patients with signs of DR,
-\Sexpr{round(417/611, 2)*100}\% present normal retinal structures.
+\ref{tab:xtabs_desc} we compared the AM/FM classification of the patients with the
+DR classification.
+
+Among the patients with no signs of DR, \Sexpr{round(193/540, 2)*100}\% (193/540)
+presented pathological lesions in the retinal structures. Among the patients with
+signs of DR, \Sexpr{round(417/611, 2)*100}\% presented normal retinal structures.
+In the cells between parentheses we have the expected counts, where we see a small
+difference to the observed counts. Performing a \(\chi^{2}\)-test we obtained a
+test statistic of \Sexpr{round(chi, 3)}. For a probability of Type I error of
+\(\alpha\) = 0.05 with 1 degree of freedom, the rejection region is determined by
+the value 3.841, which is bigger than the value of the test statistic. Therefore,
+we don't have significant statistical evidence to reject a null hyphotesis of lack
+of association between the result of the AM/FM-based classification and the
+patient status (with or without signs of DR).
 
 \begin{table}[H]
  \centering
- \caption{Comparison of the AM/FM-based classification with the DR situation of the
-          patients.} \label{tab:xtabs_desc}
+ \caption{Comparison of the AM/FM-based classification with the DR situation of
+          the patients, by the observed counts of patients. In parentheses are
+          presented the respective expected counts.} \label{tab:xtabs_desc}
  \vspace{.15cm}
  \begin{tabular}{l|c|c|c}
   \toprule
-  \thead{AM/FM-based classification} & \thead{No sign of DR} & \thead{Sign of DR} &
-  \thead{Total} \\
+  \thead{AM/FM-based classification} & \thead{No sign of DR} & \thead{Sign of DR}
+  & \thead{Total} \\
   \midrule
-  \makecell{Normal retinal structures} & 347 & 417 & \Sexpr{347+417} \\
+  \makecell{Normal retinal structures} & 347 (\Sexpr{round(exp_neg.nodr, 0)})
+                                       & 417 (\Sexpr{round(exp_neg.dr, 0)})
+                                       & \Sexpr{347+417} \\
   \midrule
-  \makecell{Pathological lesions} & 193 & 194 & \Sexpr{193+194} \\
+  \makecell{Pathological lesions} & 193 (\Sexpr{round(exp_pos.nodr, 0)})
+                                  & 194 (\Sexpr{round(exp_pos.dr, 0)})
+                                  & \Sexpr{193+194} \\
   \midrule
   \thead{Total} & \Sexpr{347+193} & \Sexpr{417+194} & \Sexpr{nrow(da)} \\
   \bottomrule
  \end{tabular}
 \end{table}
 
-\noindent
-To start, we fitted a logistic regression (logit link function) considering all the
-features. With this first model, we can start to do variables (features) selection
-using likelihood ratio test. 
+To see and understand the behavior of the features in the patients status, we
+fitted a logistic regression (with logit link function). We start with all
+features and using as criterium the AIC we arrived in a final model wehre the
+results can be seen in Table \ref{tab:sum.m_logistic}. To find the CI we used the
+follow approach: estimated coefficient \(\pm\) standard normal distribution 95\%
+quantil times (\(\cdot\)) coefficient standard error.
 
-Looking now only for this first model we have the Table \ref{tab:sum_m0}. There we
-can see in the \(p\)-value column that for the MD features, only the values for the
-0.9 confidence level weren't significant, considering a significance level of 10\%.
-For the exudates detection features only two was significant, with one and two set
-of points.
+Looking to the results of this first model, presented in Table
+\ref{tab:sum.m_logistic}, we see in the \(p\)-value column that for the MD
+features only the values for the 0.9 confidence level weren't significant (for
+this reason aren't present in the Table), considering a significance level of
+10\%. For the exudates detection features only two wasn't significant, with three
+and eight set of points. As we already expected by the results in the Tables
+\ref{tab:t.test_euc} and \ref{tab:t.test_diam}, the euclidian distance and the
+diameter not shown to be significant. Considering a significance level of 10\%,
+the AM/FM-based classification shown to be significant.
 
-As we already expected by the results in the Tables \ref{tab:t.test_euc} and
-\ref{tab:t.test_diam}, the euclidian distance and the diameter not shown to be
-significant. Considering a significance level of 10\%, the AM/FM-based
-classification shown to be significant.
+To see the significance we don't need to look exclusively to the \(p\)-value, we
+can also look to the confidence intervals (CI). If the interval contain the value
+zero it's a clue that the variable may be not significant. The interval range is
+also very informative. If it's big, the uncertainty about the coeficient is 
+greater.
+
+With the variables present in this final model obtained with a logit link
+function we fitted more three models with different link functions. This models
+are compared by the AIC in Table \ref{tab:aics}. The better fit is obtained with
+the logit link function, this means that we stay with the fitted logistic
+regression with the estimated coefficients presented in Table
+\ref{tab:sum.m_logistic}.
 
 <<include=FALSE>>=
+# <code r> ===================================================================== #
 da.model <- da[ , -(1:2)]
 m0 <- glm(dr ~ ., family = binomial, da.model)
 
-tab.m0 <- data.frame(
-  Features = c("Intercept",
-               "MD:0.5", "MD:0.6", "MD:0.7", "MD:0.8", "MD:0.9", "MD:1",
-               "EXU1", "EXU2", "EXU3", "EXU4", "EXU5", "EXU6", "EXU7", "EXU8",
-               "EUC", "DIAM", "AM/FM"),
-  Estimate = round(as.numeric(summary(m0)$coeff[ , 1]), 5),
-  Std.Error = round(as.numeric(summary(m0)$coeff[ , 2]), 5),
-  p.value = round(as.numeric(summary(m0)$coeff[ , 4]), 5))
+m_logistic <- stepAIC(m0)
 
-print(xtable(tab.m0, digits = 5
-             , caption = "Summary of the fitted logistic regression with the
-                          estimated coefficients, standard errors and related
-                          p-values."
-             , label = "tab:sum_m0")
+tab.m_logistic <- data.frame(
+  Features = c("Intercept",
+               "MD: 0.5", "MD: 0.6", "MD: 0.7", "MD: 0.8", "MD: 1",
+               "EXU 1", "EXU2 ", "EXU4 ", "EXU5 ", "EXU6 ", "EXU 7",
+               "DIAM", "AM/FM"),
+  "Lower CI"       = round(confint.default(m_logistic)[ , 1], 5),
+  "Point estimate" = round(  summary(m_logistic)$coeff[ , 1], 5),
+  "Upper CI"       = round(confint.default(m_logistic)[ , 2], 5),
+  "p.value"        = round(  summary(m_logistic)$coeff[ , 4], 5))
+
+print(xtable(tab.m_logistic, digits = 5
+             , caption = "Summary of the final fitted logistic regression with the
+                          estimated coefficients, lower and upper of the 95
+                          percent confidence interval (CI) and related p-values.
+                          In bold, for easy identification, are the significant
+                          coefficients at a level of 5\\% and the CI's that don't
+                          include zero."
+             , label = "tab:sum.m_logistic")
       , include.rownames = FALSE
       , caption.placement = "top"
       , table.placement = "H"
       , booktabs = TRUE)
+# </code r> ==================================================================== #
 @
 
 \begin{table}[H]
-\centering
-\caption{Summary of the fitted logistic regression with the estimated coefficients,
-         standard errors and related p-values (p-values less than 0.1 in bold).}
-\label{tab:sum_m0}
-\vspace{.15cm}
- \begin{tabular}{l|r|r|r}
+ \centering
+ \caption{Summary of the final fitted logistic regression with the estimated
+          coefficients, lower and upper of the 95\% confidence interval (CI)
+          and related p-values. In bold, for easy identification, are the
+          significant coefficients at a level of 5\% and the CI's that don't
+          include zero.} 
+ \label{tab:sum.m_logistic}
+ \vspace{.15cm}
+ \begin{tabular}{l|r|r|r|r}
   \toprule
-  Features & Estimate & Standard Error & \(p\)-value \\ 
+  \textbf{Features} & \textbf{Lower CI} & \textbf{Point estimate}
+                    & \textbf{Upper CI} & \textbf{\(p\)-value} \\
   \midrule
-  Intercept & -0.10510 & 1.60807 & 0.94789 \\ 
-  MD:0.5 & 0.90624 & 0.09795 & \textbf{0.00000} \\ 
-  MD:0.6 & -0.43858 & 0.12350 & \textbf{0.00038} \\ 
-  MD:0.7 & -0.30495 & 0.09571 & \textbf{0.00144} \\
-  MD:0.8 & -0.17570 & 0.07023 & \textbf{0.01236} \\
-  MD:0.9 & -0.04016 & 0.04970 & 0.41905 \\
-  MD:1 & 0.05247 & 0.02616 & \textbf{0.04486} \\
-  EXU1 & 0.00882 & 0.00234 & \textbf{0.00016} \\
-  EXU2 & -0.01739 & 0.00964 & \textbf{0.07117} \\
-  EXU3 & 0.00849 & 0.02972 & 0.77512 \\
-  EXU4 & -0.17521 & 0.10752 & 0.10318 \\
-  EXU5 & 0.38029 & 0.27296 & 0.16355 \\
-  EXU6 & -1.69756 & 1.28095 & 0.18509 \\
-  EXU7 & 7.30653 & 5.29844 & 0.16790 \\
-  EXU8 & 0.86691 & 7.02143 & 0.90174 \\
-  EUC & -0.63078 & 2.72319 & 0.81682 \\
-  DIAM & -6.32060 & 4.28378 & 0.14009 \\
-  AM/FM & -0.30395 & 0.18116 & \textbf{0.09338} \\
+  Intercept & -1.46297 & -0.44403        & 0.57490           & 0.39304 \\
+  MD: 0.5 &  0.71822 & \textbf{0.90967}  & \textbf{1.10112}  & \textbf{0.00000} \\
+  MD: 0.6 & -0.68165 & \textbf{-0.43941} & \textbf{-0.19717} & \textbf{0.00038} \\
+  MD: 0.7 & -0.49159 & \textbf{-0.30424} & \textbf{-0.11689} & \textbf{0.00146} \\
+  MD: 0.8 & -0.32245 & \textbf{-0.20867} & \textbf{-0.09489} & \textbf{0.00033} \\
+  MD: 1   & -0.00097 & \textbf{0.04091}  & \textbf{0.08279}  & \textbf{0.05555} \\
+  EXU 1   &  0.00453 & \textbf{0.00898}  & \textbf{0.01343}  & \textbf{0.00008} \\
+  EXU 2   & -0.02827 & \textbf{-0.01508} & \textbf{-0.00190} & \textbf{0.02498} \\
+  EXU 4   & -0.28716 & \textbf{-0.15126} & \textbf{-0.01537} & \textbf{0.02914} \\
+  EXU 5   & -0.12170 & \textbf{0.38254}  & \textbf{0.88679}  & 0.13704 \\
+  EXU 6   & -4.07110 & -1.80779          & 0.45552           & 0.11747 \\
+  EXU 7   &  1.62021 & \textbf{7.86642}  & \textbf{14.11262} & 0.01357 \\
+  DIAM    & -14.54667 & -6.29276         & 1.96115           & 0.13510 \\
+  AM/FM   & -0.64448 & -0.29136          & 0.06177           & 0.10585 \\
   \bottomrule
  \end{tabular}
 \end{table}
 
 <<>>=
-hl <- logitgof(da.model$dr, fitted(m0), g = 6)
+# <code r> ===================================================================== #
+m_probit <- update(m_logistic, . ~ ., family = binomial(link = "probit"))
+m_clog2  <- update(m_logistic, . ~ ., family = binomial(link = "cloglog"))
+m_cauc   <- update(m_logistic, . ~ ., family = binomial(link = "cauchit"))
+
+aics <- c(AIC(m_logistic), AIC(m_probit), AIC(m_clog2), AIC(m_cauc))
+# </code r> ==================================================================== #
 @
 
-\noindent
-To verify the goodness of fit we use the Hosmer and Lemeshow test, that results in a
-\(p\)-value of \Sexpr{round(hl$p.value, 5)}. With a \(p\)-value of this magnitude
-has no evidence to reject the null hypothesis that the fit of the model is
-satisfactory.
+\begin{table}[H]
+ \centering
+ \caption{AIC of the models fitted with different link functions. AIC: small is
+          better. The smallest AIC is in bold, for easy identification.} 
+ \label{tab:aics}
+ \vspace{.15cm}
+ \begin{tabular}{l|c|c|c|c}
+  \toprule
+  \textbf{Link function} & Logit & Probit & Complementary log-log & Cauchit \\
+  \textbf{AIC} & \textbf{\Sexpr{round(aics[1], 3)}} & \Sexpr{round(aics[2], 3)}
+               &         \Sexpr{round(aics[3], 3)}  & \Sexpr{round(aics[4], 3)} \\
+  \bottomrule
+ \end{tabular}
+\end{table}
 
-The Pearson and the Deviance residuals are presented in the left and the center of
-Figure \ref{fig:res}. If the model is well adjusted, it is expected that these
-residues follow a standard normal distribution, and in this way that the most of the
-observations stay present in the interval -3 and 3. In the right-graph of Figure
-\ref{fig:res}, we have the ROC curve. Area Under the Curve (AUC) superior than 0.70
-can be interpreted as a good fit for the model.
+<<>>=
+# <code r> ===================================================================== #
+hl <- logitgof(da.model$dr, fitted(m_logistic), g = 6)
+# </code r> ==================================================================== #
+@
 
-<<res, fig.height=2.25, fig.cap="Dispersion of the Pearson and Deviance residuals, in the left and the center, respectively. ROC curve in the right, with the AUC value, cutoff, specificity and sensitivity.">>=
-pear <- residuals(m0, type = "pearson")
-dev <- residuals(m0, type = "deviance")
+To verify the final model goodness of fit we used the Hosmer and Lemeshow test
+that results in a \(p\)-value of \Sexpr{round(hl$p.value, 5)}. With a \(p\)-value
+of this magnitude has no evidence to reject the null hypothesis that the fit of
+the model is satisfactory.
+
+<<res, fig.height=2.25, fig.cap="Dispersion of the Pearson and Deviance residuals, in the left and in the center, respectively. ROC curve in the right, with AUC value, cutoff, specificity and sensitivity.">>=
+# <code r> ===================================================================== #
+pear <- residuals(m_logistic, type = "pearson")
+dev <- residuals(m_logistic, type = "deviance")
 
 par(mfrow = c(1, 3), mar = c(2, 3, 3, 1))
 
-plot(pear, axes = FALSE, xlab = NA, ylab = NA, main = "Pearson residuals", pch = 20)
+plot(pear
+     , axes = FALSE, xlab = NA, ylab = NA, main = "Pearson residuals", pch = 20)
 abline(h = 0, col = 2, lwd = 1.5) ; Axis(c(-10, 2), side = 2, las = 1)
 
-plot(dev, axes = FALSE, xlab = NA, ylab = NA, main = "Deviance residuals", pch = 20)
+plot(dev
+     , axes = FALSE, xlab = NA, ylab = NA, main = "Deviance residuals", pch = 20)
 abline(h = 0, col = 2, lwd = 1.5) ; Axis(c(-3, 2), side = 2, las = 1)
 
-plot.roc(roc(da.model$dr, fitted(m0))
+plot.roc(roc(da.model$dr, fitted(m_logistic))
          , print.auc = TRUE, print.thres = TRUE, las = 1
          , print.thres.cex = 1, print.auc.cex = 1)
+# </code r> ==================================================================== #
 @
 
-\section{Conclusion and next steps} \vspace{.25cm}
+The Pearson and the Deviance residuals are presented in the Figure \ref{fig:res}.
+If the model is well adjusted it is expected that these residues follow a standard
+normal distribution, and in this way the most of the observations have to stay
+present in the interval -3 and 3 (99.7\% of the data within three standard 
+deviations to the mean, zero). Also in Figure \ref{fig:res} we have the ROC curve.
+Area Under the Curve (AUC) superior than 0.70 is interpreted as a good fit for the
+model. All this characteristics are shown in Figure \ref{fig:res}.
+
+With this model we also trained a predictive model. For this we randomly splited
+the dataset in two parts, called in literature of train and test. As the name say,
+with the train dataset we train the model and test the results doing a prediction
+in the test dataset. Here we splited in 70 and 30. 70\% for the train and 30\%
+for test. In Table \ref{tab:train-test} are presented the number of observations
+in each dataset and the percentage of patients with and without signs of DR. We
+see that the patients are well distributed in the datasets.
+
+<<>>=
+# <code r> ===================================================================== #
+n_test <- sample(size = nrow(da.model) * .3, x = 0:nrow(da.model))
+
+da.train <- da.model[-n_test, ] ; da.test <- da.model[n_test, ]
+# </code r> ==================================================================== #
+@
+
+\begin{table}[H]
+ \centering
+ \caption{Number (\#) of patients and the number (and percentage) of patients with
+          and without signs of DR in each dataset.} 
+ \label{tab:train-test}
+ \vspace{.15cm}
+ \begin{tabular}{l|c|c|c}
+  \toprule
+  & \textbf{\# of patients} & \textbf{Patients with no signs of DR}
+                            & \textbf{Patients with signs of DR} \\
+  \midrule
+  \textbf{Train dataset} & \Sexpr{nrow(da.train)}
+                         & \Sexpr{summary(da.train$dr)[[1]]}
+                (\Sexpr{round(prop.table(table(da.train$dr))[[1]] * 100, 0)}\%)
+                         & \Sexpr{summary(da.train$dr)[[2]]}
+                (\Sexpr{round(prop.table(table(da.train$dr))[[2]] * 100, 0)}\%) \\
+  \textbf{Test dataset}  & \Sexpr{nrow(da.test)}
+                         & \Sexpr{summary(da.test$dr)[[1]]}
+                 (\Sexpr{round(prop.table(table(da.test$dr))[[1]] * 100, 0)}\%)
+                         & \Sexpr{summary(da.test$dr)[[2]]}
+                 (\Sexpr{round(prop.table(table(da.test$dr))[[2]] * 100, 0)}\%) \\
+  \bottomrule
+ \end{tabular}
+\end{table}
+
+The results of the predictive model is seen in Figure \ref{fig:pred-roc}. The AUC
+above 0.70 means that the model have a good fit. The better AUC, specificity and
+sensitivity is found using a threshold of 0.513, very similar to the standard 0.5.
+Both specificity (true negative rate - proportion of patients without signs of DR
+that are correctly identified as such) and sensitivity are bigger than 0.65, with
+a bigger sensitivity (true positive rate - proportion of patients with signs od DR
+that are correctly identified as such), 0.805.
+
+<<pred-roc, fig.cap="ROC curve with the results (AUC, specificity, sensitivity and threshold) of the predictive model. The model was fitted using the train dataset and the prediction was performed in the test dataset.", fig.height=3.25, fig.width=3.5>>=
+# <code r> ===================================================================== #
+m_train <- update(m_logistic, . ~ ., data = da.train)
+
+par(mar = c(2, 3, 2, 1))
+
+plot.roc(roc(da.test$dr, predict(m_train, da.test, type = "response"))
+         , print.auc = TRUE, print.thres = TRUE, las = 1
+         , print.thres.cex = 1, print.auc.cex = 1)
+# </code r> ==================================================================== #
+@
+
+Other, and final, model that we fitted is a model considering principal component
+analysis, PCA. Instead of using all the MD and EXU variables together, that
+present a strong level of correlation (Figures \ref{fig:images} and
+\ref{fig:big_pairs}), we performed a PCA and considered as covariables in the
+model only the first principal component of the MD variables and the first
+principal component of the EXU variables. The fitted model was a model with five
+covariables. The two first principal components, the euclidian distance, the
+diameter and the AM/FM-based classification.
+
+<<include=FALSE>>=
+# <code r> ===================================================================== #
+da.md  <- da.model[ , 1:6]  ; da.model$md.pca  <- principal(da.md)$scores
+
+da.exu <- da.model[ , 7:14] ; da.model$exu.pca <- principal(da.exu)$scores
+
+m_pca <- update(m_logistic, . ~ - . + md.pca + exu.pca + V17 + V18 + amfm)
+
+m_pca <- stepAIC(m_pca)
+# </code r> ==================================================================== #
+@
+
+Performing a variable selection by the AIC we finish with a model with only the
+first components, which means that in the presence of the principal components the
+euclidian distance, the diameter and the AM/FM-based classification aren't
+statiscally significant. This model present an AIC of
+\Sexpr{round(AIC(m_pca), 3)}, which is much bigger than the AIC of the models
+presented in Table \ref{tab:aics}. This means that the model with the results
+presented in Table \ref{tab:sum.m_logistic} still shown to be better and that
+the presence of the set of MD and EXU variables aren't detrimental to the model
+goodness-of-fit.
+
+\section{Conclusion} \vspace{.25cm}
 
 \noindent
 Practically all the patients in the study have a sufficient quality assessment and
 present a SRA. The means of the euclidian distance of the center of the macula to
 the center of the optic disc are practically the same (without a statistical
 difference), independent from if the patient present or not signs of DR. The same
-conclusion can be made for the diameter of the optic disc. With the model fitted the
-same result is observed. When compared the results of the AM/FM-based classification
-with the DR signs status, big differences are observed. To see if this difference is
-statistically significant, a \(t\)-test can be performed.
+conclusion can be made for the diameter of the optic disc.
 
-The model fitted with all the variables present a satisfactory goodness-of-fit, with
-a specificity (true negative rate) and sensitivity (true positive rate) superior
-than 0.70, and with an AUC over 0.80. The estimated cutoff of the probability to
-classify the patients in one of the two statuses in very close to 0.5. 
+The fitted final model with all the variables presented a satisfactory
+goodness-of-fit, with a specificity (true negative rate) and sensitivity (true
+positive rate) superior than 0.70, and with an AUC over 0.80.
+The estimated cutoff of the probability to classify the patients in one of the two
+status is very close to 0.5. 
 
-About the features, in general, the features related to the MD results shown to be
-more significant. Thinking in the next steps of the analysis, a selection of
-variables can be performed, and a Principal Component Analysis (PCA) can be used to
-group the MD features in one, and the exudates features in one too. Others link
-functions can be also tested and a predictive model based on the best model can also
-be trained.
+About the features, almost all the MD and EUX variables are present in the final
+model, showing that they are statistically significant to classify the patients.
+Thinking in the correlation between this variables, a PCA analysis was performed
+and the first principal components was used as covariables. The resulting model
+presented a good fit, but much lower than the model with all the variables, as the
+AIC obtained shown. With the predictive model the results was also very
+satisfatory. The obtained AUC was greater than 0.70 and the specificity (true
+negative rate) and sensitivity (true positive rate) was greater than 0.65.
+
+From the Table \ref{tab:sum.m_logistic} we can achieve some very interesting
+interpretations and conclusions about the variables coefficients. In the list
+below we give the interpretation of each one using odds ratio.
+
+\begin{itemize}
+ \item AM/FM-based classification.
+ \begin{itemize}
+  \item The odds ratio (\(\widehat{\rm OR}\)), chance, of a patient with positive
+        (pathological lesions) AM/FM-based classification present signs of DR is
+        \Sexpr{round(exp(-.64448), 2)} (\(\widehat{\rm OR} = \exp(-0.64448)\))
+        times that of those with negative (normal retinal structures) AM/FM-based
+        classification, with both having all the same values in the others
+        characteristics.
+ \end{itemize}
+ \item Microaneurism Detection (MD) at different confidence levels.
+ \begin{itemize}
+  \item For each one more microaneurisms found at confidence level of 0.5, the
+        odds ratio, chance, of present signs of DR is
+        \Sexpr{round(exp(.71822), 2)} (\(\exp(0.71822)\)) times that of those with
+        one less, i.e., the odds increase.
+  \item For each one more microaneurisms found at confidence level of 0.6, the
+        odds ratio of present signs of DR is \Sexpr{round(exp(-.68165), 2)}
+        (\(\exp(-0.68165)\)) times that of those with one less, i.e., the odds
+        decrease.
+  \item For each one more microaneurisms found at confidence level of 0.7, the
+        odds of present signs of DR is \Sexpr{round(exp(-.49159), 2)}
+        (\(\exp(-0.49159)\)) times that of those with one less, i.e., the odds
+        decrease.
+  \item For each one more microaneurisms found at confidence level of 0.8, the
+        odds of present signs of DR is \Sexpr{round(exp(-.32245), 2)}
+        (\(\exp(-0.32245)\)) times that of those with one less, i.e., the odds
+        decrease.
+  \item For each one more microaneurisms found at confidence level of 1, the odds
+        of present signs of DR is \Sexpr{round(exp(-.00097), 2)}
+        (\(\exp(-0.00097)\)) times that of those with one less, i.e., the odds
+        decrease.
+ \end{itemize}
+ \item Exudates detection in different set of points.
+ \begin{itemize}
+  \item Number of points: 1. Exudates mean: \Sexpr{round(mean(da.model$V9), 3)}.
+        The odds ratio, chance, of a patient with EXU 1 of
+        \Sexpr{round(mean(da.model$V9) + 5, 3)} present signs of DR is
+        \Sexpr{round(exp(.00453 * 5), 2)}
+        (\(\exp(0.00453 \cdot (\Sexpr{round(mean(da.model$V9) + 5, 3)} -
+                               \Sexpr{round(mean(da.model$V9), 3)}))\)) times that
+        of those with EXU 1 of \Sexpr{round(mean(da.model$V9), 3)}.
+  \item Number of points: 2. Exudates mean: \Sexpr{round(mean(da.model$V10), 3)}.
+        The odds ratio of a patient with EXU 2 of
+        \Sexpr{round(mean(da.model$V10) + 5, 3)} present signs of DR is
+        \Sexpr{round(exp(-.02827 * 5), 2)}
+        (\(\exp(-0.02827 \cdot (\Sexpr{round(mean(da.model$V10) + 5, 3)} -
+                                \Sexpr{round(mean(da.model$V10), 3)}))\)) times
+        that of those with EXU 2 of \Sexpr{round(mean(da.model$V10), 3)}.
+  \item Number of points: 4. Exudates mean: \Sexpr{round(mean(da.model$V12), 3)}.
+        The odds of a patient with EXU 4 of
+        \Sexpr{round(mean(da.model$V12) + 2, 3)} present signs of DR is
+        \Sexpr{round(exp(-.28716 * 2), 2)}
+        (\(\exp(-0.28716 \cdot (\Sexpr{round(mean(da.model$V12) + 2, 3)} -
+                                \Sexpr{round(mean(da.model$V12), 3)}))\)) times
+        that of those with EXU 4 of \Sexpr{round(mean(da.model$V12), 3)}.
+  \item Number of points: 5. Exudates mean: \Sexpr{round(mean(da.model$V13), 3)}.
+        The odds of a patient with EXU 5 of
+        \Sexpr{round(mean(da.model$V13) + 2, 3)} present signs of DR is
+        \Sexpr{round(exp(-.1217 * 2), 2)}
+        (\(\exp(-0.1217 \cdot (\Sexpr{round(mean(da.model$V13) + 2, 3)} -
+                               \Sexpr{round(mean(da.model$V13), 3)}))\)) times
+        that of those with EXU 5 of \Sexpr{round(mean(da.model$V13), 3)}.
+  \item Number of points: 6. Exudates mean: \Sexpr{round(mean(da.model$V14), 3)}.
+        The odds of a patient with EXU 6 of
+        \Sexpr{round(mean(da.model$V14) + 1, 3)} present signs of DR is
+        \Sexpr{round(exp(-4.0711 * 1), 2)}
+        (\(\exp(-4.0711 \cdot (\Sexpr{round(mean(da.model$V14) + 1, 3)} -
+                               \Sexpr{round(mean(da.model$V14), 3)}))\)) times
+        that of those with EXU 6 of \Sexpr{round(mean(da.model$V14), 3)}.
+  \item Number of points: 7. Exudates mean: \Sexpr{round(mean(da.model$V15), 3)}.
+        The odds of a patient with EXU 7 of
+        \Sexpr{round(mean(da.model$V15) + 1, 3)} present signs of DR is
+        \Sexpr{round(exp(1.62021 * 1), 2)}
+        (\(\exp(1.62021 \cdot (\Sexpr{round(mean(da.model$V15) + 1, 3)} -
+                               \Sexpr{round(mean(da.model$V15), 3)}))\)) times
+        that of those with EXU 7 of \Sexpr{round(mean(da.model$V15), 3)}.
+ \end{itemize}
+ \item Diameter of the optic disc.
+ \begin{itemize}
+  \item Mean: \Sexpr{round(mean(da.model$V18), 3)}.
+        The odds of a patient with diameter of the optic disc of
+        \Sexpr{round(mean(da.model$V18) + .25, 3)} present signs of DR is
+        \Sexpr{round(exp(-14.54667 * .25), 2)}
+        (\(\exp(-14.54667 \cdot (\Sexpr{round(mean(da.model$V18) + .25, 3)} -
+                                 \Sexpr{round(mean(da.model$V18), 3)}))\)) times
+        that of those with diameter of \Sexpr{round(mean(da.model$V18), 3)}.
+ \end{itemize}
+\end{itemize}
+
+We saw that as we increase the confidence level of the MD detections the odds 
+ratio approach zero, which means that for high confidence levels differences
+in the MD detection doesn't impact the chance of the patient present signs of DR.
+For the exudates detection we see that the difference between the odds ratio 
+aren't big, with an exception in the detection with the set of seven points. With
+this set the odds ratio between the groups is big.
+
+With the diameter of the optic disc the differences between the odds ratio is also
+not so big. A bigger difference is observed when we compare the odds ratio of the
+patients by the AM/FM based-classification.
+
+As a final conclusion we can highlight that almost all the variables stay present
+in the final model, this show that in general all the variables measured are
+useful when putted together in the model to classify patients about
+the presence of signs of DR. Looking individually to each coefficient we don't see
+considerable differences. The final model and the predictive model present very
+good results with satisfactory measures of accuracy and quality of fit and
+prediction. The model considering the canonical link function, logistic, presented
+the best results when compared with others.
 
 \newpage
 \section{References} \vspace{.25cm}
@@ -799,38 +1278,360 @@ be trained.
               
               \hspace{-.15cm} URL (arXiv preprint): https://goo.gl/pGkBDm.
 
-\noindent [9] Logistic regression. From Wikipedia, the free encyclopedia.
-              URL: https://goo.gl/ZXY6qE.
+\noindent [9] Akaike information criterion. From Wikipedia, the free encyclopedia.
+              URL: https://goo.gl/sRJ16t.
               
-              \hspace{-.15cm} Accessed at 7 November 2017.
+              \hspace{-.15cm} Accessed at 27 November 2017.
 
-\noindent [10] R Core Team (2017). R: A language and environment for statistical
+\noindent [10] Principal component analysis. From Wikipedia, the free
+               encyclopedia. URL: https://goo.gl/QPTKwx.
+              
+              \hspace{.05cm} Accessed at 10 December 2017.
+
+\noindent [11] R Core Team (2017). R: A language and environment for statistical
               computing.
               
               \hspace{.05cm} R Foundation for Statistical Computing, Vienna,
                              Austria. URL: https://www.R-project.org/.
 
-\noindent [11] Hosmer-Lemeshow test. From Wikipedia, the free encyclopedia.
+\noindent [12] Hosmer-Lemeshow test. From Wikipedia, the free encyclopedia.
                URL: https://goo.gl/8SgkaB.
               
                \hspace{.05cm} Accessed at 9 November 2017.
 
-\noindent [12] JAY, M. (2017).
-               generalhoslem: Goodness of Fit Tests for Logistic Regression Models.
+\noindent [13] JAY, M. (2017).
+               generalhoslem: Goodness of Fit Tests for Logistic Regression
+               Models.
                
                \hspace{.05cm} R package version 1.3.0. URL: https://goo.gl/7VG9Ke.
 
-\noindent [13] Receiver operating characteristic.
+\noindent [14] Receiver operating characteristic.
                From Wikipedia, the free encyclopedia.
                URL: https://goo.gl/ret2fX.
               
                \hspace{.05cm} Accessed at 9 November 2017.
 
-\noindent [14] ROBIN, X., et all. (2011).
-               pROC: an open-source package for R and S+ to analyze and compare ROC
+\noindent [15] ROBIN, X., et all. (2011).
+               pROC: an open-source package for R and S+ to analyze and compare
+               ROC
                
                \hspace{.05cm} curves. \textit{BMC Bioinformatics}, 12, p.77.
                               DOI: 10.1186/1471-2105-12-77.
                               URL: https://goo.gl/fBG1We.
+
+\newpage
+\section{Appendix} \vspace{.25cm}
+
+\subsection{Appendix A: R code for \(t\)-test implementation} \vspace{.25cm}
+
+\noindent
+Here we present the code for the \(t\)-test with the euclidian distante variable.
+For the diameter variable the procedure is exactly the same.
+
+<<>>=
+# <r code> ===================================================================== #
+# dataset: da ============================================================ #
+# response variable: dr (two levels, "yes" and "no"). 17th column of da == #
+#                    yes = present signs of DR =========================== #
+#                    no = shows no signs of DR =========================== #
+
+## means ================================================================ ##
+# euc: euclidean distance of the center of the macula to the center of the
+#      optic disc
+euc.no <- da[da$dr == "no", 17] ; euc.yes <- da[da$dr == "yes", 17]
+
+## weights ============================================================== ##
+# wei: weights
+wei.no  <-  (length(euc.no)-1) / ((length(euc.no)-1) + (length(euc.yes)-1))
+wei.yes <- (length(euc.yes)-1) / ((length(euc.no)-1) + (length(euc.yes)-1))
+
+## pooled variance estimate ============================================= ##
+sp2 <- wei.no * var(euc.no) + wei.yes * var(euc.yes)
+
+## numerator and denominator of the test statistic ====================== ##
+num <- (mean(euc.no) - mean(euc.yes))
+deno <- sqrt(sp2 * (1/length(euc.no) + 1/length(euc.yes)))
+
+## test statistic and value of the reference distribution =============== ##
+tt <- num / deno
+ref <- qt(.95, nrow(da) - 2) # probability of type I error of \alpha = 0.05
+                             # degrees of freedom: number of observations
+                             #                     (nrow(da))-1
+# if tt > ref => reject the null hyphotesis ============================= ##
+# </r code> ==================================================================== #
+@
+
+\begin{lstlisting}
+# dataset: da ============================================================ #
+# response variable: dr (two levels, "yes" and "no"). 17th column of da == #
+#                    yes = present signs of DR =========================== #
+#                    no = shows no signs of DR =========================== #
+
+## means ================================================================ ##
+# euc: euclidean distance of the center of the macula to the center of the
+#      optic disc
+euc.no <- da[da$dr == "no", 17] ; euc.yes <- da[da$dr == "yes", 17]
+
+## weights ============================================================== ##
+# wei: weights
+wei.no  <-  (length(euc.no)-1) / ((length(euc.no)-1) + (length(euc.yes)-1))
+wei.yes <- (length(euc.yes)-1) / ((length(euc.no)-1) + (length(euc.yes)-1))
+
+## pooled variance estimate ============================================= ##
+sp2 <- wei.no * var(euc.no) + wei.yes * var(euc.yes)
+
+## numerator and denominator of the test statistic ====================== ##
+num <- (mean(euc.no) - mean(euc.yes))
+deno <- sqrt(sp2 * (1/length(euc.no) + 1/length(euc.yes)))
+
+## test statistic and value of the reference distribution =============== ##
+tt <- num / deno
+ref <- qt(.95, nrow(da) - 2) # probability of type I error of \alpha = 0.05
+                             # degrees of freedom: number of observations
+                             #                     (nrow(da))-1
+# if tt > ref => reject the null hyphotesis ============================= ##
+\end{lstlisting}
+
+\newpage
+\subsection{Appendix B: R code for \(\chi^{2}\)-test implementation}
+\vspace{.25cm}
+
+<<>>=
+# <code r> ===================================================================== #
+# variable: am/fm-based classification =================================== #
+
+## expected counts ====================================================== ##
+# exp: expected count
+# neg: negative am/fm classification
+# pos: positive am/fm classification
+# nodr: shows no signs of DR
+# dr:   present signs of DR
+# amfm: am/fm-based classification
+exp_neg.nodr <-
+  nrow(da[da$amfm == "neg", ]) * nrow(da[da$dr == "no", ])  / nrow(da)
+exp_neg.dr   <-
+  nrow(da[da$amfm == "neg", ]) * nrow(da[da$dr == "yes", ]) / nrow(da)
+exp_pos.nodr <-
+  nrow(da[da$amfm == "pos", ]) * nrow(da[da$dr == "no", ])  / nrow(da)
+exp_pos.dr   <-
+  nrow(da[da$amfm == "pos", ]) * nrow(da[da$dr == "yes", ]) / nrow(da)
+
+## test statistic and value of the reference distribution =============== ##
+# obs: observed count
+obs_neg.nodr <- nrow(da[da$amfm == "neg" & da$dr == "no",  ])
+obs_neg.dr   <- nrow(da[da$amfm == "neg" & da$dr == "yes", ])
+obs_pos.nodr <- nrow(da[da$amfm == "pos" & da$dr == "no",  ])
+obs_pos.dr   <- nrow(da[da$amfm == "pos" & da$dr == "yes", ])
+
+neg.nodr <- ((obs_neg.nodr - exp_neg.nodr)**2) / exp_neg.nodr
+neg.dr   <- ((obs_neg.dr   - exp_neg.dr  )**2) / exp_neg.dr
+pos.nodr <- ((obs_pos.nodr - exp_pos.nodr)**2) / exp_pos.nodr
+pos.dr   <- ((obs_pos.dr   - exp_pos.dr  )**2) / exp_pos.dr
+
+# chi: \chi^{2} test statistic
+chi <- neg.nodr + neg.dr + pos.nodr + pos.dr
+ref <- qchisq(.95, 1) # probability of type I error of \alpha = 0.05
+                      # degrees of freedom: number of classes of one
+                      #                     variable (amfm) minus (-) 1
+                      #                     times the number of classes of
+                      #                     the other variable (dr) - 1.
+                      #                     2-1 x 2-1 = 1
+# if chi > ref => reject the null hyphotesis ============================ ##
+# </code r> ==================================================================== #
+@
+
+\begin{lstlisting}
+# variable: am/fm-based classification =================================== #
+
+## expected counts ====================================================== ##
+# exp: expected count
+# neg: negative am/fm classification
+# pos: positive am/fm classification
+# nodr: shows no signs of DR
+# dr:   present signs of DR
+# amfm: am/fm-based classification
+exp_neg.nodr <-
+  nrow(da[da$amfm == "neg", ]) * nrow(da[da$dr == "no", ])  / nrow(da)
+exp_neg.dr   <-
+  nrow(da[da$amfm == "neg", ]) * nrow(da[da$dr == "yes", ]) / nrow(da)
+exp_pos.nodr <-
+  nrow(da[da$amfm == "pos", ]) * nrow(da[da$dr == "no", ])  / nrow(da)
+exp_pos.dr   <-
+  nrow(da[da$amfm == "pos", ]) * nrow(da[da$dr == "yes", ]) / nrow(da)
+
+## test statistic and value of the reference distribution =============== ##
+# obs: observed count
+obs_neg.nodr <- nrow(da[da$amfm == "neg" & da$dr == "no",  ])
+obs_neg.dr   <- nrow(da[da$amfm == "neg" & da$dr == "yes", ])
+obs_pos.nodr <- nrow(da[da$amfm == "pos" & da$dr == "no",  ])
+obs_pos.dr   <- nrow(da[da$amfm == "pos" & da$dr == "yes", ])
+
+neg.nodr <- ((obs_neg.nodr - exp_neg.nodr)**2) / exp_neg.nodr
+neg.dr   <- ((obs_neg.dr   - exp_neg.dr  )**2) / exp_neg.dr
+pos.nodr <- ((obs_pos.nodr - exp_pos.nodr)**2) / exp_pos.nodr
+pos.dr   <- ((obs_pos.dr   - exp_pos.dr  )**2) / exp_pos.dr
+
+# chi: \chi^{2} test statistic
+chi <- neg.nodr + neg.dr + pos.nodr + pos.dr
+ref <- qchisq(.95, 1) # probability of type I error of \alpha = 0.05
+                      # degrees of freedom: number of classes of one
+                      #                     variable (amfm) minus (-) 1
+                      #                     times the number of classes of
+                      #                     the other variable (dr) - 1.
+                      #                     2-1 x 2-1 = 1
+# if chi > ref => reject the null hyphotesis ============================ ##
+\end{lstlisting}
+
+\newpage
+\subsection{Appendix C: Variable selection using the AIC as a criterium}
+\vspace{.25cm}
+
+The variable selection was made with the \texttt{stepAIC()} R function. All the
+steps are presented in Table \ref{tab:app_aic}.
+
+In the first step we see that the smallest AIC (with the AIC the lower the better)
+is obtained in the model without the variable EXU 8 (looking to more decimal
+places). In the second step the better AIC is obtained when we take out the 
+variable EUC. In the third step we take out the EXU 3 variable, in the fourth step
+the variable MD: 0.9 and in the fifth step the better AIC is obtained when all the
+variables are present, i.e., we don't need to take out more variables, this is the
+best model by the AIC criterium.
+
+\begin{table}[H]
+ \centering
+ \caption{Selecion of variables in five steps. In each step is presented the AIC
+          of the model without the respective feature. In bold is presented the
+          smallest, better, AIC at each step.} 
+ \label{tab:app_aic}
+ \vspace{.15cm}
+ \begin{tabular}{l|r|l|r|l|r|l|r|l|r}
+  \toprule
+  \multicolumn{2}{c}{\textbf{1st step}} & \multicolumn{2}{c}{\textbf{2nd step}}
+                                        & \multicolumn{2}{c}{\textbf{3rd step}}
+                                        & \multicolumn{2}{c}{\textbf{4th step}}
+                                        & \multicolumn{2}{c}{\textbf{5th step}} \\
+  \cmidrule{1-2} \cmidrule{3-4} \cmidrule{5-6} \cmidrule{7-8} \cmidrule{9-10}
+  \textbf{Feature} & \textbf{AIC} & \textbf{Feature} & \textbf{AIC} &
+  \textbf{Feature} & \textbf{AIC} & \textbf{Feature} & \textbf{AIC} &
+  \textbf{Feature} & \textbf{AIC} \\ 
+  \midrule
+        MD: 0.5  &         1262.5  &     MD: 0.5  &         1260.5  &
+        MD: 0.5  &         1258.5  &         MD: 0.5  &         1257.2  &
+        MD: 0.5 & 1257.1 \\
+        MD: 0.6  &         1151.5  &     MD: 0.6  &         1149.5  &
+        MD: 0.6  &         1147.5  &         MD: 0.6  &         1145.6  &
+        MD: 0.6 & 1144.3 \\
+        MD: 0.7  &         1148.9  &     MD: 0.7  &         1146.9  &
+        MD: 0.7  &         1144.9  &         MD: 0.7  &         1143.0  &
+        MD: 0.7 & 1141.7 \\
+        MD: 0.8  &         1144.8  &     MD: 0.8  &         1142.9  &
+        MD: 0.8  &         1141.0  &         MD: 0.8  &         1139.1  &
+        MD: 0.8 & 1144.6 \\
+        MD: 0.9  &         1139.1  &     MD: 0.9  &         1137.1  &
+        MD: 0.9  &         1135.2  & \textbf{MD: 0.9} & \textbf{1133.3} &
+        -       & -      \\
+          MD: 1  &         1142.5  &       MD: 1  &         1140.5  &
+          MD: 1  &         1138.6  &           MD: 1  &         1136.8  &
+          MD: 1 & 1135.0 \\
+          EXU 1  &         1153.3  &       EXU 1  &         1151.3  &
+          EXU 1  &         1149.5  &           EXU 1  &         1149.0  &
+          EXU 1 & 1147.7 \\
+          EXU 2  &         1141.8  &       EXU 2  &         1139.8  &
+          EXU 2  &         1137.8  &           EXU 2  &         1137.9  &
+          EXU 2 & 1136.4 \\
+          EXU 3  & \textbf{1138.5} &       EXU 3  &         1136.6  &
+  \textbf{EXU 3} & \textbf{1134.6} &           -      &         -       &
+          -     & -      \\
+          EXU 4  &         1141.3  &       EXU 4  &         1139.3  &
+          EXU 4  &         1137.4  &           EXU 4  &         1137.9  &
+          EXU 4 & 1136.5 \\
+          EXU 5  &         1141.4  &       EXU 5  &         1139.7  &
+          EXU 5  &         1137.7  &           EXU 5  &         1135.9  &
+          EXU 5 & 1134.7 \\
+          EXU 6  &         1140.7  &       EXU 6  &         1139.2  &
+          EXU 6  &         1137.2  &           EXU 6  &         1135.4  &
+          EXU 6 & 1134.1 \\
+          EXU 7  &         1140.9  &       EXU 7  &         1145.3  &
+          EXU 7  &         1143.3  &           EXU 7  &         1141.5  &
+          EXU 7 & 1140.2 \\
+  \textbf{EXU 8} & \textbf{1138.5} &         -    &         -       &
+          -      &         -       &           -      &         -       &
+          -     & -      \\
+          EUC    & \textbf{1138.5} & \textbf{EUC} & \textbf{1136.5} &
+          -      &         -       &           -      &         -       &
+          -     & -      \\
+          DIAM   &         1140.7  &        DIAM  &         1138.7  &
+          DIAM   &         1136.7  &           DIAM   &         1134.8  &
+          DIAM  & 1133.5 \\
+          AM/FM  &         1141.3  &       AM/FM  &         1139.3  &
+          AM/FM  &         1137.4  &           AM/FM  &         1135.4  &
+          AM/FM & 1133.9 \\
+  \midrule
+  Model & 1140.5 & Model & 1138.5 & Model & 1136.5 & Model & 1134.6 &
+  \textbf{Model} & \textbf{1133.3} \\
+  \bottomrule
+ \end{tabular}
+\end{table}
+
+\newpage
+\subsection{Appendix D: Other computations in R} \vspace{.25cm}
+
+<<eval=FALSE>>=
+# <code r> ===================================================================== #
+## generic code to fit the model ======================================== ##
+model <- glm(response ~ variables # variable1 + variable2 + ...
+             , family = binomial(link = logit) # or probit, cloglog, cauchit
+             , data_frame)
+AIC(model) ## getting the AIC =========================================== ##
+
+stepAIC(model) ## performing the model selection by the AIC criterium === ##
+
+## computing confidence intervals ======================================= ##
+confint.default(model) # estimated coefficient plus/minus 95% normal quantil
+                       # times coefficient standard error
+
+## performing the Hosmer-Lemeshow test ================================== ##
+# logitgof function is in the generalhoslem package
+logitgof(model$response, fitted(model))
+
+## computing the Pearson and Deviance residuals ========================= ##
+residuals(model, type = "pearson") 
+residuals(model, type = "deviance")
+
+## computing the ROC curve ============================================== ##
+# roc function is in the pROC package
+roc(model$response, fitted(model))
+# use this inside the plot.roc() function with the arguments
+# print.auc = TRUE and print.thres = TRUE to plot the ROC curve ========= ##
+# </code r> ==================================================================== #
+@
+
+\begin{lstlisting}
+## generic code to fit the model ======================================== ##
+model <- glm(response ~ variables # variable1 + variable2 + ...
+             , family = binomial(link = logit) # or probit, cloglog, cauchit
+             , data_frame)
+AIC(model) ## getting the AIC =========================================== ##
+
+stepAIC(model) ## performing the model selection by the AIC criterium === ##
+
+## computing confidence intervals ======================================= ##
+confint.default(model) # estimated coefficient plus/minus 95% normal quantil
+                       # times coefficient standard error
+
+## performing the Hosmer-Lemeshow test ================================== ##
+# logitgof function is in the generalhoslem package
+logitgof(model$response, fitted(model))
+
+## computing the Pearson and Deviance residuals ========================= ##
+residuals(model, type = "pearson") 
+residuals(model, type = "deviance")
+
+## computing the ROC curve ============================================== ##
+# roc function is in the pROC package
+roc(model$response, fitted(model))
+# use this inside the plot.roc() function with the arguments
+# print.auc = TRUE and print.thres = TRUE to plot the ROC curve ========= ##
+\end{lstlisting}
 
 \end{document}
