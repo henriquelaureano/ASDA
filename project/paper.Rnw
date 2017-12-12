@@ -32,6 +32,8 @@
  stringstyle = \color{darkspringgreen} % string literal style
 }
 
+\captionsetup{justification = centering}
+
 \usepackage{hyperref} % Required for hyperlinks
 \hypersetup{hidelinks, colorlinks, breaklinks = true, urlcolor = color2,
             citecolor = color1, linkcolor = color1, bookmarksopen = false,
@@ -41,7 +43,7 @@
 % \Archive{Additional note} % Additional notes (e.g. copyright, DOI,
 %                                                    review/research article)
 
-\JournalInfo{AMCS 243 - Applied Statistics and Data Analysis,
+\JournalInfo{STAT 210 - Applied Statistics and Data Analysis,
              Hernando Catequista Ombao - Fall Semester 2017}
 \Archive{King Abdullah University of Science and Technology (KAUST) -
          CEMSE Divison}
@@ -265,7 +267,7 @@ without any severe symptoms. Therefore, there is a high need to improve the
 methods that can diagnose DR as soon as possible because the early detection and
 treatment can reduce the risk of blindness by 95\%[4]. The project provide a
 selection and a study of the variables which have a significant impact on the
-diabetic retinopathy. Knowing these relationships better the patient can receive
+diabetic retinopathy. Knowing these relationships better, the patient can receive
 an early treatment that can limit the potential for significant vision loss. 
 
 The principal goal of this study was to check which variables have a difference
@@ -624,12 +626,13 @@ Where:
        the feature.
 \end{itemize}
 
-The terms interpretation can be done by odds ratio (OR).
+\noindent The terms interpretation can be done by odds ratio (OR).
 
-In the context of generalized linear models for binary data, the logit is the
+\noindent In the context of generalized linear models for binary data, the logit is the
 canonical link function and when used the resulting model is called  of logistic
 regression. However, other link function can be used [7] and [8]. These link
 functions are:
+\newpage
 
 \begin{itemize}
  \item Probit or inverse Normal function: \(g(F(x)) = \Phi^{-1}(F(x))\).
@@ -911,7 +914,7 @@ print(xtable(tab.m_logistic, digits = 5
  \centering
  \caption{Summary of the final fitted logistic regression with the estimated
           coefficients, lower and upper of the 95\% confidence interval (CI)
-          and related p-values. In bold, for easy identification, are the
+          and related p-values. \textbf{In bold}, for easy identification, are the
           significant coefficients at a level of 5\% and the CI's that don't
           include zero.} 
  \label{tab:sum.m_logistic}
@@ -951,7 +954,7 @@ aics <- c(AIC(m_logistic), AIC(m_probit), AIC(m_clog2), AIC(m_cauc))
 
 \begin{table}[H]
  \centering
- \caption{AIC of the models fitted with different link functions. AIC: small is
+ \caption{AIC of the models fitted with different link functions. \\AIC: small is
           better. The smallest AIC is in bold, for easy identification.} 
  \label{tab:aics}
  \vspace{.15cm}
@@ -1050,7 +1053,7 @@ above 0.70 means that the model have a good fit. The better AUC, specificity and
 sensitivity is found using a threshold of 0.513, very similar to the standard 0.5.
 Both specificity (true negative rate - proportion of patients without signs of DR
 that are correctly identified as such) and sensitivity are bigger than 0.65, with
-a bigger sensitivity (true positive rate - proportion of patients with signs od DR
+a bigger sensitivity (true positive rate - proportion of patients with signs of DR
 that are correctly identified as such), 0.805.
 
 <<pred-roc, fig.cap="ROC curve with the results (AUC, specificity, sensitivity and threshold) of the predictive model. The model was fitted using the train dataset and the prediction was performed in the test dataset.", fig.height=3.25, fig.width=3.5>>=
@@ -1113,7 +1116,7 @@ status is very close to 0.5.
 
 About the features, almost all the MD and EUX variables are present in the final
 model, showing that they are statistically significant to classify the patients.
-Thinking in the correlation between this variables, a PCA analysis was performed
+Thinking in the correlation between this variables, a PCA analysis was performe,
 and the first principal components was used as covariables. The resulting model
 presented a good fit, but much lower than the model with all the variables, as the
 AIC obtained shown. With the predictive model the results was also very
@@ -1215,7 +1218,7 @@ below we give the interpretation of each one using odds ratio.
 \end{itemize}
 
 We saw that as we increase the confidence level of the MD detections the odds 
-ratio approach zero, which means that for high confidence levels differences
+ratio approach to zero, which means that for high confidence levels differences
 in the MD detection doesn't impact the chance of the patient present signs of DR.
 For the exudates detection we see that the difference between the odds ratio 
 aren't big, with an exception in the detection with the set of seven points. With
@@ -1486,10 +1489,10 @@ ref <- qchisq(.95, 1) # probability of type I error of \alpha = 0.05
 \subsection{Appendix C: Variable selection using the AIC as a criterium}
 \vspace{.25cm}
 
-The variable selection was made with the \texttt{stepAIC()} R function. All the
+\noindent The variable selection was made with the \texttt{stepAIC()} R function. All the
 steps are presented in Table \ref{tab:app_aic}.
 
-In the first step we see that the smallest AIC (with the AIC the lower the better)
+\noindent In the first step we see that the smallest AIC (with the AIC the lower the better)
 is obtained in the model without the variable EXU 8 (looking to more decimal
 places). In the second step the better AIC is obtained when we take out the 
 variable EUC. In the third step we take out the EXU 3 variable, in the fourth step
